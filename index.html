@@ -549,7 +549,7 @@
     </section>
 
     <!-- Doctor Card & Modal Styles -->
-    <style>
+<style>
       /* Card entrance animation */
       .doctor-card {
         opacity: 0;
@@ -563,195 +563,219 @@
       /* Card hover effect */
       .doctor-card:hover, .doctor-card:focus {
         z-index: 2;
-        box-shadow: 0 8px 32px 0 rgba(37,99,235,0.09), 0 2px 8px 0 rgba(16, 42, 80, 0.07);
-        transform: translateY(-5px) scale(1.04);
+        box-shadow: 0 12px 40px 0 rgba(37,99,235,0.12), 0 2px 8px 0 rgba(16, 42, 80, 0.08);
+        transform: translateY(-5px) scale(1.02);
       }
       .doctor-card:hover .doctor-card-img,
       .doctor-card:focus .doctor-card-img {
-        transform: scale(1.08);
+        transform: scale(1.06);
         transition: transform 0.5s cubic-bezier(.4,0,.2,1);
         filter: brightness(1.04) contrast(1.08);
       }
-      /* Doctor Modal */
+
+      /* Premium Doctor Modal Layout */
       #doctor-modal {
         display: none;
         position: fixed;
         z-index: 1000;
         left: 0; top: 0; right: 0; bottom: 0;
         width: 100vw; height: 100vh;
-        background: rgba(30, 41, 59, 0.30);
-        backdrop-filter: blur(2px);
+        background: rgba(15, 23, 42, 0.65);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
         align-items: center;
         justify-content: center;
-        transition: background 0.3s;
+        opacity: 0;
+        transition: opacity 0.3s ease;
       }
       #doctor-modal.visible {
         display: flex;
-        animation: modal-fadein 0.28s cubic-bezier(.44,.12,.41,1.04);
+        opacity: 1;
+        animation: modal-fadein 0.3s cubic-bezier(.16, 1, .3, 1) forwards;
       }
       @keyframes modal-fadein {
-        0% { opacity: 0; transform: scale(0.96);}
-        100% { opacity: 1; transform: scale(1);}
+        0% { opacity: 0; transform: scale(0.95); }
+        100% { opacity: 1; transform: scale(1); }
       }
+
       .doctor-modal-panel {
-        background: #fff;
-        border-radius: 1.25rem;
-        box-shadow: 0 8px 32px 0 rgba(37,99,235,0.18), 0 2px 8px 0 rgba(16, 42, 80, 0.11);
-        max-width: 700px;
-        width: 94vw;
+        background: #ffffff;
+        border-radius: 2.25rem;
+        box-shadow: 0 40px 90px rgba(15,23,42,.22);
+        max-width: 1120px;
+        width: min(96vw,1120px);
+        max-height: 92vh;
         display: flex;
         flex-direction: row;
         overflow: hidden;
-        animation: modal-panel-scale 0.33s cubic-bezier(.44,.12,.41,1.04);
-        max-height: 92vh;
-        overflow-y: auto;
+        position: relative;
       }
-      @keyframes modal-panel-scale {
-        0% { opacity: 0; transform: scale(0.93);}
-        100% { opacity: 1; transform: scale(1);}
-      }
-      @media (max-width: 640px) {
+
+      @media (max-width: 768px) {
         .doctor-modal-panel {
           flex-direction: column;
+          max-height: 92vh;
           width: calc(100vw - 24px);
-          max-width: calc(100vw - 24px);
-          max-height: 90vh;
-          overflow-y: auto;
-          border-radius: 1rem;
+          border-radius: 1.5rem;
         }
       }
+
       .doctor-modal-backdrop {
         position: absolute;
         left: 0; top: 0; right: 0; bottom: 0;
         width: 100vw; height: 100vh;
         cursor: pointer;
       }
+
+      /* Image Column Left with Cinematic Gradient */
       .doctor-modal-image {
-        width: 240px;
-        min-width: 200px;
-        max-width: 280px;
-        background: #eff6ff;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        width: 42%;
+        min-width: 340px;
+        background: linear-gradient(135deg,#dbeafe 0%,#eff6ff 50%,#ffffff 100%);
         position: relative;
+        overflow: hidden;
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+        padding: 1.5rem;
       }
-      @media (max-width: 640px) {
+
+      @media (max-width: 768px) {
         .doctor-modal-image {
           width: 100%;
-          max-width: none;
           min-width: 0;
-          aspect-ratio: 1/1;
+          height: 240px;
         }
       }
+
       .doctor-modal-image img {
         width: 100%;
         height: 100%;
         object-fit: cover;
-        object-position: top;
-        border-radius: 0;
-        transition: filter 0.3s;
+        object-position: top center;
+        border-radius: 1.5rem;
+        box-shadow: 0 18px 45px rgba(37,99,235,.15);
       }
+
+      /* Content Column Right */
       .doctor-modal-content {
-        flex: 1 1 0%;
-        min-width: 0;
-        padding: 2.5rem 2rem 2rem 2rem;
+        flex: 1;
+        padding: 3rem;
+        overflow-y: auto;
         display: flex;
         flex-direction: column;
-        justify-content: center;
+        justify-content: space-between;
       }
-      @media (max-width: 640px) {
+
+      @media (max-width: 768px) {
         .doctor-modal-content {
-          padding: 1.5rem 1rem 1.5rem 1rem;
+          padding: 2rem 1.5rem;
         }
       }
+
+      /* Custom scrollbar for modal content */
+      .doctor-modal-content::-webkit-scrollbar {
+        width: 6px;
+      }
+      .doctor-modal-content::-webkit-scrollbar-track {
+        background: #f8fafc;
+      }
+      .doctor-modal-content::-webkit-scrollbar-thumb {
+        background: #cbd5e1;
+        border-radius: 3px;
+      }
+
+      /* Close Button Styling */
       .doctor-modal-close {
         position: absolute;
-        top: 1.2rem;
-        right: 1.2rem;
-        font-size: 1.8rem;
-        color: #64748b;
-        background: #f1f5f9;
-        border-radius: 999px;
-        width: 3.25rem;
-        height: 3.25rem;
+        top: 20px;
+        right: 20px;
+        font-size: 2rem;
+        color: #2563eb;
+        background: #fff;
+        border-radius: 50%;
+        width: 52px;
+        height: 52px;
         display: flex;
         align-items: center;
         justify-content: center;
         cursor: pointer;
         border: none;
-        z-index: 10;
-        transition: background 0.2s, color 0.2s;
-        box-shadow: 0 8px 20px rgba(0,0,0,.15);
-        position: sticky;
+        z-index: 20;
+        transition: all 0.18s cubic-bezier(.4,0,.2,1);
+        box-shadow: 0 8px 32px rgba(37,99,235,.18), 0 1.5px 8px rgba(16,42,80,0.08);
       }
       .doctor-modal-close:hover {
-      @media (max-width: 640px) {
-        .doctor-modal-close {
-          top: 0.75rem;
-          right: 0.75rem;
-        }
+        background: #eff6ff;
+        color: #2563eb;
+        transform: scale(1.08);
       }
-        background: #2563eb;
-        color: #fff;
-      }
+
       body.modal-open {
         overflow: hidden !important;
         touch-action: none;
       }
     </style>
+
     <!-- Doctor Modal HTML (Redesigned) -->
-    <div id="doctor-modal" aria-modal="true" role="dialog" tabindex="-1">
+<div id="doctor-modal" aria-modal="true" role="dialog" tabindex="-1">
       <div class="doctor-modal-backdrop"></div>
-      <div class="doctor-modal-panel relative flex flex-row w-full max-w-3xl">
+      <div class="doctor-modal-panel relative flex flex-row w-full bg-white shadow-2xl overflow-hidden">
         <button class="doctor-modal-close" aria-label="Close doctor details">&times;</button>
-        <!-- Image LEFT, about 38% width -->
-        <div class="doctor-modal-image flex items-center justify-center bg-blue-100" style="width:38%;min-width:180px;">
-          <img src="" alt="" id="doctor-modal-img" class="object-cover object-top rounded-none" />
+        
+        <!-- Image LEFT -->
+        <div class="doctor-modal-image relative bg-slate-100 flex items-center justify-center">
+          <img src="" alt="" id="doctor-modal-img" class="w-full h-full object-cover object-top" />
+          <div class="absolute inset-0 bg-gradient-to-t from-slate-900/50 via-transparent to-transparent pointer-events-none"></div>
         </div>
+
         <!-- Details RIGHT -->
-        <div class="doctor-modal-content flex-1 min-w-0 flex flex-col justify-center">
-          <div class="sticky top-0 bg-white/95 backdrop-blur-sm z-10 pb-3 mb-3 border-b border-slate-100"></div>
-          <div class="mb-2">
-            <span class="block text-xs font-bold uppercase tracking-widest text-blue-500 mb-2">Doctor Profile</span>
-            <h3 id="doctor-modal-name" class="text-3xl font-extrabold text-blue-950 mb-1"></h3>
-            <div id="doctor-modal-specialty" class="text-blue-700 font-semibold text-lg mb-4"></div>
-          </div>
-          <hr class="border-blue-100 mb-4">
-          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-4 text-sm">
-            <div>
-              <div class="text-blue-400 font-bold uppercase text-[11px] mb-1">Qualification</div>
-              <div id="doctor-modal-qualification" class="text-blue-900 font-semibold"></div>
+        <div class="doctor-modal-content flex-1 min-w-0 bg-white p-8 lg:p-12 flex flex-col justify-between overflow-y-auto">
+          <div>
+            <!-- Header Section -->
+            <div class="border-b border-slate-200 pb-6 mb-6">
+              <span class="inline-block text-xs font-semibold tracking-widest text-slate-400 uppercase mb-2">Medical Specialist</span>
+              <h3 id="doctor-modal-name" class="text-3xl lg:text-4xl font-light text-slate-900 tracking-tight mb-2"></h3>
+              <div id="doctor-modal-specialty" class="text-blue-600 font-medium text-lg"></div>
             </div>
-            <div>
-              <div class="text-blue-400 font-bold uppercase text-[11px] mb-1">Experience</div>
-              <div id="doctor-modal-experience" class="text-blue-900 font-semibold"></div>
+
+            <!-- Clean List Layout (No Boxes, Full Text Display) -->
+            <div class="space-y-4 mb-8 text-sm">
+              <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center py-3 border-b border-slate-100 gap-1">
+                <span class="text-slate-400 font-medium tracking-wide uppercase text-xs">Qualification</span>
+                <span id="doctor-modal-qualification" class="text-slate-900 font-medium whitespace-normal text-left sm:text-right"></span>
+              </div>
+              <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center py-3 border-b border-slate-100 gap-1">
+                <span class="text-slate-400 font-medium tracking-wide uppercase text-xs">Experience</span>
+                <span id="doctor-modal-experience" class="text-slate-900 font-medium whitespace-normal text-left sm:text-right"></span>
+              </div>
+              <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center py-3 border-b border-slate-100 gap-1">
+                <span class="text-slate-400 font-medium tracking-wide uppercase text-xs">Expertise</span>
+                <span id="doctor-modal-short-specialty" class="text-slate-900 font-medium whitespace-normal text-left sm:text-right"></span>
+              </div>
+              <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center py-3 border-b border-slate-100 gap-1">
+                <span class="text-slate-400 font-medium tracking-wide uppercase text-xs">Availability</span>
+                <span class="text-emerald-600 font-medium whitespace-normal text-left sm:text-right flex items-center gap-2">
+                  <span class="w-2 h-2 rounded-full bg-emerald-500 flex-shrink-0"></span>
+                  <span id="doctor-modal-availability"></span>
+                </span>
+              </div>
             </div>
-            <div>
-              <div class="text-blue-400 font-bold uppercase text-[11px] mb-1">Area of Expertise</div>
-              <div id="doctor-modal-short-specialty" class="text-blue-900 font-semibold"></div>
-            </div>
-          </div>
-          <hr class="border-blue-100 mb-4">
-          <div class="mb-3">
-            <div class="font-bold text-blue-700 text-xs uppercase tracking-widest mb-1">Qualification & Registration</div>
-            <div id="doctor-modal-qualification-detail" class="text-blue-900 mb-2"></div>
-            <div class="font-bold text-blue-700 text-xs uppercase tracking-widest mb-1">Certification / Designation</div>
-            <div id="doctor-modal-certification" class="text-blue-900 mb-2"></div>
-            <div class="font-bold text-blue-700 text-xs uppercase tracking-widest mb-1">Professional Profile</div>
-            <div id="doctor-modal-bio" class="text-blue-900/90 mb-2"></div>
-          </div>
-          <div class="flex flex-wrap gap-3 mb-2">
-            <div>
-              <span class="text-[11px] font-mono uppercase tracking-wider text-blue-400 font-bold">Languages:</span>
-              <span id="doctor-modal-languages" class="text-xs font-bold text-blue-950"></span>
-            </div>
-            <div>
-              <span class="text-[11px] font-mono uppercase tracking-wider text-blue-400 font-bold">Availability:</span>
-              <span id="doctor-modal-availability" class="text-xs font-bold text-blue-950"></span>
+
+            <!-- Biography Section -->
+            <div class="mb-8">
+              <h4 class="text-xs font-semibold tracking-widest text-slate-400 uppercase mb-3">Biography</h4>
+              <div id="doctor-modal-bio" class="text-slate-600 text-sm leading-relaxed whitespace-pre-line"></div>
             </div>
           </div>
-          <a href="#contact" id="doctor-modal-book" class="inline-block mt-4 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold uppercase tracking-wider transition-colors rounded shadow-sm">Book Appointment</a>
+
+          <!-- Action Footer -->
+          <div class="pt-6 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <span class="text-xs text-slate-400">Direct booking desk open</span>
+            <a href="#contact" id="doctor-modal-book" class="w-full sm:w-auto inline-flex items-center justify-center px-8 py-3.5 bg-slate-900 hover:bg-blue-600 text-white text-xs font-semibold uppercase tracking-widest transition-colors rounded-none text-center">
+              Book Appointment
+            </a>
+          </div>
         </div>
       </div>
     </div>
@@ -783,49 +807,45 @@
         const modalPanel = modal.querySelector('.doctor-modal-panel');
         const closeBtn = modal.querySelector('.doctor-modal-close');
         const backdrop = modal.querySelector('.doctor-modal-backdrop');
-        // Modal fields
+        
+        // Modal fields matching the clean layout
         const modalImg = document.getElementById('doctor-modal-img');
         const modalName = document.getElementById('doctor-modal-name');
-        const modalShortSpecialty = document.getElementById('doctor-modal-short-specialty');
         const modalSpecialty = document.getElementById('doctor-modal-specialty');
         const modalQualification = document.getElementById('doctor-modal-qualification');
         const modalExperience = document.getElementById('doctor-modal-experience');
-        const modalLanguages = document.getElementById('doctor-modal-languages');
+        const modalShortSpecialty = document.getElementById('doctor-modal-short-specialty');
         const modalAvailability = document.getElementById('doctor-modal-availability');
         const modalBio = document.getElementById('doctor-modal-bio');
         const modalBook = document.getElementById('doctor-modal-book');
-        // New modal fields for new layout
-        const modalQualificationDetail = document.getElementById('doctor-modal-qualification-detail');
-        const modalCertification = document.getElementById('doctor-modal-certification');
 
         function openModalFromCard(card) {
-          // Populate modal fields from data-*
+          // Populate modal fields from data-* attributes
           modalImg.src = card.getAttribute('data-photo');
           modalImg.alt = card.getAttribute('data-name');
           modalName.textContent = card.getAttribute('data-name');
           modalSpecialty.textContent = card.getAttribute('data-specialty');
-          modalShortSpecialty.textContent = card.getAttribute('data-short-specialty');
           modalQualification.textContent = card.getAttribute('data-qualification');
           modalExperience.textContent = card.getAttribute('data-experience');
-          modalLanguages.textContent = card.getAttribute('data-languages');
+          modalShortSpecialty.textContent = card.getAttribute('data-short-specialty');
           modalAvailability.textContent = card.getAttribute('data-availability');
           modalBio.textContent = card.getAttribute('data-bio');
-          // For new modal layout
-          if (modalQualificationDetail) modalQualificationDetail.textContent = card.getAttribute('data-qualification');
-          if (modalCertification) modalCertification.textContent = card.getAttribute('data-short-specialty');
+          
           // Show modal
           modal.classList.add('visible');
           document.body.classList.add('modal-open');
-          // Scroll modal panel to top for each doctor
           modalPanel.scrollTop = 0;
+          
           setTimeout(() => {
             closeBtn.focus();
           }, 100);
         }
+
         function closeModal() {
           modal.classList.remove('visible');
           document.body.classList.remove('modal-open');
         }
+
         // Open modal on card click or Enter/Space
         doctorCards.forEach(card => {
           card.addEventListener('click', () => openModalFromCard(card));
@@ -836,19 +856,20 @@
             }
           });
         });
+
         // Close modal on close btn, backdrop, or Escape
         closeBtn.addEventListener('click', closeModal);
         backdrop.addEventListener('click', closeModal);
+        
         window.addEventListener('keydown', function(e) {
           if (modal.classList.contains('visible') && (e.key === 'Escape' || e.key === 'Esc')) {
             closeModal();
           }
         });
-        // Prevent click inside panel from closing modal
+
         modalPanel.addEventListener('click', e => e.stopPropagation());
       });
     </script>
-
     <!-- 4. ABOUT US -->
     <section id="about" class="py-32 px-6 bg-blue-100 border-y border-blue-100">
         <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
