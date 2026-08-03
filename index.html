@@ -19,65 +19,347 @@
     </script>
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
+<style>
+  :root {
+    --bg-color: #ffffff;
+    --page-text: #333333;
+    --hero-title: #581c87;
+    
+    /* Design Elements */
+    --gold-accent: #d97706;
+    --slice-bg: #faf7f2;
+    --text-color: #3b1836;
+    --text-hover: #fef08a;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    min-height: 100vh;
+    background-color: var(--bg-color);
+    font-family: 'Montserrat', sans-serif;
+    color: var(--page-text);
+    overflow-x: hidden;
+  }
+
+  /* FIXED NAVBAR CONTAINER (Pinned to top-left) */
+  .navbar-header {
+    position: fixed; /* Attached to screen on scroll */
+    top: 25px;
+    left: 30px;
+    z-index: 1000;
+    background: transparent;
+    border: none;
+    pointer-events: none; /* Let clicks pass through empty space */
+  }
+
+  /* ROTATING FLOATING NAV WRAPPER */
+  .circular-nav-wrapper {
+    position: relative;
+    pointer-events: auto;
+    /* Increased size */
+    width: min(65vw, 280px); 
+    height: min(65vw, 280px);
+    filter: drop-shadow(0 12px 28px rgba(0, 0, 0, 0.15));
+    transition: filter 0.3s ease;
+  }
+
+  /* Continuous Slow Rotation on Laptops / Desktops */
+  @media (min-width: 768px) {
+    .circular-nav-wrapper {
+      animation: slowRotate 30s linear infinite;
+    }
+
+    /* Instantly pauses rotation when cursor moves over it */
+    .circular-nav-wrapper:hover {
+      animation-play-state: paused;
+    }
+  }
+
+  @keyframes slowRotate {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  svg {
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+  }
+
+  /* Interactive Slice Sector */
+  .sector {
+    fill: url(#ivory-gradient);
+    stroke: url(#gold-metallic);
+    stroke-width: 2.5px;
+    transition: all 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+    cursor: pointer;
+    transform-origin: 250px 250px;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Sector Curved Text */
+  .sector-text {
+    font-family: 'Cinzel', Georgia, serif;
+    font-size: 13.5px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    fill: var(--text-color);
+    pointer-events: none;
+    transition: fill 0.35s ease;
+  }
+
+  /* Hover & Mobile Active States */
+  .menu-item {
+    text-decoration: none;
+  }
+
+  .menu-item:hover .sector,
+  .menu-item:active .sector {
+    fill: url(#purple-hover-gradient);
+    transform: scale(1.025);
+    filter: drop-shadow(0 4px 10px rgba(0,0,0,0.25));
+  }
+
+  .menu-item:hover .sector-text,
+  .menu-item:active .sector-text {
+    fill: var(--text-hover);
+  }
+
+  /* Center Logo Badge Styling */
+  .center-logo-group {
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    transform-origin: 250px 250px;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .center-logo-group:hover,
+  .center-logo-group:active {
+    transform: scale(1.04);
+  }
+
+  /* LANDING / HERO SECTION */
+  .hero-section {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 120px 20px 80px 20px;
+    text-align: center;
+    background-color: var(--bg-color);
+  }
+
+  .hero-section h1 {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(2.2rem, 5vw, 3.8rem);
+    color: var(--hero-title);
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+  }
+
+  .hero-section p {
+    max-width: 650px;
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: var(--page-text);
+  }
+
+  .content-section {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 80px 20px;
+    text-align: center;
+    border-top: 1px solid #f0f0f0;
+  }
+
+  .content-section h2 {
+    font-family: 'Cinzel', serif;
+    color: var(--hero-title);
+    margin-bottom: 15px;
+  }
+
+  /* MOBILE RESPONSIVE ADJUSTMENTS */
+  @media (max-width: 600px) {
+    .navbar-header {
+      top: 15px;
+      left: 15px;
+    }
+    
+    .circular-nav-wrapper {
+      width: min(52vw, 190px);
+      height: min(52vw, 190px);
+    }
+
+    .hero-section {
+      padding-top: 220px;
+    }
+  }
+</style>
 </head>
 <body class="bg-white text-brand-light font-sans antialiased selection:bg-brand-accent selection:text-black">
 
     <!-- 1. NAVIGATION -->
   <!-- HEADER WITH MOBILE NAVIGATION -->
-    <header class="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-blue-100">
-        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+  <header class="navbar-header">
+    <div class="circular-nav-wrapper">
+      <svg viewBox="0 0 500 500">
+        <defs>
+          <!-- Metallic Gold Gradient -->
+          <linearGradient id="gold-metallic" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#fef08a" />
+            <stop offset="30%" stop-color="#d97706" />
+            <stop offset="50%" stop-color="#fef9c3" />
+            <stop offset="75%" stop-color="#b45309" />
+            <stop offset="100%" stop-color="#78350f" />
+          </linearGradient>
+
+          <!-- Ivory Slice Radial Gradient -->
+          <radialGradient id="ivory-gradient" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#ffffff" />
+            <stop offset="85%" stop-color="#f5efe6" />
+            <stop offset="100%" stop-color="#e8decb" />
+          </radialGradient>
+
+          <!-- Deep Purple Central Background -->
+          <radialGradient id="purple-center-grad" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#581c87" />
+            <stop offset="70%" stop-color="#3b0764" />
+            <stop offset="100%" stop-color="#2e1065" />
+          </radialGradient>
+
+          <!-- Slice Hover Gradient -->
+          <linearGradient id="purple-hover-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#6b21a8" />
+            <stop offset="100%" stop-color="#3b0764" />
+          </linearGradient>
+
+          <!-- Center Logo Outer Ring Gradient -->
+          <linearGradient id="badge-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#ffffff" />
+            <stop offset="100%" stop-color="#f5efe6" />
+          </linearGradient>
+
+          <!-- Drop Shadows -->
+          <filter id="inner-shadow" x="-20%" y="-20%" width="140%" height="140%">
+            <feComponentTransfer in="SourceAlpha">
+              <feFuncA type="linear" slope="0.7"/>
+            </feComponentTransfer>
+            <feGaussianBlur stdDeviation="5" result="blur"/>
+            <feOffset dx="0" dy="4"/>
+            <feComposite operator="out" in2="SourceAlpha" result="inverse"/>
+            <feFlood flood-color="#000" result="color"/>
+            <feComposite operator="in" in2="inverse" result="shadow"/>
+            <feComposite operator="over" in2="SourceGraphic"/>
+          </filter>
+
+          <!-- CIRCULAR CLIP-PATH FOR LOGO IMAGE -->
+          <clipPath id="center-logo-clip">
+            <circle cx="250" cy="250" r="68" />
+          </clipPath>
+
+          <!-- CURVED TEXT PATHS (Radius = 166px) -->
+          <path id="path-home" d="M 167 106.24 A 166 166 0 0 1 333 106.24" />
+          <path id="path-services" d="M 333 106.24 A 166 166 0 0 1 416 250" />
+          <path id="path-contact" d="M 84 250 A 166 166 0 0 1 167 106.24" />
+
+          <!-- Bottom Arcs -->
+          <path id="path-about" d="M 333 393.76 A 166 166 0 0 0 416 250" />
+          <path id="path-dentists" d="M 167 393.76 A 166 166 0 0 0 333 393.76" />
+          <path id="path-testimonials" d="M 84 250 A 166 166 0 0 0 167 393.76" />
+        </defs>
+
+        <!-- Outer Solid Metallic Gold Border -->
+        <circle cx="250" cy="250" r="212" fill="none" stroke="url(#gold-metallic)" stroke-width="7" />
+        <circle cx="250" cy="250" r="208" fill="none" stroke="#3b1836" stroke-width="1" opacity="0.4" />
+
+        <!-- Deep Purple Textured Inner Background Track -->
+        <circle cx="250" cy="250" r="135" fill="url(#purple-center-grad)" filter="url(#inner-shadow)" />
+
+        <!-- SECTOR 1: HOME -->
+        <a href="#home" class="menu-item">
+          <path class="sector" d="M 150 76.79 A 200 200 0 0 1 350 76.79 L 317.5 133.09 A 135 135 0 0 0 182.5 133.09 Z" />
+          <text class="sector-text">
+            <textPath href="#path-home" startOffset="50%" text-anchor="middle">Home</textPath>
+          </text>
+        </a>
+
+        <!-- SECTOR 2: SERVICES -->
+        <a href="#services" class="menu-item">
+          <path class="sector" d="M 350 76.79 A 200 200 0 0 1 450 250 L 385 250 A 135 135 0 0 0 317.5 133.09 Z" />
+          <text class="sector-text">
+            <textPath href="#path-services" startOffset="50%" text-anchor="middle">Services</textPath>
+          </text>
+        </a>
+
+        <!-- SECTOR 3: ABOUT -->
+        <a href="#about" class="menu-item">
+          <path class="sector" d="M 450 250 A 200 200 0 0 1 350 423.21 L 317.5 366.91 A 135 135 0 0 0 385 250 Z" />
+          <text class="sector-text">
+            <textPath href="#path-about" startOffset="50%" text-anchor="middle">About</textPath>
+          </text>
+        </a>
+
+        <!-- SECTOR 4: OUR DENTISTS -->
+        <a href="#dentists" class="menu-item">
+          <path class="sector" d="M 340 423.21 A 200 200 0 0 1 160 423.21 L 189.25 366.91 A 135 135 0 0 0 310.75 366.91 Z" />
+          <text class="sector-text">
+            <textPath href="#path-dentists" startOffset="50%" text-anchor="middle">Our Dentists</textPath>
+          </text>
+        </a>
+
+        <!-- SECTOR 5: TESTIMONIALS -->
+        <a href="#testimonials" class="menu-item">
+          <path class="sector" d="M 150 423.21 A 200 200 0 0 1 50 250 L 115 250 A 135 135 0 0 0 182.5 366.91 Z" />
+          <text class="sector-text">
+            <textPath href="#path-testimonials" startOffset="50%" text-anchor="middle">Testimonials</textPath>
+          </text>
+        </a>
+
+        <!-- SECTOR 6: CONTACT -->
+        <a href="#contact" class="menu-item">
+          <path class="sector" d="M 50 250 A 200 200 0 0 1 150 76.79 L 182.5 133.09 A 135 135 0 0 0 115 250 Z" />
+          <text class="sector-text">
+            <textPath href="#path-contact" startOffset="50%" text-anchor="middle">Contact</textPath>
+          </text>
+        </a>
+
+        <!-- Inner Gold Ring Border Separator -->
+        <circle cx="250" cy="250" r="135" fill="none" stroke="url(#gold-metallic)" stroke-width="4" />
+
+        <!-- CENTRAL LOGO BADGE WITH LOGO IMAGE -->
+        <a href="#home" class="center-logo-group">
+          <!-- Outer Metallic Gold Rim for Badge -->
+          <circle cx="250" cy="250" r="74" fill="#ffffff" stroke="url(#gold-metallic)" stroke-width="5" filter="drop-shadow(0 6px 12px rgba(0,0,0,0.4))" />
+          
+          <!-- LOGO IMAGE EMBEDDED IN CENTER -->
+          <!-- Replace the href below with your image file path e.g. href="logo.png" or "logo.svg" -->
+          <g clip-path="url(#center-logo-clip)">
+            <!-- Clean SVG Vector Dental Logo Placeholder (Default) -->
+            <rect x="175" y="175" width="150" height="150" fill="#3b0764" />
+            <path d="M 230 220 Q 250 195 270 220 Q 280 240 270 265 Q 260 280 250 285 Q 240 280 230 265 Q 220 240 230 220 Z" fill="url(#gold-metallic)" />
+            <text x="250" y="238" font-family="'Cinzel', serif" font-weight="800" font-size="11" fill="#3b0764" text-anchor="middle">SRD</text>
             
-            <!-- Brand Logo -->
-            <a href="#" class="text-xl font-bold tracking-widest uppercase text-blue-950">Shree Ram Dental</a>
+            <!-- OPTIONAL IMAGE TAG: UNCOMMENT BELOW TO USE AN EXTERNAL IMAGE FILE
+            <image href="logo.png" x="176" y="176" width="148" height="148" preserveAspectRatio="xMidYMid slice" />
+            -->
+          </g>
 
-            <!-- Desktop Navigation -->
-            <nav class="hidden md:flex items-center space-x-8 text-sm font-medium text-slate-700">
-                <a href="#home" class="hover:text-blue-600 transition-colors">Home</a>
-                <a href="#services" class="hover:text-blue-600 transition-colors">Services</a>
-                <a href="#about" class="hover:text-blue-600 transition-colors">About</a>
-                <a href="#doctors" class="hover:text-blue-600 transition-colors">Our Dentists</a>
-                <a href="#testimonials" class="hover:text-blue-600 transition-colors">Testimonials</a>
-                <a href="#contact" class="hover:text-blue-600 transition-colors">Contact</a>
-            </nav>
-
-            <!-- Actions & Mobile Menu Button -->
-            <div class="flex items-center space-x-3">
-                <a href="#contact" class="hidden sm:inline-block px-5 py-2.5 text-xs uppercase tracking-wider font-semibold bg-blue-600 text-white rounded-none hover:bg-blue-700 transition-colors">
-                    Book Appointment
-                </a>
-
-                <!-- Mobile Hamburger Button -->
-                <button id="mobile-menu-btn" aria-label="Toggle Navigation Menu" class="md:hidden p-2 text-slate-800 hover:text-blue-600 focus:outline-none cursor-pointer">
-                    <!-- Hamburger Icon -->
-                    <svg id="menu-icon-open" class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path>
-                    </svg>
-                    <!-- Close (X) Icon -->
-                    <svg id="menu-icon-close" class="w-6 h-6 hidden" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
-                    </svg>
-                </button>
-            </div>
-        </div>
-
-        <!-- Mobile Drawer Menu -->
-        <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-blue-100 px-6 py-6 transition-all duration-300">
-            <nav class="flex flex-col space-y-4 text-base font-semibold text-slate-800">
-                <a href="#home" class="mobile-nav-link hover:text-blue-600 transition-colors py-1">Home</a>
-                <a href="#services" class="mobile-nav-link hover:text-blue-600 transition-colors py-1">Services</a>
-                <a href="#about" class="mobile-nav-link hover:text-blue-600 transition-colors py-1">About</a>
-                <a href="#doctors" class="mobile-nav-link hover:text-blue-600 transition-colors py-1">Our Dentists</a>
-                <a href="#testimonials" class="mobile-nav-link hover:text-blue-600 transition-colors py-1">Testimonials</a>
-                <a href="#contact" class="mobile-nav-link hover:text-blue-600 transition-colors py-1">Contact</a>
-                
-                <div class="pt-4 border-t border-blue-50">
-                    <a href="#contact" class="mobile-nav-link block w-full text-center py-3 text-xs uppercase tracking-wider font-semibold bg-blue-600 text-white rounded-none hover:bg-blue-700 transition-colors">
-                        Book Appointment
-                    </a>
-                </div>
-            </nav>
-        </div>
-    </header>
+          <circle cx="250" cy="250" r="74" fill="none" stroke="url(#gold-metallic)" stroke-width="3" opacity="0.8" />
+        </a>
+      </svg>
+    </div>
+  </header>
 
     <!-- Mobile Menu Toggle Script -->
     <script>
@@ -123,16 +405,16 @@
             <div class="absolute inset-0 bg-gradient-to-t from-white via-blue-100/70 to-blue-50/50"></div>
         </div>
         <div class="relative z-10 max-w-5xl mx-auto px-6 text-center mt-12">
-            <span class="inline-block py-1 px-3 rounded-full bg-blue-100 text-xs uppercase tracking-widest text-brand-accent mb-6 border border-blue-100">Trusted Dental Care</span>
+            <span class="inline-block py-1 px-3 rounded-full bg-blue-100 text-xs uppercase tracking-widest text-brand-accent mb-6 border border-blue-100">Advanced Digital Dentistry</span>
             <h1 class="text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-slate-900 mb-6 leading-tight">
-                Healthy Smiles, <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-700 via-blue-500 to-blue-400">Confident Lives</span>
+                Advanced Dental Technology, <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-700 via-blue-500 to-blue-400">Exceptional Smiles</span>
             </h1>
             <p class="max-w-2xl mx-auto text-lg text-slate-700 mb-10 font-light">
-                Shree Ram Dental Clinic delivers gentle, comprehensive dental care for the whole family using state-of-the-art technology and a patient-first approach.
+                Experience precision-driven dentistry with advanced digital diagnostics, modern treatment technology, painless procedures, and personalized care. From preventive dentistry to complex smile rehabilitation, we deliver world-class treatment with exceptional comfort and accuracy.
             </p>
             <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-                <a href="#services" class="w-full sm:w-auto px-8 py-4 bg-blue-600 text-white font-medium text-sm uppercase tracking-wider rounded-full hover:bg-blue-700 transition-all duration-300">Our Services</a>
-                <a href="#contact" class="w-full sm:w-auto px-8 py-4 bg-white text-blue-700 border border-blue-600 font-medium text-sm uppercase tracking-wider rounded-full hover:bg-blue-50 transition-all duration-300">Book Appointment</a>
+                <a href="#services" class="w-full sm:w-auto px-8 py-4 bg-blue-600 text-white font-medium text-sm uppercase tracking-wider rounded-full hover:bg-blue-700 transition-all duration-300">Explore Advanced Treatments</a>
+                <a href="#contact" class="w-full sm:w-auto px-8 py-4 bg-white text-blue-700 border border-blue-600 font-medium text-sm uppercase tracking-wider rounded-full hover:bg-blue-50 transition-all duration-300">Schedule Consultation</a>
             </div>
         </div>
     </section>
@@ -151,244 +433,344 @@
             <div id="services-container" class="overflow-hidden relative mt-16">
                 <div class="services-track w-max flex gap-6">
                     <!-- Service Card 1 -->
-                    <div class="group w-[320px] shrink-0 relative h-[450px] overflow-hidden rounded-2xl bg-white border border-blue-100 shadow hover:-translate-y-2 transition-transform duration-300">
+                    <div class="group w-[320px] shrink-0 relative h-[450px] overflow-hidden rounded-2xl bg-white border border-blue-100 shadow hover:-translate-y-2 transition-transform duration-300"
+                      data-service-title="Dental Implants"
+                      data-service-description="Permanent tooth replacement solutions that restore function, confidence, and long-term oral health."
+                      data-service-details="Dental implants are advanced, permanent solutions for missing teeth, designed to mimic the look, feel, and function of natural teeth. Ideal for patients with one or more missing teeth, implants help preserve jawbone integrity and prevent shifting of adjacent teeth. The procedure involves placing a titanium post into the jaw, which fuses with the bone and serves as a sturdy foundation for crowns, bridges, or dentures. Benefits include improved chewing ability, speech, and self-confidence, with results that can last a lifetime when cared for properly. Patients can expect a minimally invasive process with little discomfort and a high success rate.">
                         <div class="absolute top-6 left-6 text-3xl">🦷</div>
                         <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800" alt="General Dentistry - dental checkup" class="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-700 opacity-60 group-hover:opacity-40">
                         <div class="absolute inset-0 bg-gradient-to-t from-blue-100 via-blue-50/70 to-transparent"></div>
                         <div class="absolute bottom-0 left-0 right-0 p-8">
-                            <span class="text-brand-accent text-xs font-semibold uppercase tracking-widest mb-2 block">01 / General Dentistry</span>
-                            <h3 class="text-2xl font-bold text-slate-900 mb-3">Preventive & Restorative Care</h3>
-                            <p class="text-slate-700 text-sm font-light mb-4">Routine cleanings, exams, fillings, and gentle treatments to keep your smile healthy for life.</p>
-                            <span class="inline-flex items-center text-xs uppercase tracking-wider text-brand-accent font-medium group-hover:translate-x-2 transition-transform duration-300">Learn More &rarr;</span>
+                            <span class="text-brand-accent text-xs font-semibold uppercase tracking-widest mb-2 block">01 / Dental Implants</span>
+                            <h3 class="text-2xl font-bold text-slate-900 mb-3">Dental Implants</h3>
+                            <p class="text-slate-700 text-sm font-light mb-4">Permanent tooth replacement solutions that restore function, confidence, and long-term oral health.</p>
+                            <button type="button" class="service-learn-more inline-flex items-center text-xs uppercase tracking-wider text-brand-accent font-medium group-hover:translate-x-2 transition-transform duration-300">
+                              Learn More &rarr;
+                            </button>
                         </div>
                     </div>
                     <!-- Service Card 2 -->
-                    <div class="group w-[320px] shrink-0 relative h-[450px] overflow-hidden rounded-2xl bg-white border border-blue-100 shadow hover:-translate-y-2 transition-transform duration-300">
+                    <div class="group w-[320px] shrink-0 relative h-[450px] overflow-hidden rounded-2xl bg-white border border-blue-100 shadow hover:-translate-y-2 transition-transform duration-300"
+                      data-service-title="Braces & Orthodontics"
+                      data-service-description="Modern orthodontic treatments to align teeth, improve bite function, and enhance smiles."
+                      data-service-details="Braces and orthodontic treatments are designed to correct misaligned teeth and jaws, providing both cosmetic and functional improvements. Suitable for children, teens, and adults, options include traditional metal braces, ceramic braces, and clear aligners. These treatments gradually move teeth into their ideal positions, enhancing bite, oral hygiene, and appearance. Benefits include improved self-confidence, easier cleaning, and long-term oral health. Patients can expect regular adjustments and a tailored treatment plan, with most cases achieving results within 12–24 months.">
                         <div class="absolute top-6 left-6 text-3xl">😃</div>
                         <img src="https://images.unsplash.com/photo-1520880867055-1e30d1cb001c?auto=format&fit=crop&q=80&w=800" alt="Cosmetic Dentistry - smiling patient" class="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-700 opacity-60 group-hover:opacity-40">
                         <div class="absolute inset-0 bg-gradient-to-t from-blue-100 via-blue-50/70 to-transparent"></div>
                         <div class="absolute bottom-0 left-0 right-0 p-8">
-                            <span class="text-brand-accent text-xs font-semibold uppercase tracking-widest mb-2 block">02 / Cosmetic Dentistry</span>
-                            <h3 class="text-2xl font-bold text-slate-900 mb-3">Smile Makeovers</h3>
-                            <p class="text-slate-700 text-sm font-light mb-4">Whitening, veneers, bonding, and smile design for the confident, radiant look you deserve.</p>
-                            <span class="inline-flex items-center text-xs uppercase tracking-wider text-brand-accent font-medium group-hover:translate-x-2 transition-transform duration-300">Learn More &rarr;</span>
+                            <span class="text-brand-accent text-xs font-semibold uppercase tracking-widest mb-2 block">02 / Braces & Orthodontics</span>
+                            <h3 class="text-2xl font-bold text-slate-900 mb-3">Braces & Orthodontics</h3>
+                            <p class="text-slate-700 text-sm font-light mb-4">Modern orthodontic treatments to align teeth, improve bite function, and enhance smiles.</p>
+                            <button type="button" class="service-learn-more inline-flex items-center text-xs uppercase tracking-wider text-brand-accent font-medium group-hover:translate-x-2 transition-transform duration-300">
+                              Learn More &rarr;
+                            </button>
                         </div>
                     </div>
                     <!-- Service Card 3 -->
-                    <div class="group w-[320px] shrink-0 relative h-[450px] overflow-hidden rounded-2xl bg-white border border-blue-100 shadow hover:-translate-y-2 transition-transform duration-300">
+                    <div class="group w-[320px] shrink-0 relative h-[450px] overflow-hidden rounded-2xl bg-white border border-blue-100 shadow hover:-translate-y-2 transition-transform duration-300"
+                      data-service-title="Veneers"
+                      data-service-description="Cosmetic solutions designed to improve tooth shape, color, and overall appearance."
+                      data-service-details="Dental veneers are thin, custom-made shells bonded to the front of teeth to enhance their color, shape, and symmetry. They are ideal for patients with chipped, stained, misaligned, or uneven teeth seeking a dramatic improvement in their smile. Veneers are crafted from high-quality porcelain or composite materials, offering a durable and natural-looking result. The procedure is minimally invasive and usually requires two visits. Patients benefit from immediate aesthetic transformation, increased confidence, and long-lasting results with proper care.">
                         <div class="absolute top-6 left-6 text-3xl">🦷</div>
                         <img src="https://images.unsplash.com/photo-1510915228340-29c85a43dcfe?auto=format&fit=crop&q=80&w=800" alt="Orthodontics - dental braces" class="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-700 opacity-60 group-hover:opacity-40">
                         <div class="absolute inset-0 bg-gradient-to-t from-blue-100 via-blue-50/70 to-transparent"></div>
                         <div class="absolute bottom-0 left-0 right-0 p-8">
-                            <span class="text-brand-accent text-xs font-semibold uppercase tracking-widest mb-2 block">03 / Orthodontics</span>
-                            <h3 class="text-2xl font-bold text-slate-900 mb-3">Braces & Invisalign</h3>
-                            <p class="text-slate-700 text-sm font-light mb-4">Straighten your teeth discreetly with clear aligners or traditional braces for all ages.</p>
-                            <span class="inline-flex items-center text-xs uppercase tracking-wider text-brand-accent font-medium group-hover:translate-x-2 transition-transform duration-300">Learn More &rarr;</span>
+                            <span class="text-brand-accent text-xs font-semibold uppercase tracking-widest mb-2 block">03 / Veneers</span>
+                            <h3 class="text-2xl font-bold text-slate-900 mb-3">Veneers</h3>
+                            <p class="text-slate-700 text-sm font-light mb-4">Cosmetic solutions designed to improve tooth shape, color, and overall appearance.</p>
+                            <button type="button" class="service-learn-more inline-flex items-center text-xs uppercase tracking-wider text-brand-accent font-medium group-hover:translate-x-2 transition-transform duration-300">
+                              Learn More &rarr;
+                            </button>
                         </div>
                     </div>
                     <!-- Service Card 4 -->
-                    <div class="group w-[320px] shrink-0 relative h-[450px] overflow-hidden rounded-2xl bg-white border border-blue-100 shadow hover:-translate-y-2 transition-transform duration-300">
+                    <div class="group w-[320px] shrink-0 relative h-[450px] overflow-hidden rounded-2xl bg-white border border-blue-100 shadow hover:-translate-y-2 transition-transform duration-300"
+                      data-service-title="Root Canal (RCT)"
+                      data-service-description="Advanced treatment to remove infection, relieve pain, and save natural teeth."
+                      data-service-details="Root canal therapy (RCT) is a highly effective procedure for saving teeth that are badly decayed or infected. It involves removing the infected pulp, cleaning and disinfecting the canal, and sealing the tooth to prevent further infection. This treatment is ideal for patients experiencing severe tooth pain, sensitivity, or swelling. Benefits include pain relief, preservation of natural teeth, and restoration of normal chewing. Patients can expect a comfortable, modern experience with little to no discomfort, thanks to advanced techniques and anesthesia.">
                         <div class="absolute top-6 left-6 text-3xl">🦷</div>
                         <img src="https://images.unsplash.com/photo-1485841938031-1bf81239b815?auto=format&fit=crop&q=80&w=800" alt="Pediatric Dentistry - child dental care" class="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-700 opacity-60 group-hover:opacity-40">
                         <div class="absolute inset-0 bg-gradient-to-t from-blue-100 via-blue-50/70 to-transparent"></div>
                         <div class="absolute bottom-0 left-0 right-0 p-8">
-                            <span class="text-brand-accent text-xs font-semibold uppercase tracking-widest mb-2 block">04 / Pediatric Dentistry</span>
-                            <h3 class="text-2xl font-bold text-slate-900 mb-3">Children’s Dental Care</h3>
-                            <p class="text-slate-700 text-sm font-light mb-4">Gentle, fun, and educational dental visits for kids to build healthy habits early.</p>
-                            <span class="inline-flex items-center text-xs uppercase tracking-wider text-brand-accent font-medium group-hover:translate-x-2 transition-transform duration-300">Learn More &rarr;</span>
+                            <span class="text-brand-accent text-xs font-semibold uppercase tracking-widest mb-2 block">04 / Root Canal (RCT)</span>
+                            <h3 class="text-2xl font-bold text-slate-900 mb-3">Root Canal (RCT)</h3>
+                            <p class="text-slate-700 text-sm font-light mb-4">Advanced treatment to remove infection, relieve pain, and save natural teeth.</p>
+                            <button type="button" class="service-learn-more inline-flex items-center text-xs uppercase tracking-wider text-brand-accent font-medium group-hover:translate-x-2 transition-transform duration-300">
+                              Learn More &rarr;
+                            </button>
                         </div>
                     </div>
                     <!-- Service Card 5 -->
-                    <div class="group w-[320px] shrink-0 relative h-[450px] overflow-hidden rounded-2xl bg-white border border-blue-100 shadow hover:-translate-y-2 transition-transform duration-300">
+                    <div class="group w-[320px] shrink-0 relative h-[450px] overflow-hidden rounded-2xl bg-white border border-blue-100 shadow hover:-translate-y-2 transition-transform duration-300"
+                      data-service-title="Teeth Whitening"
+                      data-service-description="Professional whitening procedures for a brighter and more confident smile."
+                      data-service-details="Teeth whitening is a safe, effective cosmetic procedure that removes stains and discoloration, resulting in a noticeably brighter smile. Suitable for most adults, professional whitening is performed using advanced techniques and materials that protect enamel and gums. Benefits include instant results, boosted confidence, and a youthful appearance. Patients can expect a comfortable in-clinic session or take-home kits, with long-lasting results when paired with good oral hygiene habits.">
                         <div class="absolute top-6 left-6 text-3xl">🦷</div>
                         <img src="https://images.unsplash.com/photo-1520012218364-4f7c1b1d6b8a?auto=format&fit=crop&q=80&w=800" alt="Dental Implants - implant surgery" class="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-700 opacity-60 group-hover:opacity-40">
                         <div class="absolute inset-0 bg-gradient-to-t from-blue-100 via-blue-50/70 to-transparent"></div>
                         <div class="absolute bottom-0 left-0 right-0 p-8">
-                            <span class="text-brand-accent text-xs font-semibold uppercase tracking-widest mb-2 block">05 / Dental Implants</span>
-                            <h3 class="text-2xl font-bold text-slate-900 mb-3">Permanent Tooth Replacement</h3>
-                            <p class="text-slate-700 text-sm font-light mb-4">Restore missing teeth with natural-looking, long-lasting dental implants.</p>
-                            <span class="inline-flex items-center text-xs uppercase tracking-wider text-brand-accent font-medium group-hover:translate-x-2 transition-transform duration-300">Learn More &rarr;</span>
+                            <span class="text-brand-accent text-xs font-semibold uppercase tracking-widest mb-2 block">05 / Teeth Whitening</span>
+                            <h3 class="text-2xl font-bold text-slate-900 mb-3">Teeth Whitening</h3>
+                            <p class="text-slate-700 text-sm font-light mb-4">Professional whitening procedures for a brighter and more confident smile.</p>
+                            <button type="button" class="service-learn-more inline-flex items-center text-xs uppercase tracking-wider text-brand-accent font-medium group-hover:translate-x-2 transition-transform duration-300">
+                              Learn More &rarr;
+                            </button>
                         </div>
                     </div>
                     <!-- Service Card 6 -->
-                    <div class="group w-[320px] shrink-0 relative h-[450px] overflow-hidden rounded-2xl bg-white border border-blue-100 shadow hover:-translate-y-2 transition-transform duration-300">
+                    <div class="group w-[320px] shrink-0 relative h-[450px] overflow-hidden rounded-2xl bg-white border border-blue-100 shadow hover:-translate-y-2 transition-transform duration-300"
+                      data-service-title="General Checkup"
+                      data-service-description="Routine examinations focused on prevention, early diagnosis, and long-term oral health."
+                      data-service-details="General dental checkups are the foundation of preventive care, involving a thorough examination of teeth, gums, and oral tissues. Recommended for all ages, these visits help detect problems early, ensuring prompt and effective treatment. Benefits include prevention of cavities, gum disease, and other oral health issues. Patients can expect a gentle cleaning, digital X-rays if needed, and personalized advice for maintaining a healthy smile. Regular checkups support lifelong oral wellness and peace of mind.">
                         <div class="absolute top-6 left-6 text-3xl">🦷</div>
                         <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&q=80&w=800" alt="Root Canal Therapy - endodontic treatment" class="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-700 opacity-60 group-hover:opacity-40">
                         <div class="absolute inset-0 bg-gradient-to-t from-blue-100 via-blue-50/70 to-transparent"></div>
                         <div class="absolute bottom-0 left-0 right-0 p-8">
-                            <span class="text-brand-accent text-xs font-semibold uppercase tracking-widest mb-2 block">06 / Root Canal Therapy</span>
-                            <h3 class="text-2xl font-bold text-slate-900 mb-3">Save & Restore Teeth</h3>
-                            <p class="text-slate-700 text-sm font-light mb-4">Pain-free root canals to treat infection and preserve your natural teeth.</p>
-                            <span class="inline-flex items-center text-xs uppercase tracking-wider text-brand-accent font-medium group-hover:translate-x-2 transition-transform duration-300">Learn More &rarr;</span>
+                            <span class="text-brand-accent text-xs font-semibold uppercase tracking-widest mb-2 block">06 / General Checkup</span>
+                            <h3 class="text-2xl font-bold text-slate-900 mb-3">General Checkup</h3>
+                            <p class="text-slate-700 text-sm font-light mb-4">Routine examinations focused on prevention, early diagnosis, and long-term oral health.</p>
+                            <button type="button" class="service-learn-more inline-flex items-center text-xs uppercase tracking-wider text-brand-accent font-medium group-hover:translate-x-2 transition-transform duration-300">
+                              Learn More &rarr;
+                            </button>
                         </div>
                     </div>
                     <!-- Service Card 7 -->
-                    <div class="group w-[320px] shrink-0 relative h-[450px] overflow-hidden rounded-2xl bg-white border border-blue-100 shadow hover:-translate-y-2 transition-transform duration-300">
+                    <div class="group w-[320px] shrink-0 relative h-[450px] overflow-hidden rounded-2xl bg-white border border-blue-100 shadow hover:-translate-y-2 transition-transform duration-300"
+                      data-service-title="Gum Treatment (Periodontics)"
+                      data-service-description="Specialized treatment for gum disease, bleeding gums, periodontal infections, and long-term gum health maintenance."
+                      data-service-details="Periodontal (gum) treatment addresses gum disease, bleeding, and infections to restore and maintain healthy gums. Suitable for patients with signs of gingivitis or periodontitis, therapies may include deep cleaning (scaling and root planing), laser therapy, and ongoing maintenance. Benefits include reduced inflammation, prevention of tooth loss, and improved breath. Patients can expect gentle, thorough care and clear guidance for home maintenance to ensure long-term results.">
                         <div class="absolute top-6 left-6 text-3xl">🦷</div>
                         <img src="https://images.unsplash.com/photo-1503676382389-4809596d5290?auto=format&fit=crop&q=80&w=800" alt="Teeth Whitening - bright smile" class="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-700 opacity-60 group-hover:opacity-40">
                         <div class="absolute inset-0 bg-gradient-to-t from-blue-100 via-blue-50/70 to-transparent"></div>
                         <div class="absolute bottom-0 left-0 right-0 p-8">
-                            <span class="text-brand-accent text-xs font-semibold uppercase tracking-widest mb-2 block">07 / Teeth Whitening</span>
-                            <h3 class="text-2xl font-bold text-slate-900 mb-3">Professional Whitening</h3>
-                            <p class="text-slate-700 text-sm font-light mb-4">Brighten your smile quickly and safely with in-office or take-home treatments.</p>
-                            <span class="inline-flex items-center text-xs uppercase tracking-wider text-brand-accent font-medium group-hover:translate-x-2 transition-transform duration-300">Learn More &rarr;</span>
+                            <span class="text-brand-accent text-xs font-semibold uppercase tracking-widest mb-2 block">07 / Gum Treatment (Periodontics)</span>
+                            <h3 class="text-2xl font-bold text-slate-900 mb-3">Gum Treatment (Periodontics)</h3>
+                            <p class="text-slate-700 text-sm font-light mb-4">Specialized treatment for gum disease, bleeding gums, periodontal infections, and long-term gum health maintenance.</p>
+                            <button type="button" class="service-learn-more inline-flex items-center text-xs uppercase tracking-wider text-brand-accent font-medium group-hover:translate-x-2 transition-transform duration-300">
+                              Learn More &rarr;
+                            </button>
                         </div>
                     </div>
                     <!-- Service Card 8 -->
-                    <div class="group w-[320px] shrink-0 relative h-[450px] overflow-hidden rounded-2xl bg-white border border-blue-100 shadow hover:-translate-y-2 transition-transform duration-300">
+                    <div class="group w-[320px] shrink-0 relative h-[450px] overflow-hidden rounded-2xl bg-white border border-blue-100 shadow hover:-translate-y-2 transition-transform duration-300"
+                      data-service-title="Oral Surgery"
+                      data-service-description="Wisdom tooth removal, impacted teeth management, minor oral surgeries, and advanced surgical dental procedures."
+                      data-service-details="Oral surgery encompasses a range of procedures including wisdom tooth extraction, removal of impacted teeth, biopsies, and minor jaw surgeries. These treatments are recommended for patients with complex dental issues or oral pathology. Benefits include relief from pain, prevention of future complications, and restoration of oral function. Patients can expect a thorough consultation, gentle anesthesia, and attentive post-operative care to ensure a smooth recovery.">
                         <div class="absolute top-6 left-6 text-3xl">🦷</div>
                         <img src="https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&q=80&w=800" alt="Emergency Dentistry - urgent care" class="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-700 opacity-60 group-hover:opacity-40">
                         <div class="absolute inset-0 bg-gradient-to-t from-blue-100 via-blue-50/70 to-transparent"></div>
                         <div class="absolute bottom-0 left-0 right-0 p-8">
-                            <span class="text-brand-accent text-xs font-semibold uppercase tracking-widest mb-2 block">08 / Emergency Dentistry</span>
-                            <h3 class="text-2xl font-bold text-slate-900 mb-3">Urgent Dental Care</h3>
-                            <p class="text-slate-700 text-sm font-light mb-4">Same-day appointments for dental emergencies, pain, or injuries.</p>
-                            <span class="inline-flex items-center text-xs uppercase tracking-wider text-brand-accent font-medium group-hover:translate-x-2 transition-transform duration-300">Learn More &rarr;</span>
+                            <span class="text-brand-accent text-xs font-semibold uppercase tracking-widest mb-2 block">08 / Oral Surgery</span>
+                            <h3 class="text-2xl font-bold text-slate-900 mb-3">Oral Surgery</h3>
+                            <p class="text-slate-700 text-sm font-light mb-4">Wisdom tooth removal, impacted teeth management, minor oral surgeries, and advanced surgical dental procedures.</p>
+                            <button type="button" class="service-learn-more inline-flex items-center text-xs uppercase tracking-wider text-brand-accent font-medium group-hover:translate-x-2 transition-transform duration-300">
+                              Learn More &rarr;
+                            </button>
                         </div>
                     </div>
                     <!-- Service Card 9 -->
-                    <div class="group w-[320px] shrink-0 relative h-[450px] overflow-hidden rounded-2xl bg-white border border-blue-100 shadow hover:-translate-y-2 transition-transform duration-300">
+                    <div class="group w-[320px] shrink-0 relative h-[450px] overflow-hidden rounded-2xl bg-white border border-blue-100 shadow hover:-translate-y-2 transition-transform duration-300"
+                      data-service-title="Crowns, Bridges & Dentures"
+                      data-service-description="Custom prosthetic solutions for restoring missing, damaged, or weakened teeth with natural-looking results."
+                      data-service-details="Crowns, bridges, and dentures are restorative solutions for replacing missing or damaged teeth, restoring natural function and aesthetics. Crowns are used for single teeth, bridges for multiple adjacent teeth, and dentures for full arches. These prosthetics are custom-made for comfort, durability, and a natural appearance. Patients benefit from improved chewing, speech, and facial structure, with most procedures completed in a few visits. Proper care ensures long-lasting results and a confident smile.">
                         <div class="absolute top-6 left-6 text-3xl">🦷</div>
                         <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&q=80&w=800" alt="Oral Surgery - wisdom teeth" class="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-700 opacity-60 group-hover:opacity-40">
                         <div class="absolute inset-0 bg-gradient-to-t from-blue-100 via-blue-50/70 to-transparent"></div>
                         <div class="absolute bottom-0 left-0 right-0 p-8">
-                            <span class="text-brand-accent text-xs font-semibold uppercase tracking-widest mb-2 block">09 / Oral Surgery</span>
-                            <h3 class="text-2xl font-bold text-slate-900 mb-3">Wisdom Teeth & Extractions</h3>
-                            <p class="text-slate-700 text-sm font-light mb-4">Comfortable extractions and surgical care with a gentle touch.</p>
-                            <span class="inline-flex items-center text-xs uppercase tracking-wider text-brand-accent font-medium group-hover:translate-x-2 transition-transform duration-300">Learn More &rarr;</span>
+                            <span class="text-brand-accent text-xs font-semibold uppercase tracking-widest mb-2 block">09 / Crowns, Bridges & Dentures</span>
+                            <h3 class="text-2xl font-bold text-slate-900 mb-3">Crowns, Bridges & Dentures</h3>
+                            <p class="text-slate-700 text-sm font-light mb-4">Custom prosthetic solutions for restoring missing, damaged, or weakened teeth with natural-looking results.</p>
+                            <button type="button" class="service-learn-more inline-flex items-center text-xs uppercase tracking-wider text-brand-accent font-medium group-hover:translate-x-2 transition-transform duration-300">
+                              Learn More &rarr;
+                            </button>
                         </div>
                     </div>
                     <!-- Service Card 10 -->
-                    <div class="group w-[320px] shrink-0 relative h-[450px] overflow-hidden rounded-2xl bg-white border border-blue-100 shadow hover:-translate-y-2 transition-transform duration-300">
+                    <div class="group w-[320px] shrink-0 relative h-[450px] overflow-hidden rounded-2xl bg-white border border-blue-100 shadow hover:-translate-y-2 transition-transform duration-300"
+                      data-service-title="Scaling & Professional Cleaning"
+                      data-service-description="Deep cleaning procedures that remove plaque and tartar while promoting healthier teeth and gums."
+                      data-service-details="Scaling and professional cleaning are essential preventive treatments that remove plaque, tartar, and surface stains from teeth. Recommended every six months, these procedures help prevent gum disease, cavities, and bad breath. Benefits include fresher breath, healthier gums, and a brighter smile. Patients can expect a comfortable, thorough cleaning using gentle, modern equipment, followed by personalized oral hygiene tips for optimal home care.">
                         <div class="absolute top-6 left-6 text-3xl">🦷</div>
                         <img src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&q=80&w=800" alt="Periodontal Care - gum health" class="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-700 opacity-60 group-hover:opacity-40">
                         <div class="absolute inset-0 bg-gradient-to-t from-blue-100 via-blue-50/70 to-transparent"></div>
                         <div class="absolute bottom-0 left-0 right-0 p-8">
-                            <span class="text-brand-accent text-xs font-semibold uppercase tracking-widest mb-2 block">10 / Periodontal Care</span>
-                            <h3 class="text-2xl font-bold text-slate-900 mb-3">Healthy Gums</h3>
-                            <p class="text-slate-700 text-sm font-light mb-4">Treatment and maintenance for gum disease to protect your oral health.</p>
-                            <span class="inline-flex items-center text-xs uppercase tracking-wider text-brand-accent font-medium group-hover:translate-x-2 transition-transform duration-300">Learn More &rarr;</span>
+                            <span class="text-brand-accent text-xs font-semibold uppercase tracking-widest mb-2 block">10 / Scaling & Professional Cleaning</span>
+                            <h3 class="text-2xl font-bold text-slate-900 mb-3">Scaling & Professional Cleaning</h3>
+                            <p class="text-slate-700 text-sm font-light mb-4">Deep cleaning procedures that remove plaque and tartar while promoting healthier teeth and gums.</p>
+                            <button type="button" class="service-learn-more inline-flex items-center text-xs uppercase tracking-wider text-brand-accent font-medium group-hover:translate-x-2 transition-transform duration-300">
+                              Learn More &rarr;
+                            </button>
                         </div>
                     </div>
                     <!-- DUPLICATE SET FOR SEAMLESS LOOP -->
                     <!-- Service Card 1 DUPLICATE -->
-                    <div class="group w-[320px] shrink-0 relative h-[450px] overflow-hidden rounded-2xl bg-white border border-blue-100 shadow hover:-translate-y-2 transition-transform duration-300">
+                    <div class="group w-[320px] shrink-0 relative h-[450px] overflow-hidden rounded-2xl bg-white border border-blue-100 shadow hover:-translate-y-2 transition-transform duration-300"
+                      data-service-title="Dental Implants"
+                      data-service-description="Permanent tooth replacement solutions that restore function, confidence, and long-term oral health."
+                      data-service-details="Dental implants are advanced, permanent solutions for missing teeth, designed to mimic the look, feel, and function of natural teeth. Ideal for patients with one or more missing teeth, implants help preserve jawbone integrity and prevent shifting of adjacent teeth. The procedure involves placing a titanium post into the jaw, which fuses with the bone and serves as a sturdy foundation for crowns, bridges, or dentures. Benefits include improved chewing ability, speech, and self-confidence, with results that can last a lifetime when cared for properly. Patients can expect a minimally invasive process with little discomfort and a high success rate.">
                         <div class="absolute top-6 left-6 text-3xl">🦷</div>
                         <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800" alt="General Dentistry - dental checkup" class="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-700 opacity-60 group-hover:opacity-40">
                         <div class="absolute inset-0 bg-gradient-to-t from-blue-100 via-blue-50/70 to-transparent"></div>
                         <div class="absolute bottom-0 left-0 right-0 p-8">
-                            <span class="text-brand-accent text-xs font-semibold uppercase tracking-widest mb-2 block">01 / General Dentistry</span>
-                            <h3 class="text-2xl font-bold text-slate-900 mb-3">Preventive & Restorative Care</h3>
-                            <p class="text-slate-700 text-sm font-light mb-4">Routine cleanings, exams, fillings, and gentle treatments to keep your smile healthy for life.</p>
-                            <span class="inline-flex items-center text-xs uppercase tracking-wider text-brand-accent font-medium group-hover:translate-x-2 transition-transform duration-300">Learn More &rarr;</span>
+                            <span class="text-brand-accent text-xs font-semibold uppercase tracking-widest mb-2 block">01 / Dental Implants</span>
+                            <h3 class="text-2xl font-bold text-slate-900 mb-3">Dental Implants</h3>
+                            <p class="text-slate-700 text-sm font-light mb-4">Permanent tooth replacement solutions that restore function, confidence, and long-term oral health.</p>
+                            <button type="button" class="service-learn-more inline-flex items-center text-xs uppercase tracking-wider text-brand-accent font-medium group-hover:translate-x-2 transition-transform duration-300">
+                              Learn More &rarr;
+                            </button>
                         </div>
                     </div>
                     <!-- Service Card 2 DUPLICATE -->
-                    <div class="group w-[320px] shrink-0 relative h-[450px] overflow-hidden rounded-2xl bg-white border border-blue-100 shadow hover:-translate-y-2 transition-transform duration-300">
+                    <div class="group w-[320px] shrink-0 relative h-[450px] overflow-hidden rounded-2xl bg-white border border-blue-100 shadow hover:-translate-y-2 transition-transform duration-300"
+                      data-service-title="Braces & Orthodontics"
+                      data-service-description="Modern orthodontic treatments to align teeth, improve bite function, and enhance smiles."
+                      data-service-details="Braces and orthodontic treatments are designed to correct misaligned teeth and jaws, providing both cosmetic and functional improvements. Suitable for children, teens, and adults, options include traditional metal braces, ceramic braces, and clear aligners. These treatments gradually move teeth into their ideal positions, enhancing bite, oral hygiene, and appearance. Benefits include improved self-confidence, easier cleaning, and long-term oral health. Patients can expect regular adjustments and a tailored treatment plan, with most cases achieving results within 12–24 months.">
                         <div class="absolute top-6 left-6 text-3xl">😃</div>
                         <img src="https://images.unsplash.com/photo-1520880867055-1e30d1cb001c?auto=format&fit=crop&q=80&w=800" alt="Cosmetic Dentistry - smiling patient" class="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-700 opacity-60 group-hover:opacity-40">
                         <div class="absolute inset-0 bg-gradient-to-t from-blue-100 via-blue-50/70 to-transparent"></div>
                         <div class="absolute bottom-0 left-0 right-0 p-8">
-                            <span class="text-brand-accent text-xs font-semibold uppercase tracking-widest mb-2 block">02 / Cosmetic Dentistry</span>
-                            <h3 class="text-2xl font-bold text-slate-900 mb-3">Smile Makeovers</h3>
-                            <p class="text-slate-700 text-sm font-light mb-4">Whitening, veneers, bonding, and smile design for the confident, radiant look you deserve.</p>
-                            <span class="inline-flex items-center text-xs uppercase tracking-wider text-brand-accent font-medium group-hover:translate-x-2 transition-transform duration-300">Learn More &rarr;</span>
+                            <span class="text-brand-accent text-xs font-semibold uppercase tracking-widest mb-2 block">02 / Braces & Orthodontics</span>
+                            <h3 class="text-2xl font-bold text-slate-900 mb-3">Braces & Orthodontics</h3>
+                            <p class="text-slate-700 text-sm font-light mb-4">Modern orthodontic treatments to align teeth, improve bite function, and enhance smiles.</p>
+                            <button type="button" class="service-learn-more inline-flex items-center text-xs uppercase tracking-wider text-brand-accent font-medium group-hover:translate-x-2 transition-transform duration-300">
+                              Learn More &rarr;
+                            </button>
                         </div>
                     </div>
                     <!-- Service Card 3 DUPLICATE -->
-                    <div class="group w-[320px] shrink-0 relative h-[450px] overflow-hidden rounded-2xl bg-white border border-blue-100 shadow hover:-translate-y-2 transition-transform duration-300">
+                    <div class="group w-[320px] shrink-0 relative h-[450px] overflow-hidden rounded-2xl bg-white border border-blue-100 shadow hover:-translate-y-2 transition-transform duration-300"
+                      data-service-title="Veneers"
+                      data-service-description="Cosmetic solutions designed to improve tooth shape, color, and overall appearance."
+                      data-service-details="Dental veneers are thin, custom-made shells bonded to the front of teeth to enhance their color, shape, and symmetry. They are ideal for patients with chipped, stained, misaligned, or uneven teeth seeking a dramatic improvement in their smile. Veneers are crafted from high-quality porcelain or composite materials, offering a durable and natural-looking result. The procedure is minimally invasive and usually requires two visits. Patients benefit from immediate aesthetic transformation, increased confidence, and long-lasting results with proper care.">
                         <div class="absolute top-6 left-6 text-3xl">🦷</div>
                         <img src="https://images.unsplash.com/photo-1510915228340-29c85a43dcfe?auto=format&fit=crop&q=80&w=800" alt="Orthodontics - dental braces" class="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-700 opacity-60 group-hover:opacity-40">
                         <div class="absolute inset-0 bg-gradient-to-t from-blue-100 via-blue-50/70 to-transparent"></div>
                         <div class="absolute bottom-0 left-0 right-0 p-8">
-                            <span class="text-brand-accent text-xs font-semibold uppercase tracking-widest mb-2 block">03 / Orthodontics</span>
-                            <h3 class="text-2xl font-bold text-slate-900 mb-3">Braces & Invisalign</h3>
-                            <p class="text-slate-700 text-sm font-light mb-4">Straighten your teeth discreetly with clear aligners or traditional braces for all ages.</p>
-                            <span class="inline-flex items-center text-xs uppercase tracking-wider text-brand-accent font-medium group-hover:translate-x-2 transition-transform duration-300">Learn More &rarr;</span>
+                            <span class="text-brand-accent text-xs font-semibold uppercase tracking-widest mb-2 block">03 / Veneers</span>
+                            <h3 class="text-2xl font-bold text-slate-900 mb-3">Veneers</h3>
+                            <p class="text-slate-700 text-sm font-light mb-4">Cosmetic solutions designed to improve tooth shape, color, and overall appearance.</p>
+                            <button type="button" class="service-learn-more inline-flex items-center text-xs uppercase tracking-wider text-brand-accent font-medium group-hover:translate-x-2 transition-transform duration-300">
+                              Learn More &rarr;
+                            </button>
                         </div>
                     </div>
                     <!-- Service Card 4 DUPLICATE -->
-                    <div class="group w-[320px] shrink-0 relative h-[450px] overflow-hidden rounded-2xl bg-white border border-blue-100 shadow hover:-translate-y-2 transition-transform duration-300">
+                    <div class="group w-[320px] shrink-0 relative h-[450px] overflow-hidden rounded-2xl bg-white border border-blue-100 shadow hover:-translate-y-2 transition-transform duration-300"
+                      data-service-title="Root Canal (RCT)"
+                      data-service-description="Advanced treatment to remove infection, relieve pain, and save natural teeth."
+                      data-service-details="Root canal therapy (RCT) is a highly effective procedure for saving teeth that are badly decayed or infected. It involves removing the infected pulp, cleaning and disinfecting the canal, and sealing the tooth to prevent further infection. This treatment is ideal for patients experiencing severe tooth pain, sensitivity, or swelling. Benefits include pain relief, preservation of natural teeth, and restoration of normal chewing. Patients can expect a comfortable, modern experience with little to no discomfort, thanks to advanced techniques and anesthesia.">
                         <div class="absolute top-6 left-6 text-3xl">🦷</div>
                         <img src="https://images.unsplash.com/photo-1485841938031-1bf81239b815?auto=format&fit=crop&q=80&w=800" alt="Pediatric Dentistry - child dental care" class="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-700 opacity-60 group-hover:opacity-40">
                         <div class="absolute inset-0 bg-gradient-to-t from-blue-100 via-blue-50/70 to-transparent"></div>
                         <div class="absolute bottom-0 left-0 right-0 p-8">
-                            <span class="text-brand-accent text-xs font-semibold uppercase tracking-widest mb-2 block">04 / Pediatric Dentistry</span>
-                            <h3 class="text-2xl font-bold text-slate-900 mb-3">Children’s Dental Care</h3>
-                            <p class="text-slate-700 text-sm font-light mb-4">Gentle, fun, and educational dental visits for kids to build healthy habits early.</p>
-                            <span class="inline-flex items-center text-xs uppercase tracking-wider text-brand-accent font-medium group-hover:translate-x-2 transition-transform duration-300">Learn More &rarr;</span>
+                            <span class="text-brand-accent text-xs font-semibold uppercase tracking-widest mb-2 block">04 / Root Canal (RCT)</span>
+                            <h3 class="text-2xl font-bold text-slate-900 mb-3">Root Canal (RCT)</h3>
+                            <p class="text-slate-700 text-sm font-light mb-4">Advanced treatment to remove infection, relieve pain, and save natural teeth.</p>
+                            <button type="button" class="service-learn-more inline-flex items-center text-xs uppercase tracking-wider text-brand-accent font-medium group-hover:translate-x-2 transition-transform duration-300">
+                              Learn More &rarr;
+                            </button>
                         </div>
                     </div>
                     <!-- Service Card 5 DUPLICATE -->
-                    <div class="group w-[320px] shrink-0 relative h-[450px] overflow-hidden rounded-2xl bg-white border border-blue-100 shadow hover:-translate-y-2 transition-transform duration-300">
+                    <div class="group w-[320px] shrink-0 relative h-[450px] overflow-hidden rounded-2xl bg-white border border-blue-100 shadow hover:-translate-y-2 transition-transform duration-300"
+                      data-service-title="Teeth Whitening"
+                      data-service-description="Professional whitening procedures for a brighter and more confident smile."
+                      data-service-details="Teeth whitening is a safe, effective cosmetic procedure that removes stains and discoloration, resulting in a noticeably brighter smile. Suitable for most adults, professional whitening is performed using advanced techniques and materials that protect enamel and gums. Benefits include instant results, boosted confidence, and a youthful appearance. Patients can expect a comfortable in-clinic session or take-home kits, with long-lasting results when paired with good oral hygiene habits.">
                         <div class="absolute top-6 left-6 text-3xl">🦷</div>
                         <img src="https://images.unsplash.com/photo-1520012218364-4f7c1b1d6b8a?auto=format&fit=crop&q=80&w=800" alt="Dental Implants - implant surgery" class="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-700 opacity-60 group-hover:opacity-40">
                         <div class="absolute inset-0 bg-gradient-to-t from-blue-100 via-blue-50/70 to-transparent"></div>
                         <div class="absolute bottom-0 left-0 right-0 p-8">
-                            <span class="text-brand-accent text-xs font-semibold uppercase tracking-widest mb-2 block">05 / Dental Implants</span>
-                            <h3 class="text-2xl font-bold text-slate-900 mb-3">Permanent Tooth Replacement</h3>
-                            <p class="text-slate-700 text-sm font-light mb-4">Restore missing teeth with natural-looking, long-lasting dental implants.</p>
-                            <span class="inline-flex items-center text-xs uppercase tracking-wider text-brand-accent font-medium group-hover:translate-x-2 transition-transform duration-300">Learn More &rarr;</span>
+                            <span class="text-brand-accent text-xs font-semibold uppercase tracking-widest mb-2 block">05 / Teeth Whitening</span>
+                            <h3 class="text-2xl font-bold text-slate-900 mb-3">Teeth Whitening</h3>
+                            <p class="text-slate-700 text-sm font-light mb-4">Professional whitening procedures for a brighter and more confident smile.</p>
+                            <button type="button" class="service-learn-more inline-flex items-center text-xs uppercase tracking-wider text-brand-accent font-medium group-hover:translate-x-2 transition-transform duration-300">
+                              Learn More &rarr;
+                            </button>
                         </div>
                     </div>
                     <!-- Service Card 6 DUPLICATE -->
-                    <div class="group w-[320px] shrink-0 relative h-[450px] overflow-hidden rounded-2xl bg-white border border-blue-100 shadow hover:-translate-y-2 transition-transform duration-300">
+                    <div class="group w-[320px] shrink-0 relative h-[450px] overflow-hidden rounded-2xl bg-white border border-blue-100 shadow hover:-translate-y-2 transition-transform duration-300"
+                      data-service-title="General Checkup"
+                      data-service-description="Routine examinations focused on prevention, early diagnosis, and long-term oral health."
+                      data-service-details="General dental checkups are the foundation of preventive care, involving a thorough examination of teeth, gums, and oral tissues. Recommended for all ages, these visits help detect problems early, ensuring prompt and effective treatment. Benefits include prevention of cavities, gum disease, and other oral health issues. Patients can expect a gentle cleaning, digital X-rays if needed, and personalized advice for maintaining a healthy smile. Regular checkups support lifelong oral wellness and peace of mind.">
                         <div class="absolute top-6 left-6 text-3xl">🦷</div>
                         <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&q=80&w=800" alt="Root Canal Therapy - endodontic treatment" class="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-700 opacity-60 group-hover:opacity-40">
                         <div class="absolute inset-0 bg-gradient-to-t from-blue-100 via-blue-50/70 to-transparent"></div>
                         <div class="absolute bottom-0 left-0 right-0 p-8">
-                            <span class="text-brand-accent text-xs font-semibold uppercase tracking-widest mb-2 block">06 / Root Canal Therapy</span>
-                            <h3 class="text-2xl font-bold text-slate-900 mb-3">Save & Restore Teeth</h3>
-                            <p class="text-slate-700 text-sm font-light mb-4">Pain-free root canals to treat infection and preserve your natural teeth.</p>
-                            <span class="inline-flex items-center text-xs uppercase tracking-wider text-brand-accent font-medium group-hover:translate-x-2 transition-transform duration-300">Learn More &rarr;</span>
+                            <span class="text-brand-accent text-xs font-semibold uppercase tracking-widest mb-2 block">06 / General Checkup</span>
+                            <h3 class="text-2xl font-bold text-slate-900 mb-3">General Checkup</h3>
+                            <p class="text-slate-700 text-sm font-light mb-4">Routine examinations focused on prevention, early diagnosis, and long-term oral health.</p>
+                            <button type="button" class="service-learn-more inline-flex items-center text-xs uppercase tracking-wider text-brand-accent font-medium group-hover:translate-x-2 transition-transform duration-300">
+                              Learn More &rarr;
+                            </button>
                         </div>
                     </div>
                     <!-- Service Card 7 DUPLICATE -->
-                    <div class="group w-[320px] shrink-0 relative h-[450px] overflow-hidden rounded-2xl bg-white border border-blue-100 shadow hover:-translate-y-2 transition-transform duration-300">
+                    <div class="group w-[320px] shrink-0 relative h-[450px] overflow-hidden rounded-2xl bg-white border border-blue-100 shadow hover:-translate-y-2 transition-transform duration-300"
+                      data-service-title="Gum Treatment (Periodontics)"
+                      data-service-description="Specialized treatment for gum disease, bleeding gums, periodontal infections, and long-term gum health maintenance."
+                      data-service-details="Periodontal (gum) treatment addresses gum disease, bleeding, and infections to restore and maintain healthy gums. Suitable for patients with signs of gingivitis or periodontitis, therapies may include deep cleaning (scaling and root planing), laser therapy, and ongoing maintenance. Benefits include reduced inflammation, prevention of tooth loss, and improved breath. Patients can expect gentle, thorough care and clear guidance for home maintenance to ensure long-term results.">
                         <div class="absolute top-6 left-6 text-3xl">🦷</div>
                         <img src="https://images.unsplash.com/photo-1503676382389-4809596d5290?auto=format&fit=crop&q=80&w=800" alt="Teeth Whitening - bright smile" class="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-700 opacity-60 group-hover:opacity-40">
                         <div class="absolute inset-0 bg-gradient-to-t from-blue-100 via-blue-50/70 to-transparent"></div>
                         <div class="absolute bottom-0 left-0 right-0 p-8">
-                            <span class="text-brand-accent text-xs font-semibold uppercase tracking-widest mb-2 block">07 / Teeth Whitening</span>
-                            <h3 class="text-2xl font-bold text-slate-900 mb-3">Professional Whitening</h3>
-                            <p class="text-slate-700 text-sm font-light mb-4">Brighten your smile quickly and safely with in-office or take-home treatments.</p>
-                            <span class="inline-flex items-center text-xs uppercase tracking-wider text-brand-accent font-medium group-hover:translate-x-2 transition-transform duration-300">Learn More &rarr;</span>
+                            <span class="text-brand-accent text-xs font-semibold uppercase tracking-widest mb-2 block">07 / Gum Treatment (Periodontics)</span>
+                            <h3 class="text-2xl font-bold text-slate-900 mb-3">Gum Treatment (Periodontics)</h3>
+                            <p class="text-slate-700 text-sm font-light mb-4">Specialized treatment for gum disease, bleeding gums, periodontal infections, and long-term gum health maintenance.</p>
+                            <button type="button" class="service-learn-more inline-flex items-center text-xs uppercase tracking-wider text-brand-accent font-medium group-hover:translate-x-2 transition-transform duration-300">
+                              Learn More &rarr;
+                            </button>
                         </div>
                     </div>
                     <!-- Service Card 8 DUPLICATE -->
-                    <div class="group w-[320px] shrink-0 relative h-[450px] overflow-hidden rounded-2xl bg-white border border-blue-100 shadow hover:-translate-y-2 transition-transform duration-300">
+                    <div class="group w-[320px] shrink-0 relative h-[450px] overflow-hidden rounded-2xl bg-white border border-blue-100 shadow hover:-translate-y-2 transition-transform duration-300"
+                      data-service-title="Oral Surgery"
+                      data-service-description="Wisdom tooth removal, impacted teeth management, minor oral surgeries, and advanced surgical dental procedures."
+                      data-service-details="Oral surgery encompasses a range of procedures including wisdom tooth extraction, removal of impacted teeth, biopsies, and minor jaw surgeries. These treatments are recommended for patients with complex dental issues or oral pathology. Benefits include relief from pain, prevention of future complications, and restoration of oral function. Patients can expect a thorough consultation, gentle anesthesia, and attentive post-operative care to ensure a smooth recovery.">
                         <div class="absolute top-6 left-6 text-3xl">🦷</div>
                         <img src="https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&q=80&w=800" alt="Emergency Dentistry - urgent care" class="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-700 opacity-60 group-hover:opacity-40">
                         <div class="absolute inset-0 bg-gradient-to-t from-blue-100 via-blue-50/70 to-transparent"></div>
                         <div class="absolute bottom-0 left-0 right-0 p-8">
-                            <span class="text-brand-accent text-xs font-semibold uppercase tracking-widest mb-2 block">08 / Emergency Dentistry</span>
-                            <h3 class="text-2xl font-bold text-slate-900 mb-3">Urgent Dental Care</h3>
-                            <p class="text-slate-700 text-sm font-light mb-4">Same-day appointments for dental emergencies, pain, or injuries.</p>
-                            <span class="inline-flex items-center text-xs uppercase tracking-wider text-brand-accent font-medium group-hover:translate-x-2 transition-transform duration-300">Learn More &rarr;</span>
+                            <span class="text-brand-accent text-xs font-semibold uppercase tracking-widest mb-2 block">08 / Oral Surgery</span>
+                            <h3 class="text-2xl font-bold text-slate-900 mb-3">Oral Surgery</h3>
+                            <p class="text-slate-700 text-sm font-light mb-4">Wisdom tooth removal, impacted teeth management, minor oral surgeries, and advanced surgical dental procedures.</p>
+                            <button type="button" class="service-learn-more inline-flex items-center text-xs uppercase tracking-wider text-brand-accent font-medium group-hover:translate-x-2 transition-transform duration-300">
+                              Learn More &rarr;
+                            </button>
                         </div>
                     </div>
                     <!-- Service Card 9 DUPLICATE -->
-                    <div class="group w-[320px] shrink-0 relative h-[450px] overflow-hidden rounded-2xl bg-white border border-blue-100 shadow hover:-translate-y-2 transition-transform duration-300">
+                    <div class="group w-[320px] shrink-0 relative h-[450px] overflow-hidden rounded-2xl bg-white border border-blue-100 shadow hover:-translate-y-2 transition-transform duration-300"
+                      data-service-title="Crowns, Bridges & Dentures"
+                      data-service-description="Custom prosthetic solutions for restoring missing, damaged, or weakened teeth with natural-looking results."
+                      data-service-details="Crowns, bridges, and dentures are restorative solutions for replacing missing or damaged teeth, restoring natural function and aesthetics. Crowns are used for single teeth, bridges for multiple adjacent teeth, and dentures for full arches. These prosthetics are custom-made for comfort, durability, and a natural appearance. Patients benefit from improved chewing, speech, and facial structure, with most procedures completed in a few visits. Proper care ensures long-lasting results and a confident smile.">
                         <div class="absolute top-6 left-6 text-3xl">🦷</div>
                         <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&q=80&w=800" alt="Oral Surgery - wisdom teeth" class="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-700 opacity-60 group-hover:opacity-40">
                         <div class="absolute inset-0 bg-gradient-to-t from-blue-100 via-blue-50/70 to-transparent"></div>
                         <div class="absolute bottom-0 left-0 right-0 p-8">
-                            <span class="text-brand-accent text-xs font-semibold uppercase tracking-widest mb-2 block">09 / Oral Surgery</span>
-                            <h3 class="text-2xl font-bold text-slate-900 mb-3">Wisdom Teeth & Extractions</h3>
-                            <p class="text-slate-700 text-sm font-light mb-4">Comfortable extractions and surgical care with a gentle touch.</p>
-                            <span class="inline-flex items-center text-xs uppercase tracking-wider text-brand-accent font-medium group-hover:translate-x-2 transition-transform duration-300">Learn More &rarr;</span>
+                            <span class="text-brand-accent text-xs font-semibold uppercase tracking-widest mb-2 block">09 / Crowns, Bridges & Dentures</span>
+                            <h3 class="text-2xl font-bold text-slate-900 mb-3">Crowns, Bridges & Dentures</h3>
+                            <p class="text-slate-700 text-sm font-light mb-4">Custom prosthetic solutions for restoring missing, damaged, or weakened teeth with natural-looking results.</p>
+                            <button type="button" class="service-learn-more inline-flex items-center text-xs uppercase tracking-wider text-brand-accent font-medium group-hover:translate-x-2 transition-transform duration-300">
+                              Learn More &rarr;
+                            </button>
                         </div>
                     </div>
                     <!-- Service Card 10 DUPLICATE -->
-                    <div class="group w-[320px] shrink-0 relative h-[450px] overflow-hidden rounded-2xl bg-white border border-blue-100 shadow hover:-translate-y-2 transition-transform duration-300">
+                    <div class="group w-[320px] shrink-0 relative h-[450px] overflow-hidden rounded-2xl bg-white border border-blue-100 shadow hover:-translate-y-2 transition-transform duration-300"
+                      data-service-title="Scaling & Professional Cleaning"
+                      data-service-description="Deep cleaning procedures that remove plaque and tartar while promoting healthier teeth and gums."
+                      data-service-details="Scaling and professional cleaning are essential preventive treatments that remove plaque, tartar, and surface stains from teeth. Recommended every six months, these procedures help prevent gum disease, cavities, and bad breath. Benefits include fresher breath, healthier gums, and a brighter smile. Patients can expect a comfortable, thorough cleaning using gentle, modern equipment, followed by personalized oral hygiene tips for optimal home care.">
                         <div class="absolute top-6 left-6 text-3xl">🦷</div>
                         <img src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&q=80&w=800" alt="Periodontal Care - gum health" class="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-700 opacity-60 group-hover:opacity-40">
                         <div class="absolute inset-0 bg-gradient-to-t from-blue-100 via-blue-50/70 to-transparent"></div>
                         <div class="absolute bottom-0 left-0 right-0 p-8">
-                            <span class="text-brand-accent text-xs font-semibold uppercase tracking-widest mb-2 block">10 / Periodontal Care</span>
-                            <h3 class="text-2xl font-bold text-slate-900 mb-3">Healthy Gums</h3>
-                            <p class="text-slate-700 text-sm font-light mb-4">Treatment and maintenance for gum disease to protect your oral health.</p>
-                            <span class="inline-flex items-center text-xs uppercase tracking-wider text-brand-accent font-medium group-hover:translate-x-2 transition-transform duration-300">Learn More &rarr;</span>
+                            <span class="text-brand-accent text-xs font-semibold uppercase tracking-widest mb-2 block">10 / Scaling & Professional Cleaning</span>
+                            <h3 class="text-2xl font-bold text-slate-900 mb-3">Scaling & Professional Cleaning</h3>
+                            <p class="text-slate-700 text-sm font-light mb-4">Deep cleaning procedures that remove plaque and tartar while promoting healthier teeth and gums.</p>
+                            <button type="button" class="service-learn-more inline-flex items-center text-xs uppercase tracking-wider text-brand-accent font-medium group-hover:translate-x-2 transition-transform duration-300">
+                              Learn More &rarr;
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -403,6 +785,147 @@
             </div>
         </div>
     </section>
+
+    <!-- Service Details Modal -->
+    <div id="service-modal" aria-modal="true" role="dialog" tabindex="-1">
+      <div class="service-modal-backdrop"></div>
+      <div class="service-modal-panel relative bg-white rounded-3xl shadow-2xl max-w-xl w-[95vw] mx-auto my-8 p-8 flex flex-col gap-6">
+        <button class="service-modal-close absolute top-4 right-4 text-3xl text-brand-accent bg-white rounded-full w-12 h-12 flex items-center justify-center border border-blue-100 shadow hover:bg-blue-50 focus:outline-none transition-all" aria-label="Close service details">&times;</button>
+        <h3 id="service-modal-title" class="text-3xl sm:text-4xl font-bold text-slate-900 tracking-tight mb-3"></h3>
+        <div id="service-modal-description" class="text-brand-accent text-base font-semibold mb-2"></div>
+        <div id="service-modal-details" class="text-slate-700 text-base leading-relaxed mb-4"></div>
+        <a href="#contact" id="service-modal-book" class="mt-2 inline-flex items-center justify-center px-8 py-3.5 bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold uppercase tracking-widest transition-colors rounded-none text-center">
+          Book Consultation
+        </a>
+      </div>
+    </div>
+    <!-- Service Modal Styles -->
+    <style>
+      #service-modal {
+        display: none;
+        position: fixed;
+        z-index: 1050;
+        left: 0; top: 0; right: 0; bottom: 0;
+        width: 100vw; height: 100vh;
+        background: rgba(15, 23, 42, 0.65);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transition: opacity 0.3s cubic-bezier(.45,.03,.38,1.01);
+      }
+      #service-modal.visible {
+        display: flex;
+        opacity: 1;
+        animation: service-modal-fadein 0.32s cubic-bezier(.16, 1, .3, 1) forwards;
+      }
+      @keyframes service-modal-fadein {
+        0% { opacity: 0; transform: scale(0.97);}
+        100% { opacity: 1; transform: scale(1);}
+      }
+      .service-modal-backdrop {
+        position: absolute;
+        left: 0; top: 0; right: 0; bottom: 0;
+        width: 100vw; height: 100vh;
+        cursor: pointer;
+      }
+      .service-modal-panel {
+        position: relative;
+        z-index: 10;
+        background: #fff;
+        border-radius: 1.5rem;
+        box-shadow: 0 24px 64px rgba(37,99,235,0.12), 0 2px 8px 0 rgba(16, 42, 80, 0.08);
+        max-width: 36rem;
+        width: 95vw;
+        padding: 2.5rem 2rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        animation: service-modal-fadein 0.32s cubic-bezier(.16, 1, .3, 1);
+      }
+      @media (max-width: 640px) {
+        .service-modal-panel {
+          padding: 1.25rem 0.75rem;
+          border-radius: 1rem;
+        }
+      }
+      .service-modal-close {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        font-size: 2rem;
+        color: #2563eb;
+        background: #fff;
+        border-radius: 50%;
+        width: 48px;
+        height: 48px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        border: none;
+        z-index: 20;
+        box-shadow: 0 8px 32px rgba(37,99,235,.10), 0 1.5px 8px rgba(16,42,80,0.08);
+        transition: all 0.18s cubic-bezier(.4,0,.2,1);
+      }
+      .service-modal-close:hover {
+        background: #eff6ff;
+        color: #2563eb;
+        transform: scale(1.08);
+      }
+      body.service-modal-open {
+        overflow: hidden !important;
+        touch-action: none;
+      }
+    </style>
+    <!-- Service Modal Script -->
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        // Service modal logic
+        const serviceModal = document.getElementById('service-modal');
+        const serviceModalPanel = serviceModal.querySelector('.service-modal-panel');
+        const serviceCloseBtn = serviceModal.querySelector('.service-modal-close');
+        const serviceBackdrop = serviceModal.querySelector('.service-modal-backdrop');
+        const serviceModalTitle = document.getElementById('service-modal-title');
+        const serviceModalDescription = document.getElementById('service-modal-description');
+        const serviceModalDetails = document.getElementById('service-modal-details');
+        const serviceModalBook = document.getElementById('service-modal-book');
+
+        function openServiceModal(card) {
+          serviceModalTitle.textContent = card.getAttribute('data-service-title') || '';
+          serviceModalDescription.textContent = card.getAttribute('data-service-description') || '';
+          serviceModalDetails.textContent = card.getAttribute('data-service-details') || '';
+          serviceModal.classList.add('visible');
+          document.body.classList.add('service-modal-open');
+          setTimeout(() => {
+            serviceCloseBtn.focus();
+          }, 100);
+        }
+        function closeServiceModal() {
+          serviceModal.classList.remove('visible');
+          document.body.classList.remove('service-modal-open');
+        }
+        // Open modal on learn more click
+        document.querySelectorAll('.service-learn-more').forEach(btn => {
+          btn.addEventListener('click', function (e) {
+            e.preventDefault();
+            let card = btn.closest('.group[data-service-title]');
+            if (!card) return;
+            openServiceModal(card);
+          });
+        });
+        // Close events
+        serviceCloseBtn.addEventListener('click', closeServiceModal);
+        serviceBackdrop.addEventListener('click', closeServiceModal);
+        window.addEventListener('keydown', function(e) {
+          if (serviceModal.classList.contains('visible') && (e.key === 'Escape' || e.key === 'Esc')) {
+            closeServiceModal();
+          }
+        });
+        serviceModalPanel.addEventListener('click', e => e.stopPropagation());
+      });
+    </script>
 
     <!-- DOCTORS SECTION (BLUE & WHITE - FULL CARD ANIMATION) -->
  <!-- DOCTORS SECTION (GRID CARD OVERLAY DESIGN) -->
