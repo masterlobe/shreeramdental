@@ -1369,25 +1369,26 @@
     </style>
 
     <!-- Doctor Modal HTML (Redesigned) -->
+<!-- Doctor Modal HTML (Redesigned) -->
 <div id="doctor-modal" aria-modal="true" role="dialog" tabindex="-1">
       <div class="doctor-modal-backdrop"></div>
       <div class="doctor-modal-panel relative flex flex-row w-full bg-white shadow-2xl overflow-hidden">
         <button class="doctor-modal-close" aria-label="Close doctor details">&times;</button>
         
         <!-- Image LEFT -->
-        <div class="doctor-modal-image relative bg-slate-100 flex items-center justify-center">
+        <div class="doctor-modal-image relative bg-slate-100 hidden md:flex items-center justify-center" style="display: none; @media (min-width: 768px) { display: flex; }">
           <img src="" alt="" id="doctor-modal-img" class="w-full h-full object-cover object-top" />
           <div class="absolute inset-0 bg-gradient-to-t from-slate-900/50 via-transparent to-transparent pointer-events-none"></div>
         </div>
 
         <!-- Details RIGHT -->
-        <div class="doctor-modal-content flex-1 min-w-0 bg-white p-8 lg:p-12 flex flex-col justify-between overflow-y-auto">
+        <div class="doctor-modal-content flex-1 min-w-0 bg-white p-6 sm:p-8 lg:p-12 flex flex-col justify-between overflow-y-auto">
           <div>
             <!-- Header Section -->
             <div class="border-b border-slate-200 pb-6 mb-6">
               <span class="inline-block text-xs font-semibold tracking-widest text-slate-400 uppercase mb-2">Medical Specialist</span>
-              <h3 id="doctor-modal-name" class="text-3xl lg:text-4xl font-light text-slate-900 tracking-tight mb-2"></h3>
-              <div id="doctor-modal-specialty" class="text-blue-600 font-medium text-lg"></div>
+              <h3 id="doctor-modal-name" class="text-2xl sm:text-3xl lg:text-4xl font-light text-slate-900 tracking-tight mb-2"></h3>
+              <div id="doctor-modal-specialty" class="text-blue-600 font-medium text-base sm:text-lg"></div>
             </div>
 
             <!-- Clean List Layout (No Boxes, Full Text Display) -->
@@ -1521,7 +1522,7 @@
         modalPanel.addEventListener('click', e => e.stopPropagation());
       });
     </script>
-    <!-- 4. ABOUT US -->
+<!-- 4. ABOUT US -->
     <section id="about" class="py-32 px-6 bg-blue-100 border-y border-blue-100">
         <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div class="relative">
@@ -1529,7 +1530,8 @@
                     <img src="https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&fit=crop&q=80&w=2000" alt="Dental team" class="w-full h-full object-cover grayscale contrast-125 hover:grayscale-0 transition-all duration-700">
                 </div>
                 <div class="absolute -bottom-8 -right-8 bg-brand-accent text-white p-8 rounded-2xl hidden sm:block">
-                    <p class="text-4xl font-extrabold mb-1">15+</p>
+                    <!-- Added data-target and data-suffix -->
+                    <p class="text-4xl font-extrabold mb-1"><span class="counter" data-target="15" data-suffix="+">0</span></p>
                     <p class="text-xs uppercase tracking-widest font-bold">Years of Dental Excellence</p>
                 </div>
             </div>
@@ -1541,17 +1543,79 @@
                 </p>
                 <div class="grid grid-cols-2 gap-6 pt-6 border-t border-blue-100">
                     <div>
-                        <h4 class="text-3xl font-bold text-slate-900 mb-1">98%</h4>
+                        <!-- Added data-target and data-suffix -->
+                        <h4 class="text-3xl font-bold text-slate-900 mb-1"><span class="counter" data-target="98" data-suffix="%">0</span></h4>
                         <p class="text-xs uppercase tracking-wider text-slate-600">Patient Satisfaction</p>
                     </div>
                     <div>
-                        <h4 class="text-3xl font-bold text-slate-900 mb-1">4,500+</h4>
+                        <!-- Added data-target, data-suffix, and data-separator for commas -->
+                        <h4 class="text-3xl font-bold text-slate-900 mb-1"><span class="counter" data-target="4500" data-suffix="+" data-separator=",">0</span></h4>
                         <p class="text-xs uppercase tracking-wider text-slate-600">Smiles Transformed</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const counters = document.querySelectorAll('.counter');
+        let animated = false;
+
+        const runCounters = () => {
+            if (animated) return;
+            animated = true;
+
+            counters.forEach(counter => {
+                const target = +counter.getAttribute('data-target');
+                const suffix = counter.getAttribute('data-suffix') || '';
+                const useSeparator = counter.hasAttribute('data-separator');
+                const duration = 2000; // 2 seconds
+                const frameRate = 1000 / 60; // 60fps
+                const totalFrames = Math.round(duration / frameRate);
+                let frame = 0;
+
+                const countInterval = setInterval(() => {
+                    frame++;
+                    const progress = frame / totalFrames;
+                    // Ease-out formula for smooth deceleration
+                    const currentCount = Math.round(target * (1 - Math.pow(1 - progress, 3)));
+
+                    if (frame >= totalFrames) {
+                        counter.innerText = (useSeparator ? target.toLocaleString() : target) + suffix;
+                        clearInterval(countInterval);
+                    } else {
+                        counter.innerText = (useSeparator ? currentCount.toLocaleString() : currentCount) + suffix;
+                    }
+                }, frameRate);
+            });
+        };
+
+        const aboutSection = document.querySelector('#about');
+
+        if (aboutSection) {
+            // Fallback check: If the section is already visible on initial load, run immediately
+            const rect = aboutSection.getBoundingClientRect();
+            const isVisible = (rect.top <= window.innerHeight) && (rect.bottom >= 0);
+            
+            if (isVisible) {
+                runCounters();
+            } else {
+                // Otherwise, use Intersection Observer for scroll tracking
+                const observer = new IntersectionObserver((entries, observerInstance) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            runCounters();
+                            observerInstance.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.1 }); // Lowered threshold to 10% for safer triggering
+
+                observer.observe(aboutSection);
+            }
+        }
+    });
+</script>
 
     <!-- 7. CLINIC BRANCHES -->
    <!-- 7. CLINIC BRANCHES -->
@@ -1679,32 +1743,93 @@
             <img src="https://images.unsplash.com/photo-1511895426328-dc8714191300?auto=format&fit=crop&q=80&w=1200" alt="Dental clinic highlight background" class="w-full h-full object-cover">
         </div>
         <div class="relative z-10 max-w-7xl mx-auto text-center">
-            <h2 class="text-xs uppercase tracking-widest text-brand-accent mb-3">Clinic Highlights</h2>
-            <p class="text-3xl sm:text-5xl font-bold text-slate-900 mb-16">Why Families Choose Shree Ram</p>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-                <div class="bg-blue-50 p-8 rounded-2xl border border-blue-100 text-center">
-                    <span class="text-5xl font-extrabold text-brand-accent block mb-2">15</span>
-                    <h4 class="text-brand-accent font-semibold text-sm uppercase tracking-wider mb-1">Years Experience</h4>
-                    <p class="text-slate-600 text-xs">Providing gentle, trusted dental care</p>
-                </div>
-                <div class="bg-blue-50 p-8 rounded-2xl border border-blue-100 text-center">
-                    <span class="text-5xl font-extrabold text-brand-accent block mb-2">4,500+</span>
-                    <h4 class="text-brand-accent font-semibold text-sm uppercase tracking-wider mb-1">Happy Patients</h4>
-                    <p class="text-slate-600 text-xs">Smiles brightened and lives changed</p>
-                </div>
-                <div class="bg-blue-50 p-8 rounded-2xl border border-blue-100 text-center">
-                    <span class="text-5xl font-extrabold text-brand-accent block mb-2">7</span>
-                    <h4 class="text-brand-accent font-semibold text-sm uppercase tracking-wider mb-1">Qualified Dentists</h4>
-                    <p class="text-slate-600 text-xs">Expertise in all dental specialties</p>
-                </div>
-                <div class="bg-blue-50 p-8 rounded-2xl border border-blue-100 text-center">
-                    <span class="text-5xl font-extrabold text-brand-accent block mb-2">12k+</span>
-                    <h4 class="text-brand-accent font-semibold text-sm uppercase tracking-wider mb-1">Treatments Done</h4>
-                    <p class="text-slate-600 text-xs">Successful procedures & happy outcomes</p>
-                </div>
-            </div>
+    <h2 class="text-xs uppercase tracking-widest text-brand-accent mb-3">Clinic Highlights</h2>
+    <p class="text-3xl sm:text-5xl font-bold text-slate-900 mb-16">Why Families Choose Shree Ram</p>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div class="bg-blue-50 p-8 rounded-2xl border border-blue-100 text-center">
+            <!-- Added counter class and data-target -->
+            <span class="text-5xl font-extrabold text-brand-accent block mb-2 counter" data-target="15">0</span>
+            <h4 class="text-brand-accent font-semibold text-sm uppercase tracking-wider mb-1">Years Experience</h4>
+            <p class="text-slate-600 text-xs">Providing gentle, trusted dental care</p>
         </div>
+        <div class="bg-blue-50 p-8 rounded-2xl border border-blue-100 text-center">
+            <!-- Added data-separator for commas and data-suffix for + -->
+            <span class="text-5xl font-extrabold text-brand-accent block mb-2 counter" data-target="4500" data-separator="," data-suffix="+">0</span>
+            <h4 class="text-brand-accent font-semibold text-sm uppercase tracking-wider mb-1">Happy Patients</h4>
+            <p class="text-slate-600 text-xs">Smiles brightened and lives changed</p>
+        </div>
+        <div class="bg-blue-50 p-8 rounded-2xl border border-blue-100 text-center">
+            <span class="text-5xl font-extrabold text-brand-accent block mb-2 counter" data-target="7">0</span>
+            <h4 class="text-brand-accent font-semibold text-sm uppercase tracking-wider mb-1">Qualified Dentists</h4>
+            <p class="text-slate-600 text-xs">Expertise in all dental specialties</p>
+        </div>
+        <div class="bg-blue-50 p-8 rounded-2xl border border-blue-100 text-center">
+            <!-- Added data-suffix for k+ -->
+            <span class="text-5xl font-extrabold text-brand-accent block mb-2 counter" data-target="12" data-suffix="k+">0</span>
+            <h4 class="text-brand-accent font-semibold text-sm uppercase tracking-wider mb-1">Treatments Done</h4>
+            <p class="text-slate-600 text-xs">Successful procedures & happy outcomes</p>
+        </div>
+    </div>
+</div>
     </section>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+    const counters = document.querySelectorAll('.counter');
+
+    const runCounters = (counterElement) => {
+        if (counterElement.classList.contains('animated')) return;
+        counterElement.classList.add('animated');
+
+        const target = +counterElement.getAttribute('data-target');
+        const suffix = counterElement.getAttribute('data-suffix') || '';
+        const useSeparator = counterElement.hasAttribute('data-separator');
+        const duration = 2000; // 2 seconds
+        const frameRate = 1000 / 60; // 60fps
+        const totalFrames = Math.round(duration / frameRate);
+        let frame = 0;
+
+        const countInterval = setInterval(() => {
+            frame++;
+            const progress = frame / totalFrames;
+            // Ease-out formula for smooth deceleration
+            const currentCount = Math.round(target * (1 - Math.pow(1 - progress, 3)));
+
+            if (frame >= totalFrames) {
+                counterElement.innerText = (useSeparator ? target.toLocaleString() : target) + suffix;
+                clearInterval(countInterval);
+            } else {
+                counterElement.innerText = (useSeparator ? currentCount.toLocaleString() : currentCount) + suffix;
+            }
+        }, frameRate);
+    };
+
+    // Use Intersection Observer so each section triggers independently when scrolled into view
+    const observerOptions = {
+        root: null,
+        threshold: 0.1 // Triggers when 10% of the element is visible
+    };
+
+    const observer = new IntersectionObserver((entries, observerInstance) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                // Find all counters inside the visible section/container
+                const sectionCounters = entry.target.querySelectorAll('.counter');
+                sectionCounters.forEach(counter => runCounters(counter));
+                observerInstance.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+
+    // Observe both the #about section and the highlights container parent (or wrap highlights in a section with an ID)
+    const aboutSection = document.querySelector('#about');
+    if (aboutSection) observer.observe(aboutSection);
+
+    // If your highlights grid is wrapped inside a parent container, select it to observe
+    const highlightsContainer = document.querySelector('.relative.z-10.max-w-7xl');
+    if (highlightsContainer) observer.observe(highlightsContainer);
+});
+    </script>
 
 <!-- 6. PATIENT TESTIMONIALS (BLUE & WHITE - POP SLIDE ANIMATION) -->
     <section id="testimonials" class="py-32 bg-white border-t border-blue-100 overflow-hidden relative">
@@ -2306,34 +2431,8 @@ lucide.createIcons();
 <!-- Floating Action Buttons (Fixed Bottom-Right) -->
 <div class="fixed bottom-6 right-6 z-50 flex items-center gap-3">
   
-  <!-- Book Appointment Button -->
-  <!-- 1. Keyframes Animation (Place in your global CSS or inside a <style> tag) -->
-<style>
-  @keyframes lightSweep {
-    0% {
-      transform: translateX(-150%) skewX(-20deg);
-    }
-    /* Pauses briefly between sweeps (between 35% and 100%) */
-    35%, 100% {
-      transform: translateX(250%) skewX(-20deg);
-    }
-  }
-
-  .animate-shimmer {
-    animation: lightSweep 3.5s ease-in-out infinite;
-  }
-</style>
-
-<!-- 2. The Button HTML -->
-<button class="relative overflow-hidden rounded-full bg-blue-600 px-8 py-3.5 font-semibold text-white shadow-lg shadow-blue-500/30 transition-transform duration-300 hover:scale-105 active:scale-95">
   
-  <!-- Button Text (Needs z-10 so it sits above the shimmer) -->
-  <span class="relative z-10 flex items-center gap-2">
-    Book Appointment
-  </span>
-
   <!-- Shimmer Element -->
-  <span class="absolute inset-0 w-1/2 h-full bg-gradient-to-r from-transparent via-white/40 to-transparent animate-shimmer pointer-events-none"></span>
 
 </button>
 
