@@ -96,14 +96,7 @@
     }
   }
 
-  @keyframes slowRotate {
-    from {
-      transform: rotate(0deg);
-    }
-    to {
-      transform: rotate(360deg);
-    }
-  }
+  
 
   svg {
     width: 100%;
@@ -256,7 +249,14 @@
     transform:translateX(-100%) scale(1.02);
     opacity:0;
 }
+
+
+
+
 </style>
+
+
+
 </head>
 <body class="bg-white text-brand-light font-sans antialiased selection:bg-brand-accent selection:text-black">
 
@@ -389,31 +389,188 @@
         <circle cx="250" cy="250" r="135" fill="none" stroke="url(#gold-metallic)" stroke-width="4" />
 
         <!-- CENTRAL LOGO BADGE WITH LOGO IMAGE -->
-        <a href="#home" class="center-logo-group">
-          <!-- Outer Metallic Gold Rim for Badge -->
-          <circle cx="250" cy="250" r="74" fill="#ffffff" stroke="url(#gold-metallic)" stroke-width="5" filter="drop-shadow(0 6px 12px rgba(0,0,0,0.4))" />
-          
-          <!-- LOGO IMAGE EMBEDDED IN CENTER -->
-          <!-- Replace the href below with your image file path e.g. href="logo.png" or "logo.svg" -->
-<g class="logo-pop">
+        <style>
+  @keyframes coin-rhythm {
+    0%, 50% {
+      transform: rotateY(0deg);
+    }
+    65%, 85% {
+      transform: rotateY(180deg);
+    }
+    100% {
+      transform: rotateY(360deg);
+    }
+  }
 
-  <!-- White circular background -->
-  <circle cx="250" cy="250" r="80" fill="white" />
+  .coin-wrapper {
+    perspective: 1000px;
+  }
 
-  <!-- Transparent logo -->
-  <image
-    href="./images/logo.png"
-    x="176"
-    y="176"
-    width="148"
-    height="148"
-    preserveAspectRatio="xMidYMid meet"
-  />
-</g>
+  .coin-flipper {
+    position: relative;
+    width: 148px;
+    height: 148px;
+    transform-style: preserve-3d;
+    /* Using cubic-bezier for a very natural, physics-like flip */
+    animation: coin-rhythm 5s cubic-bezier(0.4, 0.0, 0.2, 1) infinite;
+  }
 
-          <circle cx="250" cy="250" r="74" fill="none" stroke="url(#gold-metallic)" stroke-width="3" opacity="0.8" />
-        </a>
+  /* Pause auto-flip on hover so users can easily click */
+  .coin-wrapper:hover .coin-flipper {
+    animation-play-state: paused;
+  }
+
+  .coin-side {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /* High-end metallic gold outer border */
+    border: 4px solid #d97706; 
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
+  }
+
+  .coin-front {
+    transform: rotateY(0deg);
+    background-color: #ffffff;
+  }
+
+  .coin-back {
+    transform: rotateY(180deg);
+    /* Deep elegant gradient matching premium corporate aesthetics */
+    background: radial-gradient(circle at center, #1e3a8a 0%, #0f172a 100%);
+    color: #ffffff;
+    cursor: pointer;
+    text-decoration: none;
+  }
+</style>
+
+<a href="#home" class="center-logo-group">
+  <!-- Outer Metallic Gold Rim for Badge (Stationary) -->
+  <circle cx="250" cy="250" r="74" fill="#ffffff" stroke="url(#gold-metallic)" stroke-width="5" filter="drop-shadow(0 6px 12px rgba(0,0,0,0.4))" />
+  
+  <!-- LOGO IMAGE EMBEDDED IN CENTER -->
+  <!-- WRAPPER GROUP WITH SPIN CLASS -->
+  <g class="logo-pop-spin">
+
+    <!-- White circular background (will spin with logo) -->
+    <circle cx="250" cy="250" r="80" fill="white" />
+
+    <!-- Transparent logo (will spin with logo) -->
+    <image
+      href="./images/logo.png"
+      x="176"
+      y="176"
+      width="148"
+      height="148"
+      preserveAspectRatio="xMidYMid meet"
+    />
+  </g>
+
+  <!-- Inner Gold Ring Border Separator (Stationary) -->
+  <circle cx="250" cy="250" r="74" fill="none" stroke="url(#gold-metallic)" stroke-width="3" opacity="0.8" />
+</a>
       </svg>
+
+      <!-- THE CSS -->
+<style>
+  @keyframes coin-rhythm {
+    0%, 45% { transform: rotateY(0deg); }
+    55%, 85% { transform: rotateY(180deg); }
+    95%, 100% { transform: rotateY(0deg); } /* Flips backwards to create a clean loop */
+  }
+
+  .coin-wrapper {
+    perspective: 1000px;
+    width: 148px;
+    height: 148px;
+  }
+
+  .coin-flipper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    animation: coin-rhythm 5s cubic-bezier(0.4, 0.0, 0.2, 1) infinite;
+  }
+
+  /* Optional: Remove this if you want it to flip even when hovered */
+  .coin-wrapper:hover .coin-flipper {
+    animation-play-state: paused;
+  }
+
+  .coin-side {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /* High-end metallic gold outer border */
+    border: 4px solid #d97706; 
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+  }
+
+  .coin-front {
+    transform: rotateY(0deg);
+    background-color: #ffffff;
+  }
+
+  .coin-back {
+    transform: rotateY(180deg);
+    background: radial-gradient(circle at center, #1e3a8a 0%, #0f172a 100%);
+    color: #ffffff;
+    cursor: pointer;
+    text-decoration: none;
+  }
+</style>
+
+<!-- THE HTML COIN (Absolutely positioned in the center) -->
+<div class="absolute inset-0 flex items-center justify-center pointer-events-none z-10">
+  
+  <div class="coin-wrapper pointer-events-auto">
+    <div class="coin-flipper">
+      
+      <!-- FRONT SIDE: White with Logo -->
+      <div class="coin-side coin-front p-2">
+        <div class="w-full h-full rounded-full border-[3px] border-white p-2 flex items-center justify-center bg-white shadow-[inset_0_2px_8px_rgba(0,0,0,0.1)]">
+          <img src="./images/logo.png" alt="Shree Ram Dental Hospital" class="w-full h-full object-contain" />
+        </div>
+      </div>
+
+      <!-- BACK SIDE: Blue with "Click to Know More" -->
+      <a href="#home" class="coin-side coin-back group p-1">
+        <div class="w-full h-full rounded-full border-[2px] border-[#1e3a8a] p-2 flex flex-col items-center justify-center transition-colors group-hover:border-blue-500">
+          
+          <svg class="w-5 h-5 text-yellow-500 mb-1 animate-pulse" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+            <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+          </svg>
+          
+          <span class="text-[9px] font-bold uppercase tracking-[0.1em] text-yellow-200/80 mb-0.5">
+            click
+          </span>
+          <span class="text-[11px] font-black uppercase tracking-widest text-white leading-tight text-center">
+            Around<br>Me
+          </span>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</div>
     </div>
   </header>
 
@@ -1697,12 +1854,12 @@
                         
                         <div class="bg-white/80 backdrop-blur-sm p-4 rounded-2xl border border-blue-50 mb-8 space-y-1.5">
                             <div class="flex items-center justify-between text-[11px] text-slate-500 font-medium">
-                                <span>Sun – Fri</span>
+                                <span>Sun – Sat</span>
                                 <span class="text-slate-900 font-semibold">9:00 AM – 9:00 PM</span>
                             </div>
                             <div class="flex items-center justify-between text-[11px] text-slate-500 font-medium pt-1 border-t border-slate-100">
-                                <span>Saturday</span>
-                                <span class="text-brand-accent font-semibold">By Appointment</span>
+                                <span>Open Everyday</span>
+                                <span class="text-brand-accent font-semibold">Emergency Services Available 24/7</span>
                             </div>
                         </div>
                     </div>
@@ -1723,12 +1880,12 @@
                         
                         <div class="bg-white/80 backdrop-blur-sm p-4 rounded-2xl border border-blue-50 mb-8 space-y-1.5">
                            <div class="flex items-center justify-between text-[11px] text-slate-500 font-medium">
-                                <span>Sun – Fri</span>
+                                <span>Sun – Sat</span>
                                 <span class="text-slate-900 font-semibold">9:00 AM – 6:00 PM</span>
                             </div>
                             <div class="flex items-center justify-between text-[11px] text-slate-500 font-medium pt-1 border-t border-slate-100">
-                                <span>Saturday</span>
-                                <span class="text-brand-accent font-semibold">By Appointment
+                                <span>Open Everyday</span>
+                                <span class="text-brand-accent font-semibold">Emergency Services Available 24/7
 
                                 </span>
                             </div>
@@ -1751,12 +1908,12 @@
                         
                         <div class="bg-white/80 backdrop-blur-sm p-4 rounded-2xl border border-blue-50 mb-8 space-y-1.5">
                            <div class="flex items-center justify-between text-[11px] text-slate-500 font-medium">
-                                <span>Sun – Fri</span>
+                                <span>Sun – Sat</span>
                                 <span class="text-slate-900 font-semibold">9:00 AM – 7:00 PM</span>
                             </div>
                             <div class="flex items-center justify-between text-[11px] text-slate-500 font-medium pt-1 border-t border-slate-100">
-                                <span>Saturday</span>
-                                <span class="text-brand-accent font-semibold">By Appointment</span>
+                                <span>Open Everyday</span>
+                                <span class="text-brand-accent font-semibold">Emergency Services Available 24/7</span>
                             </div>
                         </div>
                     </div>
@@ -2327,7 +2484,7 @@ setInterval(changeSlide, 2000);
                             </div>
                             <span class="block text-[10px] font-mono font-bold uppercase tracking-widest text-blue-400 mb-1">Phone Line</span>
                             <a href="tel:+977014123456" class="text-lg font-bold text-blue-950 hover:text-blue-600 transition-colors block font-mono">+977 9848544180</a>
-                            <p class="text-xs text-blue-900/60 mt-2 font-medium">Main Clinic Line (09:00 AM – 06:00 PM)</p>
+                            <p class="text-xs text-blue-900/60 mt-2 font-medium">Main Clinic Line (09:00 AM – 09:00 PM)</p>
                         </div>
 
                         <!-- Emergency Line Card -->
@@ -2357,8 +2514,8 @@ setInterval(changeSlide, 2000);
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                             </div>
                             <span class="block text-[10px] font-mono font-bold uppercase tracking-widest text-blue-400 mb-1">Working Hours</span>
-                            <p class="text-xs font-bold text-blue-950 font-mono">SUN – FRI: 09:00 AM – 09:00 PM</p>
-                            <p class="text-xs text-blue-900/60 mt-2 font-medium">Saturday: By Appointment Only</p>
+                            <p class="text-xs font-bold text-blue-950 font-mono">SUN – SAT: 09:00 AM – 09:00 PM</p>
+                            <p class="text-xs text-blue-900/60 mt-2 font-medium">Open Everyday: Emergency Services Available 24/7</p>
                         </div>
 
                     </div>
