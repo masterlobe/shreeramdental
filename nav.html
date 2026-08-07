@@ -6,27 +6,30 @@
   <title>Shree Ram Dental Clinic - Services</title>
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   <style>
-    /* Custom scrollbar hiding and native touch scrolling */
-    #services-container::-webkit-scrollbar {
-      display: none;
-    }
+    /* Prevent vertical pull-to-refresh & browser gesture hijacking on scroll container */
     #services-container {
       -ms-overflow-style: none;
       scrollbar-width: none;
       overscroll-behavior-x: contain;
-      touch-action: pan-y pan-x;
+      overscroll-behavior-y: auto;
+      touch-action: pan-x pan-y;
       cursor: grab;
+      -webkit-overflow-scrolling: touch;
+    }
+    #services-container::-webkit-scrollbar {
+      display: none;
     }
     #services-container.is-dragging {
       cursor: grabbing;
       user-select: none;
     }
     
-    /* Service modal animation */
+    /* Service modal animation & maximum z-index */
     #service-modal {
       display: none;
       opacity: 0;
       transition: opacity 0.3s ease;
+      z-index: 99999; /* Ensure modal stays above sticky header/logo navigation */
     }
     #service-modal.visible {
       display: flex;
@@ -34,6 +37,7 @@
     }
     body.service-modal-open {
       overflow: hidden !important;
+      touch-action: none;
     }
 
     /* Modal custom scrollbar */
@@ -80,7 +84,7 @@
                data-service-description="Permanent tooth replacement solutions that restore function, confidence, and long-term oral health."
                data-service-details="
                 <div class='space-y-6'>
-                  <p class='text-slate-600 leading-relaxed'>Dental implants are the gold standard for replacing missing teeth. Unlike traditional dentures or bridges, an implant acts as a artificial root bio-integrated directly into your jawbone, providing absolute stability and preventing bone degeneration.</p>
+                  <p class='text-slate-600 leading-relaxed'>Dental implants are the gold standard for replacing missing teeth. Unlike traditional dentures or bridges, an implant acts as an artificial root bio-integrated directly into your jawbone, providing absolute stability and preventing bone degeneration.</p>
                   
                   <div>
                     <h4 class='text-slate-900 font-bold text-sm uppercase tracking-wider mb-3 text-blue-600'>Key Clinical Benefits</h4>
@@ -358,8 +362,8 @@
     </div>
   </section>
 
-  <!-- Spacious Service Details Modal -->
-  <div id="service-modal" class="fixed inset-0 z-50 items-center justify-center p-4 sm:p-8 bg-slate-900/60 backdrop-blur-md" aria-modal="true" role="dialog">
+  <!-- High Z-Index Service Details Modal (z-50 replaced with z-[99999]) -->
+  <div id="service-modal" class="fixed inset-0 z-[99999] items-center justify-center p-4 sm:p-8 bg-slate-900/60 backdrop-blur-md" aria-modal="true" role="dialog">
     <div class="service-modal-backdrop absolute inset-0"></div>
     
     <div class="service-modal-panel relative bg-white rounded-3xl shadow-2xl max-w-2xl sm:max-w-3xl w-full mx-auto max-h-[88vh] z-10 flex flex-col overflow-hidden">
@@ -391,7 +395,7 @@
     </div>
   </div>
 
-  <!-- JavaScript -->
+  <!-- JavaScript with Touch Gestures Fixed -->
   <script>
     document.addEventListener('DOMContentLoaded', function () {
       const container = document.getElementById('services-container');
@@ -422,7 +426,7 @@
       calcTrackDimensions();
       window.addEventListener('resize', calcTrackDimensions);
 
-      // Loop check
+      // Boundary check for continuous loop
       function checkInfiniteLoop() {
         if (container.scrollLeft >= singleSetWidth) {
           container.scrollLeft -= singleSetWidth;
@@ -431,7 +435,7 @@
         }
       }
 
-      // Smooth Auto-Scroll Loop
+      // Smooth Auto-Scroll Engine
       let speed = 0.6;
       let isPaused = false;
       let isDragging = false;
@@ -450,23 +454,34 @@
       container.addEventListener('mouseenter', () => isPaused = true);
       container.addEventListener('mouseleave', () => isPaused = false);
 
-      // Desktop Pointer Dragging
+      // Pointer Dragging for Mobile Touch & Desktop Mouse
       let startX = 0;
+      let startY = 0;
       let scrollStart = 0;
+      let isHorizontalSwipe = false;
 
+      // Unify touch & mouse interaction to ensure smooth horizontal swipe
       container.addEventListener('pointerdown', (e) => {
-        if (e.pointerType === 'touch') return;
         isDragging = false;
-        startX = e.pageX - container.offsetLeft;
+        isHorizontalSwipe = false;
+        startX = e.clientX;
+        startY = e.clientY;
         scrollStart = container.scrollLeft;
 
         function onPointerMove(eMove) {
-          const x = eMove.pageX - container.offsetLeft;
-          const dist = (x - startX) * 1.5;
-          if (Math.abs(dist) > 5) {
+          const deltaX = eMove.clientX - startX;
+          const deltaY = eMove.clientY - startY;
+
+          // Determine horizontal swipe vs vertical page scroll
+          if (!isHorizontalSwipe && Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 5) {
+            isHorizontalSwipe = true;
+          }
+
+          if (isHorizontalSwipe) {
             isDragging = true;
             container.classList.add('is-dragging');
-            container.scrollLeft = scrollStart - dist;
+            container.scrollLeft = scrollStart - deltaX;
+            if (eMove.cancelable) eMove.preventDefault(); // Prevent page jitter on mobile swipe
           }
         }
 
@@ -474,10 +489,12 @@
           container.classList.remove('is-dragging');
           window.removeEventListener('pointermove', onPointerMove);
           window.removeEventListener('pointerup', onPointerUp);
+          window.removeEventListener('pointercancel', onPointerUp);
         }
 
-        window.addEventListener('pointermove', onPointerMove);
+        window.addEventListener('pointermove', onPointerMove, { passive: false });
         window.addEventListener('pointerup', onPointerUp);
+        window.addEventListener('pointercancel', onPointerUp);
       });
 
       // Modal Handling
@@ -508,7 +525,7 @@
         if (e.key === 'Escape' && modal.classList.contains('visible')) closeModal();
       });
 
-      // Start loop
+      // Start engine
       requestAnimationFrame(step);
     });
   </script>
