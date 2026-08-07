@@ -255,10 +255,6 @@
 
 </style>
 
-
-
-
-
   <style>
     /* Custom scrollbar hiding and native touch scrolling */
     #services-container::-webkit-scrollbar {
@@ -289,7 +285,28 @@
     body.service-modal-open {
       overflow: hidden !important;
     }
+
+    /* Modal custom scrollbar */
+    .modal-scroll::-webkit-scrollbar {
+      width: 6px;
+    }
+    .modal-scroll::-webkit-scrollbar-track {
+      background: #f1f5f9;
+      border-radius: 8px;
+    }
+    .modal-scroll::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 8px;
+    }
+    .modal-scroll::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
   </style>
+
+
+
+
+
 
 </head>
 <body class="bg-white text-brand-light font-sans antialiased selection:bg-brand-accent selection:text-black">
@@ -573,7 +590,7 @@
         </div>
     </section>
 
-   <section id="services" class="py-24 px-6 bg-slate-50 overflow-hidden">
+  <section id="services" class="py-24 px-6 bg-slate-50 overflow-hidden">
     <div class="max-w-7xl mx-auto">
       
       <!-- Section Header -->
@@ -592,190 +609,341 @@
         <div class="services-track flex gap-6 w-max">
           
           <!-- Service Card 1 -->
-          <div class="group w-[300px] sm:w-[320px] shrink-0 relative h-[420px] overflow-hidden rounded-2xl bg-white border border-slate-100 shadow-md hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300"
+          <div class="group w-[300px] sm:w-[320px] shrink-0 relative h-[420px] overflow-hidden rounded-2xl bg-white border border-slate-100 shadow-md hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 cursor-pointer"
                data-service-title="Dental Implants"
+               data-service-category="01 / Restoration"
                data-service-description="Permanent tooth replacement solutions that restore function, confidence, and long-term oral health."
-               data-service-details="Dental implants are advanced, permanent solutions for missing teeth, designed to mimic the look, feel, and function of natural teeth. Ideal for patients with one or more missing teeth, implants help preserve jawbone integrity and prevent shifting of adjacent teeth.">
+               data-service-details="
+                <div class='space-y-6'>
+                  <p class='text-slate-600 leading-relaxed'>Dental implants are the gold standard for replacing missing teeth. Unlike traditional dentures or bridges, an implant acts as a artificial root bio-integrated directly into your jawbone, providing absolute stability and preventing bone degeneration.</p>
+                  
+                  <div>
+                    <h4 class='text-slate-900 font-bold text-sm uppercase tracking-wider mb-3 text-blue-600'>Key Clinical Benefits</h4>
+                    <ul class='grid grid-cols-1 sm:grid-cols-2 gap-2 text-slate-600 text-sm'>
+                      <li class='flex items-center gap-2'><span class='text-blue-500 font-bold'>✓</span> Restores 100% chewing function</li>
+                      <li class='flex items-center gap-2'><span class='text-blue-500 font-bold'>✓</span> Prevents jawbone loss & facial sag</li>
+                      <li class='flex items-center gap-2'><span class='text-blue-500 font-bold'>✓</span> No grinding of adjacent healthy teeth</li>
+                      <li class='flex items-center gap-2'><span class='text-blue-500 font-bold'>✓</span> Permanent result (20+ years duration)</li>
+                    </ul>
+                  </div>
+
+                  <div class='bg-slate-50 p-4 rounded-2xl border border-slate-100'>
+                    <h4 class='text-slate-900 font-bold text-sm mb-2'>Treatment Workflow</h4>
+                    <ol class='list-decimal list-inside text-slate-600 text-xs sm:text-sm space-y-1.5 leading-relaxed'>
+                      <li><strong>3D CBCT Scan & Planning:</strong> High-precision digital mapping of your jaw structure.</li>
+                      <li><strong>Implant Placement:</strong> Gentle insertion of a medical-grade titanium post under local anesthesia.</li>
+                      <li><strong>Osseointegration:</strong> A 3-6 month healing phase where bone naturally fuses with the post.</li>
+                      <li><strong>Custom Crown Attachment:</strong> Handcrafted porcelain crown designed to match your smile.</li>
+                    </ol>
+                  </div>
+                </div>
+               ">
             <img src="./images/1.jpg" alt="Dental Implants" class="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 opacity-50 group-hover:opacity-40">
             <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/60 to-transparent"></div>
             <div class="absolute bottom-0 left-0 right-0 p-6 text-white">
               <span class="text-blue-400 text-xs font-semibold uppercase tracking-wider mb-1 block">01 / Restoration</span>
               <h3 class="text-xl font-bold mb-2">Dental Implants</h3>
               <p class="text-slate-300 text-xs font-light mb-4 line-clamp-2">Permanent tooth replacement solutions that restore function, confidence, and long-term oral health.</p>
-              <button type="button" class="service-learn-more inline-flex items-center text-xs uppercase tracking-wider text-blue-400 font-semibold group-hover:translate-x-1 transition-transform duration-300">
+              <span class="inline-flex items-center text-xs uppercase tracking-wider text-blue-400 font-semibold group-hover:translate-x-1 transition-transform duration-300">
                 Learn More &rarr;
-              </button>
+              </span>
             </div>
           </div>
 
           <!-- Service Card 2 -->
-          <div class="group w-[300px] sm:w-[320px] shrink-0 relative h-[420px] overflow-hidden rounded-2xl bg-white border border-slate-100 shadow-md hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300"
+          <div class="group w-[300px] sm:w-[320px] shrink-0 relative h-[420px] overflow-hidden rounded-2xl bg-white border border-slate-100 shadow-md hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 cursor-pointer"
                data-service-title="Braces & Orthodontics"
+               data-service-category="02 / Orthodontics"
                data-service-description="Modern orthodontic treatments to align teeth, improve bite function, and enhance smiles."
-               data-service-details="Braces and orthodontic treatments are designed to correct misaligned teeth and jaws, providing both cosmetic and functional improvements. Options include traditional metal braces, ceramic braces, and clear aligners.">
+               data-service-details="
+                <div class='space-y-6'>
+                  <p class='text-slate-600 leading-relaxed'>Orthodontic therapy corrects overcrowding, gaps, deep bites, and jaw misalignments. Achieving straight teeth is not merely cosmetic—properly aligned teeth significantly reduce wear, lower risks of gum disease, and eliminate strain on your jaw joints (TMJ).</p>
+                  
+                  <div>
+                    <h4 class='text-slate-900 font-bold text-sm uppercase tracking-wider mb-3 text-blue-600'>Available Treatment Options</h4>
+                    <div class='grid grid-cols-1 sm:grid-cols-3 gap-3'>
+                      <div class='bg-slate-50 p-3 rounded-xl border border-slate-100'>
+                        <h5 class='font-bold text-slate-900 text-xs uppercase mb-1'>Metal Braces</h5>
+                        <p class='text-slate-500 text-xs'>Traditional high-durability stainless steel brackets for reliable alignment.</p>
+                      </div>
+                      <div class='bg-slate-50 p-3 rounded-xl border border-slate-100'>
+                        <h5 class='font-bold text-slate-900 text-xs uppercase mb-1'>Ceramic Braces</h5>
+                        <p class='text-slate-500 text-xs'>Tooth-colored aesthetic brackets designed to blend discreetly with your enamel.</p>
+                      </div>
+                      <div class='bg-slate-50 p-3 rounded-xl border border-slate-100'>
+                        <h5 class='font-bold text-slate-900 text-xs uppercase mb-1'>Clear Aligners</h5>
+                        <p class='text-slate-500 text-xs'>Nearly invisible, removable custom trays for maximum comfort and convenience.</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class='bg-blue-50/50 p-4 rounded-2xl border border-blue-100/60'>
+                    <h4 class='text-blue-900 font-bold text-sm mb-1'>Expected Duration</h4>
+                    <p class='text-slate-600 text-xs sm:text-sm leading-relaxed'>Treatments typically range from <strong>12 to 24 months</strong> depending on age, bite complexity, and adherence to retainer schedules. Regular adjustments are performed every 4–6 weeks.</p>
+                  </div>
+                </div>
+               ">
             <img src="./images/2.jpg" alt="Braces & Orthodontics" class="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 opacity-50 group-hover:opacity-40">
             <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/60 to-transparent"></div>
             <div class="absolute bottom-0 left-0 right-0 p-6 text-white">
               <span class="text-blue-400 text-xs font-semibold uppercase tracking-wider mb-1 block">02 / Orthodontics</span>
               <h3 class="text-xl font-bold mb-2">Braces & Orthodontics</h3>
               <p class="text-slate-300 text-xs font-light mb-4 line-clamp-2">Modern orthodontic treatments to align teeth, improve bite function, and enhance smiles.</p>
-              <button type="button" class="service-learn-more inline-flex items-center text-xs uppercase tracking-wider text-blue-400 font-semibold group-hover:translate-x-1 transition-transform duration-300">
+              <span class="inline-flex items-center text-xs uppercase tracking-wider text-blue-400 font-semibold group-hover:translate-x-1 transition-transform duration-300">
                 Learn More &rarr;
-              </button>
+              </span>
             </div>
           </div>
 
           <!-- Service Card 3 -->
-          <div class="group w-[300px] sm:w-[320px] shrink-0 relative h-[420px] overflow-hidden rounded-2xl bg-white border border-slate-100 shadow-md hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300"
+          <div class="group w-[300px] sm:w-[320px] shrink-0 relative h-[420px] overflow-hidden rounded-2xl bg-white border border-slate-100 shadow-md hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 cursor-pointer"
                data-service-title="Veneers"
+               data-service-category="03 / Cosmetic"
                data-service-description="Cosmetic solutions designed to improve tooth shape, color, and overall appearance."
-               data-service-details="Dental veneers are thin, custom-made shells bonded to the front of teeth to enhance their color, shape, and symmetry. Ideal for chipped, stained, or misaligned teeth.">
+               data-service-details="
+                <div class='space-y-6'>
+                  <p class='text-slate-600 leading-relaxed'>Dental veneers are custom-crafted, wafer-thin shells of dental porcelain or composite resin bonded to the front surface of your teeth. They offer a transformative solution for stubborn stains, minor gaps, chips, or asymmetrical teeth.</p>
+                  
+                  <div>
+                    <h4 class='text-slate-900 font-bold text-sm uppercase tracking-wider mb-3 text-blue-600'>What Veneers Can Correct</h4>
+                    <ul class='grid grid-cols-1 sm:grid-cols-2 gap-2 text-slate-600 text-sm'>
+                      <li class='flex items-center gap-2'><span class='text-blue-500 font-bold'>✓</span> Severe tetracycline or intrinsic stains</li>
+                      <li class='flex items-center gap-2'><span class='text-blue-500 font-bold'>✓</span> Chipped, cracked, or worn edges</li>
+                      <li class='flex items-center gap-2'><span class='text-blue-500 font-bold'>✓</span> Irregularly shaped or undersized teeth</li>
+                      <li class='flex items-center gap-2'><span class='text-blue-500 font-bold'>✓</span> Unwanted gaps between front teeth</li>
+                    </ul>
+                  </div>
+
+                  <div class='bg-slate-50 p-4 rounded-2xl border border-slate-100'>
+                    <h4 class='text-slate-900 font-bold text-sm mb-2'>Porcelain vs. Composite Veneers</h4>
+                    <p class='text-slate-600 text-xs sm:text-sm leading-relaxed mb-2'><strong>Porcelain Veneers:</strong> Exceptional natural translucency, ultra stain-resistant, and can last 15+ years with proper care.</p>
+                    <p class='text-slate-600 text-xs sm:text-sm leading-relaxed'><strong>Composite Veneers:</strong> Completed in a single visit, budget-friendly, easily repairable, requiring minimal tooth reduction.</p>
+                  </div>
+                </div>
+               ">
             <img src="./images/3.jpg" alt="Veneers" class="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 opacity-50 group-hover:opacity-40">
             <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/60 to-transparent"></div>
             <div class="absolute bottom-0 left-0 right-0 p-6 text-white">
               <span class="text-blue-400 text-xs font-semibold uppercase tracking-wider mb-1 block">03 / Cosmetic</span>
               <h3 class="text-xl font-bold mb-2">Veneers</h3>
               <p class="text-slate-300 text-xs font-light mb-4 line-clamp-2">Cosmetic solutions designed to improve tooth shape, color, and overall appearance.</p>
-              <button type="button" class="service-learn-more inline-flex items-center text-xs uppercase tracking-wider text-blue-400 font-semibold group-hover:translate-x-1 transition-transform duration-300">
+              <span class="inline-flex items-center text-xs uppercase tracking-wider text-blue-400 font-semibold group-hover:translate-x-1 transition-transform duration-300">
                 Learn More &rarr;
-              </button>
+              </span>
             </div>
           </div>
 
           <!-- Service Card 4 -->
-          <div class="group w-[300px] sm:w-[320px] shrink-0 relative h-[420px] overflow-hidden rounded-2xl bg-white border border-slate-100 shadow-md hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300"
+          <div class="group w-[300px] sm:w-[320px] shrink-0 relative h-[420px] overflow-hidden rounded-2xl bg-white border border-slate-100 shadow-md hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 cursor-pointer"
                data-service-title="Root Canal (RCT)"
+               data-service-category="04 / Endodontics"
                data-service-description="Advanced treatment to remove infection, relieve pain, and save natural teeth."
-               data-service-details="Root canal therapy (RCT) is a procedure for saving teeth that are severely decayed or infected, removing pain and protecting tooth structure.">
+               data-service-details="
+                <div class='space-y-6'>
+                  <p class='text-slate-600 leading-relaxed'>Root Canal Treatment (RCT) is a highly routine endodontic therapy designed to save a severely decayed, cracked, or infected tooth instead of extracting it. Modern techniques ensure the process is virtually painless and comparable to filling a routine cavity.</p>
+                  
+                  <div>
+                    <h4 class='text-slate-900 font-bold text-sm uppercase tracking-wider mb-3 text-blue-600'>Signs You May Need Root Canal Therapy</h4>
+                    <ul class='grid grid-cols-1 sm:grid-cols-2 gap-2 text-slate-600 text-sm'>
+                      <li class='flex items-center gap-2'><span class='text-blue-500 font-bold'>•</span> Severe throbbing toothache while chewing</li>
+                      <li class='flex items-center gap-2'><span class='text-blue-500 font-bold'>•</span> Prolonged sensitivity to hot or cold foods</li>
+                      <li class='flex items-center gap-2'><span class='text-blue-500 font-bold'>•</span> Swelling or tenderness in nearby gums</li>
+                      <li class='flex items-center gap-2'><span class='text-blue-500 font-bold'>•</span> Discoloration or darkening of the tooth</li>
+                    </ul>
+                  </div>
+
+                  <div class='bg-slate-50 p-4 rounded-2xl border border-slate-100'>
+                    <h4 class='text-slate-900 font-bold text-sm mb-2'>Step-by-Step Procedure</h4>
+                    <ol class='list-decimal list-inside text-slate-600 text-xs sm:text-sm space-y-1.5 leading-relaxed'>
+                      <li><strong>Local Anesthesia:</strong> Total numbing of the target area for absolute patient comfort.</li>
+                      <li><strong>Pulp Cleaning:</strong> Gentle removal of infected nerve tissue and bacteria inside the canal.</li>
+                      <li><strong>Disinfection & Sealing:</strong> Canals are sterilely flushed and filled with gutta-percha material.</li>
+                      <li><strong>Crown Restoration:</strong> A protective ceramic crown is fitted to restore 100% biting strength.</li>
+                    </ol>
+                  </div>
+                </div>
+               ">
             <img src="./images/4.jpg" alt="Root Canal" class="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 opacity-50 group-hover:opacity-40">
             <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/60 to-transparent"></div>
             <div class="absolute bottom-0 left-0 right-0 p-6 text-white">
               <span class="text-blue-400 text-xs font-semibold uppercase tracking-wider mb-1 block">04 / Endodontics</span>
               <h3 class="text-xl font-bold mb-2">Root Canal (RCT)</h3>
               <p class="text-slate-300 text-xs font-light mb-4 line-clamp-2">Advanced treatment to remove infection, relieve pain, and save natural teeth.</p>
-              <button type="button" class="service-learn-more inline-flex items-center text-xs uppercase tracking-wider text-blue-400 font-semibold group-hover:translate-x-1 transition-transform duration-300">
+              <span class="inline-flex items-center text-xs uppercase tracking-wider text-blue-400 font-semibold group-hover:translate-x-1 transition-transform duration-300">
                 Learn More &rarr;
-              </button>
+              </span>
             </div>
           </div>
 
           <!-- Service Card 5 -->
-          <div class="group w-[300px] sm:w-[320px] shrink-0 relative h-[420px] overflow-hidden rounded-2xl bg-white border border-slate-100 shadow-md hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300"
+          <div class="group w-[300px] sm:w-[320px] shrink-0 relative h-[420px] overflow-hidden rounded-2xl bg-white border border-slate-100 shadow-md hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 cursor-pointer"
                data-service-title="Teeth Whitening"
+               data-service-category="05 / Aesthetics"
                data-service-description="Professional whitening procedures for a brighter and more confident smile."
-               data-service-details="Professional teeth whitening safely removes deep stains and discoloration, creating a significantly brighter smile without damaging enamel.">
+               data-service-details="
+                <div class='space-y-6'>
+                  <p class='text-slate-600 leading-relaxed'>Our professional clinical teeth whitening treatments target deep intrinsic stains accumulated from coffee, tea, smoking, or natural aging. We utilize clinical-grade whitening agents protected by active gum barriers to ensure brilliant results without pain or sensitivity.</p>
+                  
+                  <div>
+                    <h4 class='text-slate-900 font-bold text-sm uppercase tracking-wider mb-3 text-blue-600'>Why Choose Professional Whitening?</h4>
+                    <ul class='grid grid-cols-1 sm:grid-cols-2 gap-2 text-slate-600 text-sm'>
+                      <li class='flex items-center gap-2'><span class='text-blue-500 font-bold'>✓</span> Up to 6 to 8 shades whiter in 45 minutes</li>
+                      <li class='flex items-center gap-2'><span class='text-blue-500 font-bold'>✓</span> Safe for enamel and gum tissue</li>
+                      <li class='flex items-center gap-2'><span class='text-blue-500 font-bold'>✓</span> Includes desensitizing buffer gels</li>
+                      <li class='flex items-center gap-2'><span class='text-blue-500 font-bold'>✓</span> Far superior & safer than drugstore strips</li>
+                    </ul>
+                  </div>
+
+                  <div class='bg-slate-50 p-4 rounded-2xl border border-slate-100'>
+                    <h4 class='text-slate-900 font-bold text-sm mb-1'>Post-Treatment Maintenance</h4>
+                    <p class='text-slate-600 text-xs sm:text-sm leading-relaxed'>Results can last up to 2 years. We provide custom maintenance advice and take-home touchup kits to help preserve your radiant smile over time.</p>
+                  </div>
+                </div>
+               ">
             <img src="./images/5.jpg" alt="Teeth Whitening" class="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 opacity-50 group-hover:opacity-40">
             <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/60 to-transparent"></div>
             <div class="absolute bottom-0 left-0 right-0 p-6 text-white">
               <span class="text-blue-400 text-xs font-semibold uppercase tracking-wider mb-1 block">05 / Aesthetics</span>
               <h3 class="text-xl font-bold mb-2">Teeth Whitening</h3>
               <p class="text-slate-300 text-xs font-light mb-4 line-clamp-2">Professional whitening procedures for a brighter and more confident smile.</p>
-              <button type="button" class="service-learn-more inline-flex items-center text-xs uppercase tracking-wider text-blue-400 font-semibold group-hover:translate-x-1 transition-transform duration-300">
+              <span class="inline-flex items-center text-xs uppercase tracking-wider text-blue-400 font-semibold group-hover:translate-x-1 transition-transform duration-300">
                 Learn More &rarr;
-              </button>
+              </span>
             </div>
           </div>
 
           <!-- Service Card 6 -->
-          <div class="group w-[300px] sm:w-[320px] shrink-0 relative h-[420px] overflow-hidden rounded-2xl bg-white border border-slate-100 shadow-md hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300"
+          <div class="group w-[300px] sm:w-[320px] shrink-0 relative h-[420px] overflow-hidden rounded-2xl bg-white border border-slate-100 shadow-md hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 cursor-pointer"
                data-service-title="General Checkup"
+               data-service-category="06 / Preventative"
                data-service-description="Routine examinations focused on prevention, early diagnosis, and long-term oral health."
-               data-service-details="Comprehensive checkups help maintain optimal oral hygiene and spot emerging issues early for effective preventative care.">
+               data-service-details="
+                <div class='space-y-6'>
+                  <p class='text-slate-600 leading-relaxed'>Preventative dentistry is the cornerstone of lifelong dental health. Bi-annual checkups allow our specialists to diagnose micro-cavities, enamel erosion, oral lesions, and early gum conditions before they progress into costly or painful complications.</p>
+                  
+                  <div>
+                    <h4 class='text-slate-900 font-bold text-sm uppercase tracking-wider mb-3 text-blue-600'>Comprehensive Checkup Includes</h4>
+                    <ul class='grid grid-cols-1 sm:grid-cols-2 gap-2 text-slate-600 text-sm'>
+                      <li class='flex items-center gap-2'><span class='text-blue-500 font-bold'>✓</span> Low-radiation Digital Intraoral X-Rays</li>
+                      <li class='flex items-center gap-2'><span class='text-blue-500 font-bold'>✓</span> Ultrasonic Scaling & Tartar Removal</li>
+                      <li class='flex items-center gap-2'><span class='text-blue-500 font-bold'>✓</span> Periodontal Pocket Measurement</li>
+                      <li class='flex items-center gap-2'><span class='text-blue-500 font-bold'>✓</span> Oral Cancer & Soft Tissue Screening</li>
+                    </ul>
+                  </div>
+
+                  <div class='bg-blue-50/50 p-4 rounded-2xl border border-blue-100/60'>
+                    <h4 class='text-blue-900 font-bold text-sm mb-1'>Recommended Schedule</h4>
+                    <p class='text-slate-600 text-xs sm:text-sm leading-relaxed'>We recommend a thorough examination and professional ultrasonic cleaning every <strong>6 months</strong> for adults and children alike.</p>
+                  </div>
+                </div>
+               ">
             <img src="./images/6.jpg" alt="General Checkup" class="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 opacity-50 group-hover:opacity-40">
             <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/60 to-transparent"></div>
             <div class="absolute bottom-0 left-0 right-0 p-6 text-white">
               <span class="text-blue-400 text-xs font-semibold uppercase tracking-wider mb-1 block">06 / Preventative</span>
               <h3 class="text-xl font-bold mb-2">General Checkup</h3>
               <p class="text-slate-300 text-xs font-light mb-4 line-clamp-2">Routine examinations focused on prevention, early diagnosis, and long-term oral health.</p>
-              <button type="button" class="service-learn-more inline-flex items-center text-xs uppercase tracking-wider text-blue-400 font-semibold group-hover:translate-x-1 transition-transform duration-300">
+              <span class="inline-flex items-center text-xs uppercase tracking-wider text-blue-400 font-semibold group-hover:translate-x-1 transition-transform duration-300">
                 Learn More &rarr;
-              </button>
+              </span>
             </div>
           </div>
 
           <!-- Service Card 7 -->
-          <div class="group w-[300px] sm:w-[320px] shrink-0 relative h-[420px] overflow-hidden rounded-2xl bg-white border border-slate-100 shadow-md hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300"
+          <div class="group w-[300px] sm:w-[320px] shrink-0 relative h-[420px] overflow-hidden rounded-2xl bg-white border border-slate-100 shadow-md hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 cursor-pointer"
                data-service-title="Gum Treatment (Periodontics)"
+               data-service-category="07 / Periodontics"
                data-service-description="Specialized treatment for gum disease, bleeding gums, periodontal infections, and gum health."
-               data-service-details="Targeted treatments for gum inflammation, infections, and periodontal care to protect the supporting tissue and bone around your teeth.">
+               data-service-details="
+                <div class='space-y-6'>
+                  <p class='text-slate-600 leading-relaxed'>Gum health forms the foundation of your entire smile. Periodontal disease starts quietly as gingivitis (bleeding gums) and can advance into periodontitis, causing bone destruction and tooth loss. Our specialized periodontal treatments stop disease progression and restore firm, healthy gum tissue.</p>
+                  
+                  <div>
+                    <h4 class='text-slate-900 font-bold text-sm uppercase tracking-wider mb-3 text-blue-600'>Signs of Periodontal Disease</h4>
+                    <ul class='grid grid-cols-1 sm:grid-cols-2 gap-2 text-slate-600 text-sm'>
+                      <li class='flex items-center gap-2'><span class='text-blue-500 font-bold'>•</span> Bleeding gums during brushing or flossing</li>
+                      <li class='flex items-center gap-2'><span class='text-blue-500 font-bold'>•</span> Persistent bad breath or unpleasant taste</li>
+                      <li class='flex items-center gap-2'><span class='text-blue-500 font-bold'>•</span> Receding gums making teeth look longer</li>
+                      <li class='flex items-center gap-2'><span class='text-blue-500 font-bold'>•</span> Loose or shifting adult teeth</li>
+                    </ul>
+                  </div>
+
+                  <div class='bg-slate-50 p-4 rounded-2xl border border-slate-100'>
+                    <h4 class='text-slate-900 font-bold text-sm mb-2'>Treatment Options</h4>
+                    <p class='text-slate-600 text-xs sm:text-sm leading-relaxed mb-2'><strong>Deep Scaling & Root Planing:</strong> Non-surgical deep cleaning under the gumline to smooth root surfaces and eradicate bacterial pockets.</p>
+                    <p class='text-slate-600 text-xs sm:text-sm leading-relaxed'><strong>Laser Periodontal Therapy:</strong> Advanced targeted laser treatment to eliminate deep bacterial colonies with minimal recovery downtime.</p>
+                  </div>
+                </div>
+               ">
             <img src="./images/7.jpg" alt="Gum Treatment" class="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 opacity-50 group-hover:opacity-40">
             <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/60 to-transparent"></div>
             <div class="absolute bottom-0 left-0 right-0 p-6 text-white">
               <span class="text-blue-400 text-xs font-semibold uppercase tracking-wider mb-1 block">07 / Periodontics</span>
               <h3 class="text-xl font-bold mb-2">Gum Treatment</h3>
               <p class="text-slate-300 text-xs font-light mb-4 line-clamp-2">Specialized treatment for gum disease, bleeding gums, periodontal infections, and gum health.</p>
-              <button type="button" class="service-learn-more inline-flex items-center text-xs uppercase tracking-wider text-blue-400 font-semibold group-hover:translate-x-1 transition-transform duration-300">
+              <span class="inline-flex items-center text-xs uppercase tracking-wider text-blue-400 font-semibold group-hover:translate-x-1 transition-transform duration-300">
                 Learn More &rarr;
-              </button>
+              </span>
             </div>
           </div>
 
         </div>
       </div>
 
-      <!-- Navigation Arrows -->
-      <div class="flex justify-center items-center gap-4 mt-8">
-        <button id="services-prev" aria-label="Previous service" class="w-12 h-12 rounded-full bg-white border border-slate-200 text-slate-700 shadow-sm hover:bg-blue-600 hover:text-white hover:border-blue-600 active:scale-95 transition-all duration-200 flex items-center justify-center font-semibold text-lg">
-          ←
-        </button>
-        <button id="services-next" aria-label="Next service" class="w-12 h-12 rounded-full bg-white border border-slate-200 text-slate-700 shadow-sm hover:bg-blue-600 hover:text-white hover:border-blue-600 active:scale-95 transition-all duration-200 flex items-center justify-center font-semibold text-lg">
-          →
-        </button>
-      </div>
-
     </div>
   </section>
 
-  <!-- Expanded & Spacious Service Details Modal -->
-  <div id="service-modal" class="fixed inset-0 z-50 items-center justify-center p-6 sm:p-10 bg-slate-900/60 backdrop-blur-md" aria-modal="true" role="dialog">
+  <!-- Spacious Service Details Modal -->
+  <div id="service-modal" class="fixed inset-0 z-50 items-center justify-center p-4 sm:p-8 bg-slate-900/60 backdrop-blur-md" aria-modal="true" role="dialog">
     <div class="service-modal-backdrop absolute inset-0"></div>
-    <div class="service-modal-panel relative bg-white rounded-3xl shadow-2xl max-w-2xl sm:max-w-3xl w-full mx-auto p-8 sm:p-12 z-10 flex flex-col gap-6">
+    
+    <div class="service-modal-panel relative bg-white rounded-3xl shadow-2xl max-w-2xl sm:max-w-3xl w-full mx-auto max-h-[88vh] z-10 flex flex-col overflow-hidden">
       
-      <!-- Top Close Cross -->
-      <button class="service-modal-close absolute top-6 right-6 text-slate-400 hover:text-slate-700 hover:bg-slate-100 rounded-full w-12 h-12 flex items-center justify-center text-2xl transition-all" aria-label="Close modal">&times;</button>
-      
-      <!-- Modal Header -->
-      <div class="pr-12">
-        <span id="service-modal-description" class="text-blue-600 text-xs sm:text-sm font-bold uppercase tracking-widest block mb-2"></span>
-        <h3 id="service-modal-title" class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight leading-snug"></h3>
+      <!-- Fixed Header Section -->
+      <div class="p-6 sm:p-8 border-b border-slate-100 flex items-start justify-between bg-white relative shrink-0">
+        <div class="pr-8">
+          <span id="service-modal-category" class="text-blue-600 text-xs sm:text-sm font-bold uppercase tracking-widest block mb-1"></span>
+          <h3 id="service-modal-title" class="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight leading-snug"></h3>
+          <p id="service-modal-description" class="text-slate-500 text-sm mt-1"></p>
+        </div>
+        
+        <button class="service-modal-close text-slate-400 hover:text-slate-700 hover:bg-slate-100 rounded-full w-10 h-10 shrink-0 flex items-center justify-center text-2xl transition-all cursor-pointer" aria-label="Close modal">&times;</button>
       </div>
       
-      <!-- Modal Body Content -->
-      <div class="py-2 border-y border-slate-100 my-1">
-        <p id="service-modal-details" class="text-slate-600 text-base sm:text-lg leading-relaxed font-normal"></p>
+      <!-- Scrollable Rich Content Body -->
+      <div class="p-6 sm:p-8 modal-scroll overflow-y-auto grow">
+        <div id="service-modal-details"></div>
       </div>
       
-      <!-- Bottom Close Action Button -->
-      <div class="pt-2">
-        <button type="button" id="service-modal-close-btn" class="w-full sm:w-auto px-10 py-4 bg-slate-900 hover:bg-slate-800 text-white font-semibold text-xs sm:text-sm uppercase tracking-widest rounded-2xl text-center shadow-lg transition-all hover:shadow-xl active:scale-[0.99]">
-          Close
+      <!-- Fixed Action Footer -->
+      <div class="p-4 sm:p-6 bg-slate-50 border-t border-slate-100 shrink-0 flex flex-col sm:flex-row items-center justify-between gap-3">
+        <span class="text-xs text-slate-500">Shree Ram Dental Clinic &bull; Expert Patient Care</span>
+        <button type="button" id="service-modal-close-btn" class="w-full sm:w-auto px-8 py-3 bg-slate-900 hover:bg-slate-800 text-white font-semibold text-xs uppercase tracking-widest rounded-xl text-center shadow-md transition-all hover:shadow-lg active:scale-[0.99] cursor-pointer">
+          Close Window
         </button>
       </div>
 
     </div>
   </div>
 
-  <!-- JavaScript storing state mechanism -->
+  <!-- JavaScript -->
   <script>
     document.addEventListener('DOMContentLoaded', function () {
       const container = document.getElementById('services-container');
       const track = container ? container.querySelector('.services-track') : null;
       const modal = document.getElementById('service-modal');
       const modalTitle = document.getElementById('service-modal-title');
+      const modalCategory = document.getElementById('service-modal-category');
       const modalDesc = document.getElementById('service-modal-description');
       const modalDetails = document.getElementById('service-modal-details');
       const closeBtn = modal.querySelector('.service-modal-close');
       const closeBtnBottom = document.getElementById('service-modal-close-btn');
       const backdrop = modal.querySelector('.service-modal-backdrop');
-      const prevBtn = document.getElementById('services-prev');
-      const nextBtn = document.getElementById('services-next');
 
       if (!container || !track) return;
 
-      // JS Dynamic Infinite Loop State Engine
+      // Duplicate cards for seamless infinite marquee
       const originalCards = Array.from(track.children);
-      
-      // Auto-clone initial items via JS to fill loop buffer
       originalCards.forEach(card => {
         const clone = card.cloneNode(true);
         track.appendChild(clone);
@@ -783,13 +951,13 @@
 
       let singleSetWidth = 0;
       function calcTrackDimensions() {
-        const cardGap = 24; // gap-6 = 24px
+        const cardGap = 24; // gap-6
         singleSetWidth = originalCards.reduce((acc, card) => acc + card.offsetWidth + cardGap, 0);
       }
       calcTrackDimensions();
       window.addEventListener('resize', calcTrackDimensions);
 
-      // Infinite Loop Jump Handler
+      // Loop check
       function checkInfiniteLoop() {
         if (container.scrollLeft >= singleSetWidth) {
           container.scrollLeft -= singleSetWidth;
@@ -813,11 +981,11 @@
 
       container.addEventListener('scroll', checkInfiniteLoop, { passive: true });
 
-      // Pause continuous movement on mouse hover
+      // Pause continuous scrolling on hover
       container.addEventListener('mouseenter', () => isPaused = true);
       container.addEventListener('mouseleave', () => isPaused = false);
 
-      // Mouse Grab and Drag State (Desktop)
+      // Desktop Pointer Dragging
       let startX = 0;
       let scrollStart = 0;
 
@@ -850,8 +1018,9 @@
       // Modal Handling
       function openModal(card) {
         modalTitle.textContent = card.getAttribute('data-service-title') || '';
+        modalCategory.textContent = card.getAttribute('data-service-category') || 'Service Overview';
         modalDesc.textContent = card.getAttribute('data-service-description') || '';
-        modalDetails.textContent = card.getAttribute('data-service-details') || '';
+        modalDetails.innerHTML = card.getAttribute('data-service-details') || '';
         modal.classList.add('visible');
         document.body.classList.add('service-modal-open');
       }
@@ -874,16 +1043,7 @@
         if (e.key === 'Escape' && modal.classList.contains('visible')) closeModal();
       });
 
-      // Arrow Controls
-      prevBtn.addEventListener('click', () => {
-        container.scrollBy({ left: -340, behavior: 'smooth' });
-      });
-
-      nextBtn.addEventListener('click', () => {
-        container.scrollBy({ left: 340, behavior: 'smooth' });
-      });
-
-      // Start engine
+      // Start loop
       requestAnimationFrame(step);
     });
   </script>
