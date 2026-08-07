@@ -6,7 +6,7 @@
   <title>Shree Ram Dental Clinic - Services</title>
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   <style>
-    /* Custom scrollbar hiding and dragging states */
+    /* Custom scrollbar hiding and native touch scrolling */
     #services-container::-webkit-scrollbar {
       display: none;
     }
@@ -14,7 +14,7 @@
       -ms-overflow-style: none;
       scrollbar-width: none;
       overscroll-behavior-x: contain;
-      touch-action: pan-x;
+      touch-action: pan-y pan-x;
       cursor: grab;
     }
     #services-container.is-dragging {
@@ -22,7 +22,7 @@
       user-select: none;
     }
     
-    /* Service modal animation & backdrop */
+    /* Service modal animation */
     #service-modal {
       display: none;
       opacity: 0;
@@ -61,7 +61,7 @@
           <div class="group w-[300px] sm:w-[320px] shrink-0 relative h-[420px] overflow-hidden rounded-2xl bg-white border border-slate-100 shadow-md hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300"
                data-service-title="Dental Implants"
                data-service-description="Permanent tooth replacement solutions that restore function, confidence, and long-term oral health."
-               data-service-details="Dental implants are advanced, permanent solutions for missing teeth, designed to mimic the look, feel, and function of natural teeth. Ideal for patients with one or more missing teeth, implants help preserve jawbone integrity and prevent shifting of adjacent teeth. The procedure involves placing a titanium post into the jaw, which fuses with the bone and serves as a sturdy foundation for crowns, bridges, or dentures. Benefits include improved chewing ability, speech, and self-confidence, with results that can last a lifetime when cared for properly.">
+               data-service-details="Dental implants are advanced, permanent solutions for missing teeth, designed to mimic the look, feel, and function of natural teeth. Ideal for patients with one or more missing teeth, implants help preserve jawbone integrity and prevent shifting of adjacent teeth.">
             <img src="./images/1.jpg" alt="Dental Implants" class="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 opacity-50 group-hover:opacity-40">
             <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/60 to-transparent"></div>
             <div class="absolute bottom-0 left-0 right-0 p-6 text-white">
@@ -78,7 +78,7 @@
           <div class="group w-[300px] sm:w-[320px] shrink-0 relative h-[420px] overflow-hidden rounded-2xl bg-white border border-slate-100 shadow-md hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300"
                data-service-title="Braces & Orthodontics"
                data-service-description="Modern orthodontic treatments to align teeth, improve bite function, and enhance smiles."
-               data-service-details="Braces and orthodontic treatments are designed to correct misaligned teeth and jaws, providing both cosmetic and functional improvements. Suitable for children, teens, and adults, options include traditional metal braces, ceramic braces, and clear aligners. These treatments gradually move teeth into their ideal positions, enhancing bite, oral hygiene, and appearance.">
+               data-service-details="Braces and orthodontic treatments are designed to correct misaligned teeth and jaws, providing both cosmetic and functional improvements. Options include traditional metal braces, ceramic braces, and clear aligners.">
             <img src="./images/2.jpg" alt="Braces & Orthodontics" class="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 opacity-50 group-hover:opacity-40">
             <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/60 to-transparent"></div>
             <div class="absolute bottom-0 left-0 right-0 p-6 text-white">
@@ -95,7 +95,7 @@
           <div class="group w-[300px] sm:w-[320px] shrink-0 relative h-[420px] overflow-hidden rounded-2xl bg-white border border-slate-100 shadow-md hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300"
                data-service-title="Veneers"
                data-service-description="Cosmetic solutions designed to improve tooth shape, color, and overall appearance."
-               data-service-details="Dental veneers are thin, custom-made shells bonded to the front of teeth to enhance their color, shape, and symmetry. They are ideal for patients with chipped, stained, misaligned, or uneven teeth seeking a dramatic improvement in their smile. Veneers are crafted from high-quality porcelain or composite materials.">
+               data-service-details="Dental veneers are thin, custom-made shells bonded to the front of teeth to enhance their color, shape, and symmetry. Ideal for chipped, stained, or misaligned teeth.">
             <img src="./images/3.jpg" alt="Veneers" class="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 opacity-50 group-hover:opacity-40">
             <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/60 to-transparent"></div>
             <div class="absolute bottom-0 left-0 right-0 p-6 text-white">
@@ -112,7 +112,7 @@
           <div class="group w-[300px] sm:w-[320px] shrink-0 relative h-[420px] overflow-hidden rounded-2xl bg-white border border-slate-100 shadow-md hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300"
                data-service-title="Root Canal (RCT)"
                data-service-description="Advanced treatment to remove infection, relieve pain, and save natural teeth."
-               data-service-details="Root canal therapy (RCT) is a highly effective procedure for saving teeth that are badly decayed or infected. It involves removing the infected pulp, cleaning and disinfecting the canal, and sealing the tooth to prevent further infection. This treatment is ideal for patients experiencing severe tooth pain or sensitivity.">
+               data-service-details="Root canal therapy (RCT) is a procedure for saving teeth that are severely decayed or infected, removing pain and protecting tooth structure.">
             <img src="./images/4.jpg" alt="Root Canal" class="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 opacity-50 group-hover:opacity-40">
             <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/60 to-transparent"></div>
             <div class="absolute bottom-0 left-0 right-0 p-6 text-white">
@@ -129,7 +129,7 @@
           <div class="group w-[300px] sm:w-[320px] shrink-0 relative h-[420px] overflow-hidden rounded-2xl bg-white border border-slate-100 shadow-md hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300"
                data-service-title="Teeth Whitening"
                data-service-description="Professional whitening procedures for a brighter and more confident smile."
-               data-service-details="Teeth whitening is a safe, effective cosmetic procedure that removes stains and discoloration, resulting in a noticeably brighter smile. Suitable for most adults, professional whitening is performed using advanced techniques and materials that protect enamel and gums.">
+               data-service-details="Professional teeth whitening safely removes deep stains and discoloration, creating a significantly brighter smile without damaging enamel.">
             <img src="./images/5.jpg" alt="Teeth Whitening" class="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 opacity-50 group-hover:opacity-40">
             <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/60 to-transparent"></div>
             <div class="absolute bottom-0 left-0 right-0 p-6 text-white">
@@ -146,13 +146,30 @@
           <div class="group w-[300px] sm:w-[320px] shrink-0 relative h-[420px] overflow-hidden rounded-2xl bg-white border border-slate-100 shadow-md hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300"
                data-service-title="General Checkup"
                data-service-description="Routine examinations focused on prevention, early diagnosis, and long-term oral health."
-               data-service-details="General dental checkups are the foundation of preventive care, involving a thorough examination of teeth, gums, and oral tissues. Recommended for all ages, these visits help detect problems early, ensuring prompt and effective treatment.">
+               data-service-details="Comprehensive checkups help maintain optimal oral hygiene and spot emerging issues early for effective preventative care.">
             <img src="./images/6.jpg" alt="General Checkup" class="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 opacity-50 group-hover:opacity-40">
             <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/60 to-transparent"></div>
             <div class="absolute bottom-0 left-0 right-0 p-6 text-white">
               <span class="text-blue-400 text-xs font-semibold uppercase tracking-wider mb-1 block">06 / Preventative</span>
               <h3 class="text-xl font-bold mb-2">General Checkup</h3>
               <p class="text-slate-300 text-xs font-light mb-4 line-clamp-2">Routine examinations focused on prevention, early diagnosis, and long-term oral health.</p>
+              <button type="button" class="service-learn-more inline-flex items-center text-xs uppercase tracking-wider text-blue-400 font-semibold group-hover:translate-x-1 transition-transform duration-300">
+                Learn More &rarr;
+              </button>
+            </div>
+          </div>
+
+          <!-- Service Card 7 -->
+          <div class="group w-[300px] sm:w-[320px] shrink-0 relative h-[420px] overflow-hidden rounded-2xl bg-white border border-slate-100 shadow-md hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300"
+               data-service-title="Gum Treatment (Periodontics)"
+               data-service-description="Specialized treatment for gum disease, bleeding gums, periodontal infections, and gum health."
+               data-service-details="Targeted treatments for gum inflammation, infections, and periodontal care to protect the supporting tissue and bone around your teeth.">
+            <img src="./images/7.jpg" alt="Gum Treatment" class="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 opacity-50 group-hover:opacity-40">
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/60 to-transparent"></div>
+            <div class="absolute bottom-0 left-0 right-0 p-6 text-white">
+              <span class="text-blue-400 text-xs font-semibold uppercase tracking-wider mb-1 block">07 / Periodontics</span>
+              <h3 class="text-xl font-bold mb-2">Gum Treatment</h3>
+              <p class="text-slate-300 text-xs font-light mb-4 line-clamp-2">Specialized treatment for gum disease, bleeding gums, periodontal infections, and gum health.</p>
               <button type="button" class="service-learn-more inline-flex items-center text-xs uppercase tracking-wider text-blue-400 font-semibold group-hover:translate-x-1 transition-transform duration-300">
                 Learn More &rarr;
               </button>
@@ -175,27 +192,36 @@
     </div>
   </section>
 
-  <!-- Service Details Modal -->
-  <div id="service-modal" class="fixed inset-0 z-50 items-center justify-center p-4 bg-slate-900/60 backdrop-blur-md" aria-modal="true" role="dialog">
+  <!-- Expanded & Spacious Service Details Modal -->
+  <div id="service-modal" class="fixed inset-0 z-50 items-center justify-center p-6 sm:p-10 bg-slate-900/60 backdrop-blur-md" aria-modal="true" role="dialog">
     <div class="service-modal-backdrop absolute inset-0"></div>
-    <div class="service-modal-panel relative bg-white rounded-3xl shadow-2xl max-w-lg w-full mx-auto p-8 z-10 flex flex-col gap-4">
+    <div class="service-modal-panel relative bg-white rounded-3xl shadow-2xl max-w-2xl sm:max-w-3xl w-full mx-auto p-8 sm:p-12 z-10 flex flex-col gap-6">
       
-      <button class="service-modal-close absolute top-5 right-5 text-slate-400 hover:text-slate-700 hover:bg-slate-100 rounded-full w-10 h-10 flex items-center justify-center text-xl transition-all" aria-label="Close modal">&times;</button>
+      <!-- Top Close Cross -->
+      <button class="service-modal-close absolute top-6 right-6 text-slate-400 hover:text-slate-700 hover:bg-slate-100 rounded-full w-12 h-12 flex items-center justify-center text-2xl transition-all" aria-label="Close modal">&times;</button>
       
-      <div>
-        <span id="service-modal-description" class="text-blue-600 text-xs font-bold uppercase tracking-wider block mb-1"></span>
-        <h3 id="service-modal-title" class="text-2xl sm:text-3xl font-extrabold text-slate-900"></h3>
+      <!-- Modal Header -->
+      <div class="pr-12">
+        <span id="service-modal-description" class="text-blue-600 text-xs sm:text-sm font-bold uppercase tracking-widest block mb-2"></span>
+        <h3 id="service-modal-title" class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight leading-snug"></h3>
       </div>
       
-      <p id="service-modal-details" class="text-slate-600 text-sm leading-relaxed my-2"></p>
+      <!-- Modal Body Content -->
+      <div class="py-2 border-y border-slate-100 my-1">
+        <p id="service-modal-details" class="text-slate-600 text-base sm:text-lg leading-relaxed font-normal"></p>
+      </div>
       
-      <button type="button" id="service-modal-close-btn" class="w-full py-3.5 px-6 bg-slate-900 hover:bg-slate-800 text-white font-semibold text-xs uppercase tracking-widest rounded-xl text-center shadow-md transition-all">
-        Close
-      </button>
+      <!-- Bottom Close Action Button -->
+      <div class="pt-2">
+        <button type="button" id="service-modal-close-btn" class="w-full sm:w-auto px-10 py-4 bg-slate-900 hover:bg-slate-800 text-white font-semibold text-xs sm:text-sm uppercase tracking-widest rounded-2xl text-center shadow-lg transition-all hover:shadow-xl active:scale-[0.99]">
+          Close
+        </button>
+      </div>
+
     </div>
   </div>
 
-  <!-- JavaScript -->
+  <!-- JavaScript storing state mechanism -->
   <script>
     document.addEventListener('DOMContentLoaded', function () {
       const container = document.getElementById('services-container');
@@ -212,76 +238,68 @@
 
       if (!container || !track) return;
 
-      // Modal Control Functions
-      function openModal(card) {
-        modalTitle.textContent = card.getAttribute('data-service-title') || '';
-        modalDesc.textContent = card.getAttribute('data-service-description') || '';
-        modalDetails.textContent = card.getAttribute('data-service-details') || '';
-        modal.classList.add('visible');
-        document.body.classList.add('service-modal-open');
-      }
-
-      function closeModal() {
-        modal.classList.remove('visible');
-        document.body.classList.remove('service-modal-open');
-      }
-
-      // Event Listeners for Closing Modal
-      closeBtn.addEventListener('click', closeModal);
-      closeBtnBottom.addEventListener('click', closeModal);
-      backdrop.addEventListener('click', closeModal);
-      window.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && modal.classList.contains('visible')) closeModal();
-      });
-
-      // Clone elements to create smooth infinite loop
-      const cards = Array.from(track.children);
-      cards.forEach(card => {
+      // JS Dynamic Infinite Loop State Engine
+      const originalCards = Array.from(track.children);
+      
+      // Auto-clone initial items via JS to fill loop buffer
+      originalCards.forEach(card => {
         const clone = card.cloneNode(true);
         track.appendChild(clone);
       });
 
-      // Attach Modal Click Listeners
-      track.addEventListener('click', (e) => {
-        if (isSwiping) return; // Prevent opening modal on drag/swipe
-        const card = e.target.closest('[data-service-title]');
-        if (card) openModal(card);
-      });
+      let singleSetWidth = 0;
+      function calcTrackDimensions() {
+        const cardGap = 24; // gap-6 = 24px
+        singleSetWidth = originalCards.reduce((acc, card) => acc + card.offsetWidth + cardGap, 0);
+      }
+      calcTrackDimensions();
+      window.addEventListener('resize', calcTrackDimensions);
 
-      // Carousel Continuous Scroll Engine
-      let speed = 0.6;
-      let isPaused = false;
-      let isSwiping = false;
-      let startX = 0;
-      let scrollLeftPos = 0;
-
-      function autoScroll() {
-        if (!isPaused && !isSwiping) {
-          container.scrollLeft += speed;
-          if (container.scrollLeft >= track.scrollWidth / 2) {
-            container.scrollLeft = 0;
-          }
+      // Infinite Loop Jump Handler
+      function checkInfiniteLoop() {
+        if (container.scrollLeft >= singleSetWidth) {
+          container.scrollLeft -= singleSetWidth;
+        } else if (container.scrollLeft <= 0) {
+          container.scrollLeft += singleSetWidth;
         }
-        requestAnimationFrame(autoScroll);
       }
 
-      // Pause on Hover
+      // Smooth Auto-Scroll Loop
+      let speed = 0.6;
+      let isPaused = false;
+      let isDragging = false;
+
+      function step() {
+        if (!isPaused && !isDragging) {
+          container.scrollLeft += speed;
+          checkInfiniteLoop();
+        }
+        requestAnimationFrame(step);
+      }
+
+      container.addEventListener('scroll', checkInfiniteLoop, { passive: true });
+
+      // Pause continuous movement on mouse hover
       container.addEventListener('mouseenter', () => isPaused = true);
       container.addEventListener('mouseleave', () => isPaused = false);
 
-      // Mouse Drag / Touch Swipe Handling
+      // Mouse Grab and Drag State (Desktop)
+      let startX = 0;
+      let scrollStart = 0;
+
       container.addEventListener('pointerdown', (e) => {
-        isSwiping = false;
+        if (e.pointerType === 'touch') return;
+        isDragging = false;
         startX = e.pageX - container.offsetLeft;
-        scrollLeftPos = container.scrollLeft;
-        
+        scrollStart = container.scrollLeft;
+
         function onPointerMove(eMove) {
           const x = eMove.pageX - container.offsetLeft;
-          const walk = (x - startX) * 1.5;
-          if (Math.abs(walk) > 5) {
-            isSwiping = true;
+          const dist = (x - startX) * 1.5;
+          if (Math.abs(dist) > 5) {
+            isDragging = true;
             container.classList.add('is-dragging');
-            container.scrollLeft = scrollLeftPos - walk;
+            container.scrollLeft = scrollStart - dist;
           }
         }
 
@@ -295,7 +313,34 @@
         window.addEventListener('pointerup', onPointerUp);
       });
 
-      // Manual Navigation Buttons
+      // Modal Handling
+      function openModal(card) {
+        modalTitle.textContent = card.getAttribute('data-service-title') || '';
+        modalDesc.textContent = card.getAttribute('data-service-description') || '';
+        modalDetails.textContent = card.getAttribute('data-service-details') || '';
+        modal.classList.add('visible');
+        document.body.classList.add('service-modal-open');
+      }
+
+      function closeModal() {
+        modal.classList.remove('visible');
+        document.body.classList.remove('service-modal-open');
+      }
+
+      track.addEventListener('click', (e) => {
+        if (isDragging) return;
+        const card = e.target.closest('[data-service-title]');
+        if (card) openModal(card);
+      });
+
+      closeBtn.addEventListener('click', closeModal);
+      closeBtnBottom.addEventListener('click', closeModal);
+      backdrop.addEventListener('click', closeModal);
+      window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.classList.contains('visible')) closeModal();
+      });
+
+      // Arrow Controls
       prevBtn.addEventListener('click', () => {
         container.scrollBy({ left: -340, behavior: 'smooth' });
       });
@@ -305,7 +350,7 @@
       });
 
       // Start engine
-      requestAnimationFrame(autoScroll);
+      requestAnimationFrame(step);
     });
   </script>
 </body>
