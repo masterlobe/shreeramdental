@@ -3,201 +3,310 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-<body>
-  <header class="navbar-header">
-  <!-- Added aspect-square to force a strict 1:1 container ratio -->
-  <div class="circular-nav-wrapper relative w-full max-w-[500px] aspect-square mx-auto">
+  <title>Shree Ram Dental Clinic - Services</title>
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <style>
+    /* Custom scrollbar hiding and dragging states */
+    #services-container::-webkit-scrollbar {
+      display: none;
+    }
+    #services-container {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+      overscroll-behavior-x: contain;
+      touch-action: pan-x;
+      cursor: grab;
+    }
+    #services-container.is-dragging {
+      cursor: grabbing;
+      user-select: none;
+    }
     
-    <!-- SVG NAVIGATION RING & SECTORS -->
-    <svg viewBox="0 0 500 500" class="w-full h-full">  
-      <defs>
-        <!-- Metallic Gold Gradient -->
-        <linearGradient id="gold-metallic" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#fef08a" />
-          <stop offset="30%" stop-color="#d97706" />
-          <stop offset="50%" stop-color="#fef9c3" />
-          <stop offset="75%" stop-color="#b45309" />
-          <stop offset="100%" stop-color="#78350f" />
-        </linearGradient>
+    /* Service modal animation & backdrop */
+    #service-modal {
+      display: none;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    #service-modal.visible {
+      display: flex;
+      opacity: 1;
+    }
+    body.service-modal-open {
+      overflow: hidden !important;
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased">
 
-        <!-- Ivory Slice Radial Gradient -->
-        <radialGradient id="ivory-gradient" cx="50%" cy="50%" r="50%">
-          <stop offset="0%" stop-color="#ffffff" />
-          <stop offset="85%" stop-color="#f5efe6" />
-          <stop offset="100%" stop-color="#e8decb" />
-        </radialGradient>
+  <section id="services" class="py-24 px-6 bg-slate-50 overflow-hidden">
+    <div class="max-w-7xl mx-auto">
+      
+      <!-- Section Header -->
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+        <div>
+          <span class="text-xs font-bold tracking-widest uppercase text-blue-600 mb-2 block">Our Services</span>
+          <h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-slate-900">Comprehensive Dental Care</h2>
+        </div>
+        <p class="text-slate-600 max-w-md mt-4 md:mt-0 font-normal leading-relaxed">
+          Shree Ram Dental Clinic offers a full range of dental services for all ages, from routine checkups to cosmetic transformations and orthodontic solutions.
+        </p>
+      </div>
 
-        <!-- Deep Purple Central Background -->
-        <radialGradient id="purple-center-grad" cx="50%" cy="50%" r="50%">
-          <stop offset="0%" stop-color="#581c87" />
-          <stop offset="70%" stop-color="#3b0764" />
-          <stop offset="100%" stop-color="#2e1065" />
-        </radialGradient>
-
-        <!-- Drop Shadows -->
-        <filter id="inner-shadow" x="-20%" y="-20%" width="140%" height="140%">
-          <feComponentTransfer in="SourceAlpha">
-            <feFuncA type="linear" slope="0.7"/>
-          </feComponentTransfer>
-          <feGaussianBlur stdDeviation="5" result="blur"/>
-          <feOffset dx="0" dy="4"/>
-          <feComposite operator="out" in2="SourceAlpha" result="inverse"/>
-          <feFlood flood-color="#000" result="color"/>
-          <feComposite operator="in" in2="inverse" result="shadow"/>
-          <feComposite operator="over" in2="SourceGraphic"/>
-        </filter>
-
-        <!-- CURVED TEXT PATHS (Radius = 166px) -->
-        <path id="path-home" d="M 167 106.24 A 166 166 0 0 1 333 106.24" />
-        <path id="path-services" d="M 333 106.24 A 166 166 0 0 1 416 250" />
-        <path id="path-contact" d="M 84 250 A 166 166 0 0 1 167 106.24" />
-
-        <!-- Bottom Arcs -->
-        <path id="path-about" d="M 333 393.76 A 166 166 0 0 0 416 250" />
-        <path id="path-dentists" d="M 167 393.76 A 166 166 0 0 0 333 393.76" />
-        <path id="path-testimonials" d="M 84 250 A 166 166 0 0 0 167 393.76" />
-      </defs>
-
-      <!-- Outer Solid Metallic Gold Border -->
-      <circle cx="250" cy="250" r="212" fill="none" stroke="url(#gold-metallic)" stroke-width="7" />
-      <circle cx="250" cy="250" r="208" fill="none" stroke="#3b1836" stroke-width="1" opacity="0.4" />
-
-      <!-- Deep Purple Textured Inner Background Track -->
-      <circle cx="250" cy="250" r="135" fill="url(#purple-center-grad)" filter="url(#inner-shadow)" />
-
-      <!-- SECTOR 1: HOME -->
-      <a href="#home" class="menu-item">
-        <path class="sector" d="M 150 76.79 A 200 200 0 0 1 350 76.79 L 317.5 133.09 A 135 135 0 0 0 182.5 133.09 Z" />
-        <text class="sector-text">
-          <textPath href="#path-home" startOffset="50%" text-anchor="middle">Home</textPath>
-        </text>
-      </a>
-
-      <!-- SECTOR 2: SERVICES -->
-      <a href="#services" class="menu-item">
-        <path class="sector" d="M 350 76.79 A 200 200 0 0 1 450 250 L 385 250 A 135 135 0 0 0 317.5 133.09 Z" />
-        <text class="sector-text">
-          <textPath href="#path-services" startOffset="50%" text-anchor="middle">Services</textPath>
-        </text>
-      </a>
-
-      <!-- SECTOR 3: ABOUT -->
-      <a href="#about" class="menu-item">
-        <path class="sector" d="M 450 250 A 200 200 0 0 1 350 423.21 L 317.5 366.91 A 135 135 0 0 0 385 250 Z" />
-        <text class="sector-text">
-          <textPath href="#path-about" startOffset="50%" text-anchor="middle">About</textPath>
-        </text>
-      </a>
-
-      <!-- SECTOR 4: OUR DENTISTS -->
-      <a href="#doctors" class="menu-item">
-        <path class="sector" d="M 340 423.21 A 200 200 0 0 1 160 423.21 L 189.25 366.91 A 135 135 0 0 0 310.75 366.91 Z" />
-        <text class="sector-text">
-          <textPath href="#path-dentists" startOffset="50%" text-anchor="middle">Our Dentists</textPath>
-        </text>
-      </a>
-
-      <!-- SECTOR 5: TESTIMONIALS -->
-      <a href="#testimonials" class="menu-item">
-        <path class="sector" d="M 150 423.21 A 200 200 0 0 1 50 250 L 115 250 A 135 135 0 0 0 182.5 366.91 Z" />
-        <text class="sector-text">
-          <textPath href="#path-testimonials" startOffset="50%" text-anchor="middle">Testimonials</textPath>
-        </text>
-      </a>
-
-      <!-- SECTOR 6: CONTACT -->
-      <a href="#contact" class="menu-item">
-        <path class="sector" d="M 50 250 A 200 200 0 0 1 150 76.79 L 182.5 133.09 A 135 135 0 0 0 115 250 Z" />
-        <text class="sector-text">
-          <textPath href="#path-contact" startOffset="50%" text-anchor="middle">Contact</textPath>
-        </text>
-      </a>
-
-      <!-- Inner Gold Ring Border Separator -->
-      <circle cx="250" cy="250" r="135" fill="none" stroke="url(#gold-metallic)" stroke-width="6" />
-    </svg>
-
-    <!-- HTML FLIP COIN OVERLAY (Strictly 54% width and aspect-square to guarantee matching height) -->
-    <div class="absolute inset-0 flex items-center justify-center pointer-events-none z-10">
-      <div class="coin-wrapper pointer-events-auto w-[54%] aspect-square">
-        <div class="coin-flipper">
+      <!-- Marquee Carousel Container -->
+      <div id="services-container" class="relative w-full overflow-x-auto py-4">
+        <div class="services-track flex gap-6 w-max">
           
-          <!-- FRONT SIDE: White with Logo -->
-          <div class="coin-side coin-front p-2">
-            <div class="w-full h-full rounded-full border-[3px] border-white p-2 flex items-center justify-center bg-white shadow-[inset_0_2px_8px_rgba(0,0,0,0.1)]">
-              <img src="./images/logo.png" alt="Shree Ram Dental Hospital" class="w-full h-full object-contain" />
+          <!-- Service Card 1 -->
+          <div class="group w-[300px] sm:w-[320px] shrink-0 relative h-[420px] overflow-hidden rounded-2xl bg-white border border-slate-100 shadow-md hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300"
+               data-service-title="Dental Implants"
+               data-service-description="Permanent tooth replacement solutions that restore function, confidence, and long-term oral health."
+               data-service-details="Dental implants are advanced, permanent solutions for missing teeth, designed to mimic the look, feel, and function of natural teeth. Ideal for patients with one or more missing teeth, implants help preserve jawbone integrity and prevent shifting of adjacent teeth. The procedure involves placing a titanium post into the jaw, which fuses with the bone and serves as a sturdy foundation for crowns, bridges, or dentures. Benefits include improved chewing ability, speech, and self-confidence, with results that can last a lifetime when cared for properly.">
+            <img src="./images/1.jpg" alt="Dental Implants" class="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 opacity-50 group-hover:opacity-40">
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/60 to-transparent"></div>
+            <div class="absolute bottom-0 left-0 right-0 p-6 text-white">
+              <span class="text-blue-400 text-xs font-semibold uppercase tracking-wider mb-1 block">01 / Restoration</span>
+              <h3 class="text-xl font-bold mb-2">Dental Implants</h3>
+              <p class="text-slate-300 text-xs font-light mb-4 line-clamp-2">Permanent tooth replacement solutions that restore function, confidence, and long-term oral health.</p>
+              <button type="button" class="service-learn-more inline-flex items-center text-xs uppercase tracking-wider text-blue-400 font-semibold group-hover:translate-x-1 transition-transform duration-300">
+                Learn More &rarr;
+              </button>
             </div>
           </div>
 
-          <!-- BACK SIDE: Blue with "Click Around Me" -->
-          <a href="#home" class="coin-side coin-back group p-1.5">
-            <div class="w-full h-full rounded-full border-[2px] border-[#1e3a8a] p-2 flex flex-col items-center justify-center transition-colors group-hover:border-blue-500">
-              <svg class="w-6 h-6 text-yellow-500 mb-1 animate-pulse" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
-              </svg>
-              <span class="text-[10px] font-bold uppercase tracking-[0.1em] text-yellow-200/80 mb-0.5">click</span>
-              <span class="text-xs font-black uppercase tracking-widest text-white leading-tight text-center">Around<br>Me</span>
+          <!-- Service Card 2 -->
+          <div class="group w-[300px] sm:w-[320px] shrink-0 relative h-[420px] overflow-hidden rounded-2xl bg-white border border-slate-100 shadow-md hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300"
+               data-service-title="Braces & Orthodontics"
+               data-service-description="Modern orthodontic treatments to align teeth, improve bite function, and enhance smiles."
+               data-service-details="Braces and orthodontic treatments are designed to correct misaligned teeth and jaws, providing both cosmetic and functional improvements. Suitable for children, teens, and adults, options include traditional metal braces, ceramic braces, and clear aligners. These treatments gradually move teeth into their ideal positions, enhancing bite, oral hygiene, and appearance.">
+            <img src="./images/2.jpg" alt="Braces & Orthodontics" class="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 opacity-50 group-hover:opacity-40">
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/60 to-transparent"></div>
+            <div class="absolute bottom-0 left-0 right-0 p-6 text-white">
+              <span class="text-blue-400 text-xs font-semibold uppercase tracking-wider mb-1 block">02 / Orthodontics</span>
+              <h3 class="text-xl font-bold mb-2">Braces & Orthodontics</h3>
+              <p class="text-slate-300 text-xs font-light mb-4 line-clamp-2">Modern orthodontic treatments to align teeth, improve bite function, and enhance smiles.</p>
+              <button type="button" class="service-learn-more inline-flex items-center text-xs uppercase tracking-wider text-blue-400 font-semibold group-hover:translate-x-1 transition-transform duration-300">
+                Learn More &rarr;
+              </button>
             </div>
-          </a>
+          </div>
+
+          <!-- Service Card 3 -->
+          <div class="group w-[300px] sm:w-[320px] shrink-0 relative h-[420px] overflow-hidden rounded-2xl bg-white border border-slate-100 shadow-md hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300"
+               data-service-title="Veneers"
+               data-service-description="Cosmetic solutions designed to improve tooth shape, color, and overall appearance."
+               data-service-details="Dental veneers are thin, custom-made shells bonded to the front of teeth to enhance their color, shape, and symmetry. They are ideal for patients with chipped, stained, misaligned, or uneven teeth seeking a dramatic improvement in their smile. Veneers are crafted from high-quality porcelain or composite materials.">
+            <img src="./images/3.jpg" alt="Veneers" class="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 opacity-50 group-hover:opacity-40">
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/60 to-transparent"></div>
+            <div class="absolute bottom-0 left-0 right-0 p-6 text-white">
+              <span class="text-blue-400 text-xs font-semibold uppercase tracking-wider mb-1 block">03 / Cosmetic</span>
+              <h3 class="text-xl font-bold mb-2">Veneers</h3>
+              <p class="text-slate-300 text-xs font-light mb-4 line-clamp-2">Cosmetic solutions designed to improve tooth shape, color, and overall appearance.</p>
+              <button type="button" class="service-learn-more inline-flex items-center text-xs uppercase tracking-wider text-blue-400 font-semibold group-hover:translate-x-1 transition-transform duration-300">
+                Learn More &rarr;
+              </button>
+            </div>
+          </div>
+
+          <!-- Service Card 4 -->
+          <div class="group w-[300px] sm:w-[320px] shrink-0 relative h-[420px] overflow-hidden rounded-2xl bg-white border border-slate-100 shadow-md hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300"
+               data-service-title="Root Canal (RCT)"
+               data-service-description="Advanced treatment to remove infection, relieve pain, and save natural teeth."
+               data-service-details="Root canal therapy (RCT) is a highly effective procedure for saving teeth that are badly decayed or infected. It involves removing the infected pulp, cleaning and disinfecting the canal, and sealing the tooth to prevent further infection. This treatment is ideal for patients experiencing severe tooth pain or sensitivity.">
+            <img src="./images/4.jpg" alt="Root Canal" class="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 opacity-50 group-hover:opacity-40">
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/60 to-transparent"></div>
+            <div class="absolute bottom-0 left-0 right-0 p-6 text-white">
+              <span class="text-blue-400 text-xs font-semibold uppercase tracking-wider mb-1 block">04 / Endodontics</span>
+              <h3 class="text-xl font-bold mb-2">Root Canal (RCT)</h3>
+              <p class="text-slate-300 text-xs font-light mb-4 line-clamp-2">Advanced treatment to remove infection, relieve pain, and save natural teeth.</p>
+              <button type="button" class="service-learn-more inline-flex items-center text-xs uppercase tracking-wider text-blue-400 font-semibold group-hover:translate-x-1 transition-transform duration-300">
+                Learn More &rarr;
+              </button>
+            </div>
+          </div>
+
+          <!-- Service Card 5 -->
+          <div class="group w-[300px] sm:w-[320px] shrink-0 relative h-[420px] overflow-hidden rounded-2xl bg-white border border-slate-100 shadow-md hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300"
+               data-service-title="Teeth Whitening"
+               data-service-description="Professional whitening procedures for a brighter and more confident smile."
+               data-service-details="Teeth whitening is a safe, effective cosmetic procedure that removes stains and discoloration, resulting in a noticeably brighter smile. Suitable for most adults, professional whitening is performed using advanced techniques and materials that protect enamel and gums.">
+            <img src="./images/5.jpg" alt="Teeth Whitening" class="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 opacity-50 group-hover:opacity-40">
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/60 to-transparent"></div>
+            <div class="absolute bottom-0 left-0 right-0 p-6 text-white">
+              <span class="text-blue-400 text-xs font-semibold uppercase tracking-wider mb-1 block">05 / Aesthetics</span>
+              <h3 class="text-xl font-bold mb-2">Teeth Whitening</h3>
+              <p class="text-slate-300 text-xs font-light mb-4 line-clamp-2">Professional whitening procedures for a brighter and more confident smile.</p>
+              <button type="button" class="service-learn-more inline-flex items-center text-xs uppercase tracking-wider text-blue-400 font-semibold group-hover:translate-x-1 transition-transform duration-300">
+                Learn More &rarr;
+              </button>
+            </div>
+          </div>
+
+          <!-- Service Card 6 -->
+          <div class="group w-[300px] sm:w-[320px] shrink-0 relative h-[420px] overflow-hidden rounded-2xl bg-white border border-slate-100 shadow-md hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300"
+               data-service-title="General Checkup"
+               data-service-description="Routine examinations focused on prevention, early diagnosis, and long-term oral health."
+               data-service-details="General dental checkups are the foundation of preventive care, involving a thorough examination of teeth, gums, and oral tissues. Recommended for all ages, these visits help detect problems early, ensuring prompt and effective treatment.">
+            <img src="./images/6.jpg" alt="General Checkup" class="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 opacity-50 group-hover:opacity-40">
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/60 to-transparent"></div>
+            <div class="absolute bottom-0 left-0 right-0 p-6 text-white">
+              <span class="text-blue-400 text-xs font-semibold uppercase tracking-wider mb-1 block">06 / Preventative</span>
+              <h3 class="text-xl font-bold mb-2">General Checkup</h3>
+              <p class="text-slate-300 text-xs font-light mb-4 line-clamp-2">Routine examinations focused on prevention, early diagnosis, and long-term oral health.</p>
+              <button type="button" class="service-learn-more inline-flex items-center text-xs uppercase tracking-wider text-blue-400 font-semibold group-hover:translate-x-1 transition-transform duration-300">
+                Learn More &rarr;
+              </button>
+            </div>
+          </div>
 
         </div>
       </div>
+
+      <!-- Navigation Arrows -->
+      <div class="flex justify-center items-center gap-4 mt-8">
+        <button id="services-prev" aria-label="Previous service" class="w-12 h-12 rounded-full bg-white border border-slate-200 text-slate-700 shadow-sm hover:bg-blue-600 hover:text-white hover:border-blue-600 active:scale-95 transition-all duration-200 flex items-center justify-center font-semibold text-lg">
+          ←
+        </button>
+        <button id="services-next" aria-label="Next service" class="w-12 h-12 rounded-full bg-white border border-slate-200 text-slate-700 shadow-sm hover:bg-blue-600 hover:text-white hover:border-blue-600 active:scale-95 transition-all duration-200 flex items-center justify-center font-semibold text-lg">
+          →
+        </button>
+      </div>
+
     </div>
+  </section>
 
+  <!-- Service Details Modal -->
+  <div id="service-modal" class="fixed inset-0 z-50 items-center justify-center p-4 bg-slate-900/60 backdrop-blur-md" aria-modal="true" role="dialog">
+    <div class="service-modal-backdrop absolute inset-0"></div>
+    <div class="service-modal-panel relative bg-white rounded-3xl shadow-2xl max-w-lg w-full mx-auto p-8 z-10 flex flex-col gap-4">
+      
+      <button class="service-modal-close absolute top-5 right-5 text-slate-400 hover:text-slate-700 hover:bg-slate-100 rounded-full w-10 h-10 flex items-center justify-center text-xl transition-all" aria-label="Close modal">&times;</button>
+      
+      <div>
+        <span id="service-modal-description" class="text-blue-600 text-xs font-bold uppercase tracking-wider block mb-1"></span>
+        <h3 id="service-modal-title" class="text-2xl sm:text-3xl font-extrabold text-slate-900"></h3>
+      </div>
+      
+      <p id="service-modal-details" class="text-slate-600 text-sm leading-relaxed my-2"></p>
+      
+      <button type="button" id="service-modal-close-btn" class="w-full py-3.5 px-6 bg-slate-900 hover:bg-slate-800 text-white font-semibold text-xs uppercase tracking-widest rounded-xl text-center shadow-md transition-all">
+        Close
+      </button>
+    </div>
   </div>
-</header>
 
-<!-- THE CSS -->
-<style>
-  @keyframes coin-rhythm {
-    0%, 45% { transform: rotateY(0deg); }
-    55%, 85% { transform: rotateY(180deg); }
-    95%, 100% { transform: rotateY(0deg); }
-  }
+  <!-- JavaScript -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const container = document.getElementById('services-container');
+      const track = container ? container.querySelector('.services-track') : null;
+      const modal = document.getElementById('service-modal');
+      const modalTitle = document.getElementById('service-modal-title');
+      const modalDesc = document.getElementById('service-modal-description');
+      const modalDetails = document.getElementById('service-modal-details');
+      const closeBtn = modal.querySelector('.service-modal-close');
+      const closeBtnBottom = document.getElementById('service-modal-close-btn');
+      const backdrop = modal.querySelector('.service-modal-backdrop');
+      const prevBtn = document.getElementById('services-prev');
+      const nextBtn = document.getElementById('services-next');
 
-  .coin-flipper {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    transform-style: preserve-3d;
-    animation: coin-rhythm 5s cubic-bezier(0.4, 0.0, 0.2, 1) infinite;
-  }
+      if (!container || !track) return;
 
-  .coin-wrapper:hover .coin-flipper {
-    animation-play-state: paused;
-  }
+      // Modal Control Functions
+      function openModal(card) {
+        modalTitle.textContent = card.getAttribute('data-service-title') || '';
+        modalDesc.textContent = card.getAttribute('data-service-description') || '';
+        modalDetails.textContent = card.getAttribute('data-service-details') || '';
+        modal.classList.add('visible');
+        document.body.classList.add('service-modal-open');
+      }
 
-  .coin-side {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
-    border-radius: 50%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    border: 5px solid #d97706; 
-    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
-  }
+      function closeModal() {
+        modal.classList.remove('visible');
+        document.body.classList.remove('service-modal-open');
+      }
 
-  .coin-front {
-    transform: rotateY(0deg);
-    background-color: #ffffff;
-  }
+      // Event Listeners for Closing Modal
+      closeBtn.addEventListener('click', closeModal);
+      closeBtnBottom.addEventListener('click', closeModal);
+      backdrop.addEventListener('click', closeModal);
+      window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.classList.contains('visible')) closeModal();
+      });
 
-  .coin-back {
-    transform: rotateY(180deg);
-    background: radial-gradient(circle at center, #1e3a8a 0%, #0f172a 100%);
-    color: #ffffff;
-    cursor: pointer;
-    text-decoration: none;
-  }
-</style>
+      // Clone elements to create smooth infinite loop
+      const cards = Array.from(track.children);
+      cards.forEach(card => {
+        const clone = card.cloneNode(true);
+        track.appendChild(clone);
+      });
+
+      // Attach Modal Click Listeners
+      track.addEventListener('click', (e) => {
+        if (isSwiping) return; // Prevent opening modal on drag/swipe
+        const card = e.target.closest('[data-service-title]');
+        if (card) openModal(card);
+      });
+
+      // Carousel Continuous Scroll Engine
+      let speed = 0.6;
+      let isPaused = false;
+      let isSwiping = false;
+      let startX = 0;
+      let scrollLeftPos = 0;
+
+      function autoScroll() {
+        if (!isPaused && !isSwiping) {
+          container.scrollLeft += speed;
+          if (container.scrollLeft >= track.scrollWidth / 2) {
+            container.scrollLeft = 0;
+          }
+        }
+        requestAnimationFrame(autoScroll);
+      }
+
+      // Pause on Hover
+      container.addEventListener('mouseenter', () => isPaused = true);
+      container.addEventListener('mouseleave', () => isPaused = false);
+
+      // Mouse Drag / Touch Swipe Handling
+      container.addEventListener('pointerdown', (e) => {
+        isSwiping = false;
+        startX = e.pageX - container.offsetLeft;
+        scrollLeftPos = container.scrollLeft;
+        
+        function onPointerMove(eMove) {
+          const x = eMove.pageX - container.offsetLeft;
+          const walk = (x - startX) * 1.5;
+          if (Math.abs(walk) > 5) {
+            isSwiping = true;
+            container.classList.add('is-dragging');
+            container.scrollLeft = scrollLeftPos - walk;
+          }
+        }
+
+        function onPointerUp() {
+          container.classList.remove('is-dragging');
+          window.removeEventListener('pointermove', onPointerMove);
+          window.removeEventListener('pointerup', onPointerUp);
+        }
+
+        window.addEventListener('pointermove', onPointerMove);
+        window.addEventListener('pointerup', onPointerUp);
+      });
+
+      // Manual Navigation Buttons
+      prevBtn.addEventListener('click', () => {
+        container.scrollBy({ left: -340, behavior: 'smooth' });
+      });
+
+      nextBtn.addEventListener('click', () => {
+        container.scrollBy({ left: 340, behavior: 'smooth' });
+      });
+
+      // Start engine
+      requestAnimationFrame(autoScroll);
+    });
+  </script>
 </body>
 </html>
