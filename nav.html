@@ -1,279 +1,203 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
 </head>
 <body>
-    <section id="doctors" class="py-24 bg-slate-50 min-h-screen">
-    <div class="max-w-7xl mx-auto px-6">
-        
-        <!-- Section Header -->
-        <div class="text-center max-w-2xl mx-auto mb-16">
-            <span class="text-xs font-semibold uppercase tracking-widest text-blue-600 bg-blue-50 px-3.5 py-1.5 rounded-full border border-blue-100">Our Experts</span>
-            <h2 class="text-3xl sm:text-4xl font-bold text-slate-900 mt-4 tracking-tight">Meet Our Specialists</h2>
-            <p class="text-slate-600 text-sm mt-3 leading-relaxed">Dedicated dental professionals providing compassionate and expert care.</p>
-        </div>
+  <header class="navbar-header">
+  <!-- Added aspect-square to force a strict 1:1 container ratio -->
+  <div class="circular-nav-wrapper relative w-full max-w-[500px] aspect-square mx-auto">
+    
+    <!-- SVG NAVIGATION RING & SECTORS -->
+    <svg viewBox="0 0 500 500" class="w-full h-full">  
+      <defs>
+        <!-- Metallic Gold Gradient -->
+        <linearGradient id="gold-metallic" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#fef08a" />
+          <stop offset="30%" stop-color="#d97706" />
+          <stop offset="50%" stop-color="#fef9c3" />
+          <stop offset="75%" stop-color="#b45309" />
+          <stop offset="100%" stop-color="#78350f" />
+        </linearGradient>
 
-        <!-- 3-Column Grid -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            
-            <!-- Doctor Card 1 -->
-            <div class="doctor-card group relative aspect-[3/4] overflow-hidden rounded-3xl shadow-md transition-all duration-300 bg-slate-200 cursor-pointer"
-              tabindex="0" role="button"
-              data-photo="https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&q=80&w=800"
-              data-name="Dr. Darbesh Kumar Jha"
-              data-short-specialty="Orthodontist"
-              data-specialty="Orthodontics, Braces & Invisalign"
-              data-qualification="BDS, MDS (Orthodontics)"
-              data-experience="12+ yrs exp."
-              data-languages="English, Nepali, Hindi"
-              data-availability="Mon-Fri: 10am-6pm"
-              data-bio="Dr. Darbesh Kumar Jha specializes in orthodontics and is passionate about helping patients achieve confident, healthy smiles through braces and Invisalign.">
-                
-                <!-- Floating "Click to know more" Pill -->
-                <div class="absolute top-4 right-4 z-10 px-3 py-1.5 bg-black/40 backdrop-blur-md text-[11px] font-medium text-white/90 rounded-full border border-white/20 group-hover:bg-blue-600 group-hover:border-blue-500 transition-all duration-300 flex items-center gap-1.5 shadow-lg">
-                    <span>Click to know more</span>
-                    <svg class="w-3 h-3 transition-transform group-hover:translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
-                </div>
+        <!-- Ivory Slice Radial Gradient -->
+        <radialGradient id="ivory-gradient" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#ffffff" />
+          <stop offset="85%" stop-color="#f5efe6" />
+          <stop offset="100%" stop-color="#e8decb" />
+        </radialGradient>
 
-                <img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&q=80&w=800" alt="Dr. Darbesh Kumar Jha" class="h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-105 doctor-card-img">
-                
-                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent flex flex-col justify-end p-6 text-white">
-                    <h3 class="text-xl font-bold tracking-wide">Dr. Darbesh Kumar Jha</h3>
-                    <p class="text-xs font-medium text-blue-300 mt-0.5">Orthodontist</p>
-                    
-                    <!-- Quick Info Badges -->
-                    <div class="mt-3.5 flex flex-wrap gap-1.5 text-[11px] font-medium text-slate-100">
-                        <span class="px-2.5 py-1 bg-white/15 backdrop-blur-md rounded-lg border border-white/15 flex items-center gap-1.5">
-                            <svg class="w-3.5 h-3.5 text-blue-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0112 20.055a11.952 11.952 0 01-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"/></svg>
-                            BDS, MDS
-                        </span>
-                        <span class="px-2.5 py-1 bg-white/15 backdrop-blur-md rounded-lg border border-white/15 flex items-center gap-1.5">
-                            <svg class="w-3.5 h-3.5 text-emerald-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
-                            12+ yrs exp.
-                        </span>
-                        <span class="px-2.5 py-1 bg-white/15 backdrop-blur-md rounded-lg border border-white/15 flex items-center gap-1.5 w-full sm:w-auto">
-                            <svg class="w-3.5 h-3.5 text-amber-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                            Mon-Fri: 10am-6pm
-                        </span>
-                    </div>
-                </div>
+        <!-- Deep Purple Central Background -->
+        <radialGradient id="purple-center-grad" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#581c87" />
+          <stop offset="70%" stop-color="#3b0764" />
+          <stop offset="100%" stop-color="#2e1065" />
+        </radialGradient>
+
+        <!-- Drop Shadows -->
+        <filter id="inner-shadow" x="-20%" y="-20%" width="140%" height="140%">
+          <feComponentTransfer in="SourceAlpha">
+            <feFuncA type="linear" slope="0.7"/>
+          </feComponentTransfer>
+          <feGaussianBlur stdDeviation="5" result="blur"/>
+          <feOffset dx="0" dy="4"/>
+          <feComposite operator="out" in2="SourceAlpha" result="inverse"/>
+          <feFlood flood-color="#000" result="color"/>
+          <feComposite operator="in" in2="inverse" result="shadow"/>
+          <feComposite operator="over" in2="SourceGraphic"/>
+        </filter>
+
+        <!-- CURVED TEXT PATHS (Radius = 166px) -->
+        <path id="path-home" d="M 167 106.24 A 166 166 0 0 1 333 106.24" />
+        <path id="path-services" d="M 333 106.24 A 166 166 0 0 1 416 250" />
+        <path id="path-contact" d="M 84 250 A 166 166 0 0 1 167 106.24" />
+
+        <!-- Bottom Arcs -->
+        <path id="path-about" d="M 333 393.76 A 166 166 0 0 0 416 250" />
+        <path id="path-dentists" d="M 167 393.76 A 166 166 0 0 0 333 393.76" />
+        <path id="path-testimonials" d="M 84 250 A 166 166 0 0 0 167 393.76" />
+      </defs>
+
+      <!-- Outer Solid Metallic Gold Border -->
+      <circle cx="250" cy="250" r="212" fill="none" stroke="url(#gold-metallic)" stroke-width="7" />
+      <circle cx="250" cy="250" r="208" fill="none" stroke="#3b1836" stroke-width="1" opacity="0.4" />
+
+      <!-- Deep Purple Textured Inner Background Track -->
+      <circle cx="250" cy="250" r="135" fill="url(#purple-center-grad)" filter="url(#inner-shadow)" />
+
+      <!-- SECTOR 1: HOME -->
+      <a href="#home" class="menu-item">
+        <path class="sector" d="M 150 76.79 A 200 200 0 0 1 350 76.79 L 317.5 133.09 A 135 135 0 0 0 182.5 133.09 Z" />
+        <text class="sector-text">
+          <textPath href="#path-home" startOffset="50%" text-anchor="middle">Home</textPath>
+        </text>
+      </a>
+
+      <!-- SECTOR 2: SERVICES -->
+      <a href="#services" class="menu-item">
+        <path class="sector" d="M 350 76.79 A 200 200 0 0 1 450 250 L 385 250 A 135 135 0 0 0 317.5 133.09 Z" />
+        <text class="sector-text">
+          <textPath href="#path-services" startOffset="50%" text-anchor="middle">Services</textPath>
+        </text>
+      </a>
+
+      <!-- SECTOR 3: ABOUT -->
+      <a href="#about" class="menu-item">
+        <path class="sector" d="M 450 250 A 200 200 0 0 1 350 423.21 L 317.5 366.91 A 135 135 0 0 0 385 250 Z" />
+        <text class="sector-text">
+          <textPath href="#path-about" startOffset="50%" text-anchor="middle">About</textPath>
+        </text>
+      </a>
+
+      <!-- SECTOR 4: OUR DENTISTS -->
+      <a href="#doctors" class="menu-item">
+        <path class="sector" d="M 340 423.21 A 200 200 0 0 1 160 423.21 L 189.25 366.91 A 135 135 0 0 0 310.75 366.91 Z" />
+        <text class="sector-text">
+          <textPath href="#path-dentists" startOffset="50%" text-anchor="middle">Our Dentists</textPath>
+        </text>
+      </a>
+
+      <!-- SECTOR 5: TESTIMONIALS -->
+      <a href="#testimonials" class="menu-item">
+        <path class="sector" d="M 150 423.21 A 200 200 0 0 1 50 250 L 115 250 A 135 135 0 0 0 182.5 366.91 Z" />
+        <text class="sector-text">
+          <textPath href="#path-testimonials" startOffset="50%" text-anchor="middle">Testimonials</textPath>
+        </text>
+      </a>
+
+      <!-- SECTOR 6: CONTACT -->
+      <a href="#contact" class="menu-item">
+        <path class="sector" d="M 50 250 A 200 200 0 0 1 150 76.79 L 182.5 133.09 A 135 135 0 0 0 115 250 Z" />
+        <text class="sector-text">
+          <textPath href="#path-contact" startOffset="50%" text-anchor="middle">Contact</textPath>
+        </text>
+      </a>
+
+      <!-- Inner Gold Ring Border Separator -->
+      <circle cx="250" cy="250" r="135" fill="none" stroke="url(#gold-metallic)" stroke-width="6" />
+    </svg>
+
+    <!-- HTML FLIP COIN OVERLAY (Strictly 54% width and aspect-square to guarantee matching height) -->
+    <div class="absolute inset-0 flex items-center justify-center pointer-events-none z-10">
+      <div class="coin-wrapper pointer-events-auto w-[54%] aspect-square">
+        <div class="coin-flipper">
+          
+          <!-- FRONT SIDE: White with Logo -->
+          <div class="coin-side coin-front p-2">
+            <div class="w-full h-full rounded-full border-[3px] border-white p-2 flex items-center justify-center bg-white shadow-[inset_0_2px_8px_rgba(0,0,0,0.1)]">
+              <img src="./images/logo.png" alt="Shree Ram Dental Hospital" class="w-full h-full object-contain" />
             </div>
+          </div>
 
-            <!-- Doctor Card 2 -->
-            <div class="doctor-card group relative aspect-[3/4] overflow-hidden rounded-3xl shadow-md transition-all duration-300 bg-slate-200 cursor-pointer"
-              tabindex="0" role="button"
-              data-photo="https://images.unsplash.com/photo-1537368910025-700350fe46c7?auto=format&fit=crop&q=80&w=800"
-              data-name="Dr. Pravin Jaiswal"
-              data-short-specialty="Oral Surgeon"
-              data-specialty="Oral & Maxillofacial Surgery"
-              data-qualification="BDS, MDS (Oral Surgery)"
-              data-experience="10+ yrs exp."
-              data-languages="English, Nepali"
-              data-availability="Tue-Sat: 11am-5pm"
-              data-bio="Dr. Pravin Jaiswal is an expert in oral and maxillofacial surgery, providing advanced surgical care for complex dental and facial cases.">
-                
-                <div class="absolute top-4 right-4 z-10 px-3 py-1.5 bg-black/40 backdrop-blur-md text-[11px] font-medium text-white/90 rounded-full border border-white/20 group-hover:bg-blue-600 group-hover:border-blue-500 transition-all duration-300 flex items-center gap-1.5 shadow-lg">
-                    <span>Click to know more</span>
-                    <svg class="w-3 h-3 transition-transform group-hover:translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
-                </div>
-
-                <img src="https://images.unsplash.com/photo-1537368910025-700350fe46c7?auto=format&fit=crop&q=80&w=800" alt="Dr. Pravin Jaiswal" class="h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-105 doctor-card-img">
-                
-                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent flex flex-col justify-end p-6 text-white">
-                    <h3 class="text-xl font-bold tracking-wide">Dr. Pravin Jaiswal</h3>
-                    <p class="text-xs font-medium text-blue-300 mt-0.5">Oral & Maxillofacial Surgeon</p>
-                    
-                    <!-- Quick Info Badges -->
-                    <div class="mt-3.5 flex flex-wrap gap-1.5 text-[11px] font-medium text-slate-100">
-                        <span class="px-2.5 py-1 bg-white/15 backdrop-blur-md rounded-lg border border-white/15 flex items-center gap-1.5">
-                            <svg class="w-3.5 h-3.5 text-blue-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0112 20.055a11.952 11.952 0 01-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"/></svg>
-                            BDS, MDS
-                        </span>
-                        <span class="px-2.5 py-1 bg-white/15 backdrop-blur-md rounded-lg border border-white/15 flex items-center gap-1.5">
-                            <svg class="w-3.5 h-3.5 text-emerald-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
-                            10+ yrs exp.
-                        </span>
-                        <span class="px-2.5 py-1 bg-white/15 backdrop-blur-md rounded-lg border border-white/15 flex items-center gap-1.5 w-full sm:w-auto">
-                            <svg class="w-3.5 h-3.5 text-amber-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                            Tue-Sat: 11am-5pm
-                        </span>
-                    </div>
-                </div>
+          <!-- BACK SIDE: Blue with "Click Around Me" -->
+          <a href="#home" class="coin-side coin-back group p-1.5">
+            <div class="w-full h-full rounded-full border-[2px] border-[#1e3a8a] p-2 flex flex-col items-center justify-center transition-colors group-hover:border-blue-500">
+              <svg class="w-6 h-6 text-yellow-500 mb-1 animate-pulse" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+              </svg>
+              <span class="text-[10px] font-bold uppercase tracking-[0.1em] text-yellow-200/80 mb-0.5">click</span>
+              <span class="text-xs font-black uppercase tracking-widest text-white leading-tight text-center">Around<br>Me</span>
             </div>
-
-            <!-- Doctor Card 3 -->
-            <div class="doctor-card group relative aspect-[3/4] overflow-hidden rounded-3xl shadow-md transition-all duration-300 bg-slate-200 cursor-pointer"
-              tabindex="0" role="button"
-              data-photo="https://images.unsplash.com/photo-1594824813566-78a933758f46?auto=format&fit=crop&q=80&w=800"
-              data-name="Dr. Aastha Pathak"
-              data-short-specialty="Periodontist"
-              data-specialty="Gum Disease, Periodontal Surgery"
-              data-qualification="BDS, MDS (Periodontics)"
-              data-experience="8+ yrs exp."
-              data-languages="English, Nepali, Hindi"
-              data-availability="Mon, Wed, Fri: 9am-4pm"
-              data-bio="Dr. Aastha Pathak focuses on periodontal health, treating gum disease and performing advanced gum surgeries for optimal oral health.">
-                
-                <div class="absolute top-4 right-4 z-10 px-3 py-1.5 bg-black/40 backdrop-blur-md text-[11px] font-medium text-white/90 rounded-full border border-white/20 group-hover:bg-blue-600 group-hover:border-blue-500 transition-all duration-300 flex items-center gap-1.5 shadow-lg">
-                    <span>Click to know more</span>
-                    <svg class="w-3 h-3 transition-transform group-hover:translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
-                </div>
-
-                <img src="https://images.unsplash.com/photo-1594824813566-78a933758f46?auto=format&fit=crop&q=80&w=800" alt="Dr. Aastha Pathak" class="h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-105 doctor-card-img">
-                
-                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent flex flex-col justify-end p-6 text-white">
-                    <h3 class="text-xl font-bold tracking-wide">Dr. Aastha Pathak</h3>
-                    <p class="text-xs font-medium text-blue-300 mt-0.5">Periodontist</p>
-                    
-                    <!-- Quick Info Badges -->
-                    <div class="mt-3.5 flex flex-wrap gap-1.5 text-[11px] font-medium text-slate-100">
-                        <span class="px-2.5 py-1 bg-white/15 backdrop-blur-md rounded-lg border border-white/15 flex items-center gap-1.5">
-                            <svg class="w-3.5 h-3.5 text-blue-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0112 20.055a11.952 11.952 0 01-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"/></svg>
-                            BDS, MDS
-                        </span>
-                        <span class="px-2.5 py-1 bg-white/15 backdrop-blur-md rounded-lg border border-white/15 flex items-center gap-1.5">
-                            <svg class="w-3.5 h-3.5 text-emerald-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
-                            8+ yrs exp.
-                        </span>
-                        <span class="px-2.5 py-1 bg-white/15 backdrop-blur-md rounded-lg border border-white/15 flex items-center gap-1.5 w-full sm:w-auto">
-                            <svg class="w-3.5 h-3.5 text-amber-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                            Mon, Wed, Fri: 9am-4pm
-                        </span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Doctor Card 4 -->
-            <div class="doctor-card group relative aspect-[3/4] overflow-hidden rounded-3xl shadow-md transition-all duration-300 bg-slate-200 cursor-pointer"
-              tabindex="0" role="button"
-              data-photo="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&q=80&w=800"
-              data-name="Dr. Rohan Adhikari"
-              data-short-specialty="Endodontist"
-              data-specialty="Root Canal Therapy, Endodontics"
-              data-qualification="BDS, MDS (Endodontics)"
-              data-experience="7+ yrs exp."
-              data-languages="English, Nepali"
-              data-availability="Mon-Sat: 10am-4pm"
-              data-bio="Dr. Rohan Adhikari is highly skilled in endodontics, providing gentle and effective root canal treatments to save natural teeth.">
-                
-                <div class="absolute top-4 right-4 z-10 px-3 py-1.5 bg-black/40 backdrop-blur-md text-[11px] font-medium text-white/90 rounded-full border border-white/20 group-hover:bg-blue-600 group-hover:border-blue-500 transition-all duration-300 flex items-center gap-1.5 shadow-lg">
-                    <span>Click to know more</span>
-                    <svg class="w-3 h-3 transition-transform group-hover:translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
-                </div>
-
-                <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&q=80&w=800" alt="Dr. Rohan Adhikari" class="h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-105 doctor-card-img">
-                
-                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent flex flex-col justify-end p-6 text-white">
-                    <h3 class="text-xl font-bold tracking-wide">Dr. Rohan Adhikari</h3>
-                    <p class="text-xs font-medium text-blue-300 mt-0.5">Endodontist</p>
-                    
-                    <!-- Quick Info Badges -->
-                    <div class="mt-3.5 flex flex-wrap gap-1.5 text-[11px] font-medium text-slate-100">
-                        <span class="px-2.5 py-1 bg-white/15 backdrop-blur-md rounded-lg border border-white/15 flex items-center gap-1.5">
-                            <svg class="w-3.5 h-3.5 text-blue-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0112 20.055a11.952 11.952 0 01-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"/></svg>
-                            BDS, MDS
-                        </span>
-                        <span class="px-2.5 py-1 bg-white/15 backdrop-blur-md rounded-lg border border-white/15 flex items-center gap-1.5">
-                            <svg class="w-3.5 h-3.5 text-emerald-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
-                            7+ yrs exp.
-                        </span>
-                        <span class="px-2.5 py-1 bg-white/15 backdrop-blur-md rounded-lg border border-white/15 flex items-center gap-1.5 w-full sm:w-auto">
-                            <svg class="w-3.5 h-3.5 text-amber-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                            Mon-Sat: 10am-4pm
-                        </span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Doctor Card 5 -->
-            <div class="doctor-card group relative aspect-[3/4] overflow-hidden rounded-3xl shadow-md transition-all duration-300 bg-slate-200 cursor-pointer"
-              tabindex="0" role="button"
-              data-photo="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&q=80&w=800"
-              data-name="Dr. Nisha Thapa"
-              data-short-specialty="Cosmetic Dentist"
-              data-specialty="Cosmetic Dentistry, Smile Makeovers"
-              data-qualification="BDS, Fellowship in Cosmetic Dentistry"
-              data-experience="9+ yrs exp."
-              data-languages="English, Nepali, Hindi"
-              data-availability="Mon-Fri: 12pm-7pm"
-              data-bio="Dr. Nisha Thapa is passionate about cosmetic dentistry, transforming smiles with advanced aesthetic techniques for natural-looking results.">
-                
-                <div class="absolute top-4 right-4 z-10 px-3 py-1.5 bg-black/40 backdrop-blur-md text-[11px] font-medium text-white/90 rounded-full border border-white/20 group-hover:bg-blue-600 group-hover:border-blue-500 transition-all duration-300 flex items-center gap-1.5 shadow-lg">
-                    <span>Click to know more</span>
-                    <svg class="w-3 h-3 transition-transform group-hover:translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
-                </div>
-
-                <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&q=80&w=800" alt="Dr. Nisha Thapa" class="h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-105 doctor-card-img">
-                
-                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent flex flex-col justify-end p-6 text-white">
-                    <h3 class="text-xl font-bold tracking-wide">Dr. Nisha Thapa</h3>
-                    <p class="text-xs font-medium text-blue-300 mt-0.5">Cosmetic Dentist</p>
-                    
-                    <!-- Quick Info Badges -->
-                    <div class="mt-3.5 flex flex-wrap gap-1.5 text-[11px] font-medium text-slate-100">
-                        <span class="px-2.5 py-1 bg-white/15 backdrop-blur-md rounded-lg border border-white/15 flex items-center gap-1.5">
-                            <svg class="w-3.5 h-3.5 text-blue-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0112 20.055a11.952 11.952 0 01-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"/></svg>
-                            BDS, Fellowship
-                        </span>
-                        <span class="px-2.5 py-1 bg-white/15 backdrop-blur-md rounded-lg border border-white/15 flex items-center gap-1.5">
-                            <svg class="w-3.5 h-3.5 text-emerald-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
-                            9+ yrs exp.
-                        </span>
-                        <span class="px-2.5 py-1 bg-white/15 backdrop-blur-md rounded-lg border border-white/15 flex items-center gap-1.5 w-full sm:w-auto">
-                            <svg class="w-3.5 h-3.5 text-amber-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                            Mon-Fri: 12pm-7pm
-                        </span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Doctor Card 6 -->
-            <div class="doctor-card group relative aspect-[3/4] overflow-hidden rounded-3xl shadow-md transition-all duration-300 bg-slate-200 cursor-pointer"
-              tabindex="0" role="button"
-              data-photo="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=800"
-              data-name="Dr. Sunita Shrestha"
-              data-short-specialty="Pediatric Dentist"
-              data-specialty="Children’s Dentistry, Preventive Care"
-              data-qualification="BDS, MDS (Pediatric Dentistry)"
-              data-experience="6+ yrs exp."
-              data-languages="English, Nepali"
-              data-availability="Wed, Fri, Sun: 10am-3pm"
-              data-bio="Dr. Sunita Shrestha provides gentle dental care for children, making dental visits fun and stress-free for young patients and families.">
-                
-                <div class="absolute top-4 right-4 z-10 px-3 py-1.5 bg-black/40 backdrop-blur-md text-[11px] font-medium text-white/90 rounded-full border border-white/20 group-hover:bg-blue-600 group-hover:border-blue-500 transition-all duration-300 flex items-center gap-1.5 shadow-lg">
-                    <span>Click to know more</span>
-                    <svg class="w-3 h-3 transition-transform group-hover:translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
-                </div>
-
-                <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=800" alt="Dr. Sunita Shrestha" class="h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-105 doctor-card-img">
-                
-                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent flex flex-col justify-end p-6 text-white">
-                    <h3 class="text-xl font-bold tracking-wide">Dr. Sunita Shrestha</h3>
-                    <p class="text-xs font-medium text-blue-300 mt-0.5">Pediatric Dentist</p>
-                    
-                    <!-- Quick Info Badges -->
-                    <div class="mt-3.5 flex flex-wrap gap-1.5 text-[11px] font-medium text-slate-100">
-                        <span class="px-2.5 py-1 bg-white/15 backdrop-blur-md rounded-lg border border-white/15 flex items-center gap-1.5">
-                            <svg class="w-3.5 h-3.5 text-blue-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0112 20.055a11.952 11.952 0 01-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"/></svg>
-                            BDS, MDS
-                        </span>
-                        <span class="px-2.5 py-1 bg-white/15 backdrop-blur-md rounded-lg border border-white/15 flex items-center gap-1.5">
-                            <svg class="w-3.5 h-3.5 text-emerald-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
-                            6+ yrs exp.
-                        </span>
-                        <span class="px-2.5 py-1 bg-white/15 backdrop-blur-md rounded-lg border border-white/15 flex items-center gap-1.5 w-full sm:w-auto">
-                            <svg class="w-3.5 h-3.5 text-amber-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                            Wed, Fri, Sun: 10am-3pm
-                        </span>
-                    </div>
-                </div>
-            </div>
+          </a>
 
         </div>
+      </div>
     </div>
-</section>
+
+  </div>
+</header>
+
+<!-- THE CSS -->
+<style>
+  @keyframes coin-rhythm {
+    0%, 45% { transform: rotateY(0deg); }
+    55%, 85% { transform: rotateY(180deg); }
+    95%, 100% { transform: rotateY(0deg); }
+  }
+
+  .coin-flipper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    animation: coin-rhythm 5s cubic-bezier(0.4, 0.0, 0.2, 1) infinite;
+  }
+
+  .coin-wrapper:hover .coin-flipper {
+    animation-play-state: paused;
+  }
+
+  .coin-side {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 5px solid #d97706; 
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+  }
+
+  .coin-front {
+    transform: rotateY(0deg);
+    background-color: #ffffff;
+  }
+
+  .coin-back {
+    transform: rotateY(180deg);
+    background: radial-gradient(circle at center, #1e3a8a 0%, #0f172a 100%);
+    color: #ffffff;
+    cursor: pointer;
+    text-decoration: none;
+  }
+</style>
 </body>
 </html>
