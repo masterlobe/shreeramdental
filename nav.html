@@ -6,30 +6,23 @@
   <title>Shree Ram Dental Clinic - Services</title>
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   <style>
-    /* Prevent vertical pull-to-refresh & browser gesture hijacking on scroll container */
+    /* Native smooth momentum scrolling on mobile devices */
     #services-container {
-      -ms-overflow-style: none;
-      scrollbar-width: none;
-      overscroll-behavior-x: contain;
-      overscroll-behavior-y: auto;
-      touch-action: pan-x pan-y;
-      cursor: grab;
       -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      overscroll-behavior-x: contain;
     }
     #services-container::-webkit-scrollbar {
       display: none;
     }
-    #services-container.is-dragging {
-      cursor: grabbing;
-      user-select: none;
-    }
     
-    /* Service modal animation & maximum z-index */
+    /* Service modal animation & maximum z-index relative to site navbar/logo */
     #service-modal {
       display: none;
       opacity: 0;
       transition: opacity 0.3s ease;
-      z-index: 99999; /* Ensure modal stays above sticky header/logo navigation */
+      z-index: 99999;
     }
     #service-modal.visible {
       display: flex;
@@ -362,7 +355,7 @@
     </div>
   </section>
 
-  <!-- High Z-Index Service Details Modal (z-50 replaced with z-[99999]) -->
+  <!-- High Z-Index Service Details Modal -->
   <div id="service-modal" class="fixed inset-0 z-[99999] items-center justify-center p-4 sm:p-8 bg-slate-900/60 backdrop-blur-md" aria-modal="true" role="dialog">
     <div class="service-modal-backdrop absolute inset-0"></div>
     
@@ -395,7 +388,6 @@
     </div>
   </div>
 
-  <!-- JavaScript with Touch Gestures Fixed -->
   <script>
     document.addEventListener('DOMContentLoaded', function () {
       const container = document.getElementById('services-container');
@@ -411,7 +403,7 @@
 
       if (!container || !track) return;
 
-      // Duplicate cards for seamless infinite marquee
+      // Duplicate cards for seamless loop
       const originalCards = Array.from(track.children);
       originalCards.forEach(card => {
         const clone = card.cloneNode(true);
@@ -420,13 +412,13 @@
 
       let singleSetWidth = 0;
       function calcTrackDimensions() {
-        const cardGap = 24; // gap-6
+        const cardGap = 24;
         singleSetWidth = originalCards.reduce((acc, card) => acc + card.offsetWidth + cardGap, 0);
       }
       calcTrackDimensions();
       window.addEventListener('resize', calcTrackDimensions);
 
-      // Boundary check for continuous loop
+      // Instant loop repositioning without jitter
       function checkInfiniteLoop() {
         if (container.scrollLeft >= singleSetWidth) {
           container.scrollLeft -= singleSetWidth;
@@ -435,10 +427,13 @@
         }
       }
 
-      // Smooth Auto-Scroll Engine
-      let speed = 0.6;
+      const isMobile = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+      
+      // Speed limited to 0.45px/frame for smooth animation on mobile & desktop
+      let speed = 0.45;
       let isPaused = false;
       let isDragging = false;
+      let touchTimeout = null;
 
       function step() {
         if (!isPaused && !isDragging) {
@@ -450,52 +445,49 @@
 
       container.addEventListener('scroll', checkInfiniteLoop, { passive: true });
 
-      // Pause continuous scrolling on hover
-      container.addEventListener('mouseenter', () => isPaused = true);
-      container.addEventListener('mouseleave', () => isPaused = false);
+      // Mobile Touch Handling: Native touch scrolling with auto-scroll pause/resume
+      if (isMobile) {
+        container.addEventListener('touchstart', function() {
+          isPaused = true;
+          if (touchTimeout) clearTimeout(touchTimeout);
+        }, { passive: true });
 
-      // Pointer Dragging for Mobile Touch & Desktop Mouse
-      let startX = 0;
-      let startY = 0;
-      let scrollStart = 0;
-      let isHorizontalSwipe = false;
+        container.addEventListener('touchend', function() {
+          // Resume slow auto-marquee after 2.5 seconds of user inactivity
+          touchTimeout = setTimeout(() => {
+            isPaused = false;
+          }, 2500);
+        }, { passive: true });
+      } else {
+        // Desktop Mouse Pointer Dragging
+        let startX = 0;
+        let scrollStart = 0;
 
-      // Unify touch & mouse interaction to ensure smooth horizontal swipe
-      container.addEventListener('pointerdown', (e) => {
-        isDragging = false;
-        isHorizontalSwipe = false;
-        startX = e.clientX;
-        startY = e.clientY;
-        scrollStart = container.scrollLeft;
+        container.addEventListener('pointerdown', (e) => {
+          isDragging = false;
+          startX = e.clientX;
+          scrollStart = container.scrollLeft;
 
-        function onPointerMove(eMove) {
-          const deltaX = eMove.clientX - startX;
-          const deltaY = eMove.clientY - startY;
-
-          // Determine horizontal swipe vs vertical page scroll
-          if (!isHorizontalSwipe && Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 5) {
-            isHorizontalSwipe = true;
+          function onPointerMove(eMove) {
+            const dist = eMove.clientX - startX;
+            if (Math.abs(dist) > 5) {
+              isDragging = true;
+              container.scrollLeft = scrollStart - dist;
+            }
           }
 
-          if (isHorizontalSwipe) {
-            isDragging = true;
-            container.classList.add('is-dragging');
-            container.scrollLeft = scrollStart - deltaX;
-            if (eMove.cancelable) eMove.preventDefault(); // Prevent page jitter on mobile swipe
+          function onPointerUp() {
+            window.removeEventListener('pointermove', onPointerMove);
+            window.removeEventListener('pointerup', onPointerUp);
           }
-        }
 
-        function onPointerUp() {
-          container.classList.remove('is-dragging');
-          window.removeEventListener('pointermove', onPointerMove);
-          window.removeEventListener('pointerup', onPointerUp);
-          window.removeEventListener('pointercancel', onPointerUp);
-        }
+          window.addEventListener('pointermove', onPointerMove);
+          window.addEventListener('pointerup', onPointerUp);
+        });
 
-        window.addEventListener('pointermove', onPointerMove, { passive: false });
-        window.addEventListener('pointerup', onPointerUp);
-        window.addEventListener('pointercancel', onPointerUp);
-      });
+        container.addEventListener('mouseenter', () => isPaused = true);
+        container.addEventListener('mouseleave', () => isPaused = false);
+      }
 
       // Modal Handling
       function openModal(card) {
@@ -525,7 +517,7 @@
         if (e.key === 'Escape' && modal.classList.contains('visible')) closeModal();
       });
 
-      // Start engine
+      // Start loop
       requestAnimationFrame(step);
     });
   </script>
