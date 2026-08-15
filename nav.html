@@ -1,525 +1,613 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Shree Ram Dental Clinic - Services</title>
-  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dental Services Carousel</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
   <style>
-    /* Native smooth momentum scrolling on mobile devices */
-    #services-container {
-      -webkit-overflow-scrolling: touch;
+    #servicesCarousel {
       scrollbar-width: none;
       -ms-overflow-style: none;
+      scroll-behavior: auto;
+      touch-action: pan-x;
       overscroll-behavior-x: contain;
     }
-    #services-container::-webkit-scrollbar {
-      display: none;
-    }
-    
-    /* Service modal animation & maximum z-index relative to site navbar/logo */
-    #service-modal {
-      display: none;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-      z-index: 99999;
-    }
-    #service-modal.visible {
-      display: flex;
-      opacity: 1;
-    }
-    body.service-modal-open {
-      overflow: hidden !important;
-      touch-action: none;
-    }
 
-    /* Modal custom scrollbar */
-    .modal-scroll::-webkit-scrollbar {
-      width: 6px;
-    }
-    .modal-scroll::-webkit-scrollbar-track {
-      background: #f1f5f9;
-      border-radius: 8px;
-    }
-    .modal-scroll::-webkit-scrollbar-thumb {
-      background: #cbd5e1;
-      border-radius: 8px;
-    }
-    .modal-scroll::-webkit-scrollbar-thumb:hover {
-      background: #94a3b8;
+    #servicesCarousel::-webkit-scrollbar {
+      display: none;
     }
   </style>
 </head>
-<body class="bg-slate-50 text-slate-800 antialiased">
 
-  <section id="services" class="py-24 px-6 bg-slate-50 overflow-hidden">
-    <div class="max-w-7xl mx-auto">
-      
-      <!-- Section Header -->
-      <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
-        <div>
-          <span class="text-xs font-bold tracking-widest uppercase text-blue-600 mb-2 block">Our Services</span>
-          <h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-slate-900">Comprehensive Dental Care</h2>
-        </div>
-        <p class="text-slate-600 max-w-md mt-4 md:mt-0 font-normal leading-relaxed">
-          Shree Ram Dental Clinic offers a full range of dental services for all ages, from routine checkups to cosmetic transformations and orthodontic solutions.
-        </p>
-      </div>
+<body class="bg-slate-50">
 
-      <!-- Marquee Carousel Container -->
-      <div id="services-container" class="relative w-full overflow-x-auto py-4">
-        <div class="services-track flex gap-6 w-max">
-          
-          <!-- Service Card 1 -->
-          <div class="group w-[300px] sm:w-[320px] shrink-0 relative h-[420px] overflow-hidden rounded-2xl bg-white border border-slate-100 shadow-md hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 cursor-pointer"
-               data-service-title="Dental Implants"
-               data-service-category="01 / Restoration"
-               data-service-description="Permanent tooth replacement solutions that restore function, confidence, and long-term oral health."
-               data-service-details="
-                <div class='space-y-6'>
-                  <p class='text-slate-600 leading-relaxed'>Dental implants are the gold standard for replacing missing teeth. Unlike traditional dentures or bridges, an implant acts as an artificial root bio-integrated directly into your jawbone, providing absolute stability and preventing bone degeneration.</p>
-                  
-                  <div>
-                    <h4 class='text-slate-900 font-bold text-sm uppercase tracking-wider mb-3 text-blue-600'>Key Clinical Benefits</h4>
-                    <ul class='grid grid-cols-1 sm:grid-cols-2 gap-2 text-slate-600 text-sm'>
-                      <li class='flex items-center gap-2'><span class='text-blue-500 font-bold'>✓</span> Restores 100% chewing function</li>
-                      <li class='flex items-center gap-2'><span class='text-blue-500 font-bold'>✓</span> Prevents jawbone loss & facial sag</li>
-                      <li class='flex items-center gap-2'><span class='text-blue-500 font-bold'>✓</span> No grinding of adjacent healthy teeth</li>
-                      <li class='flex items-center gap-2'><span class='text-blue-500 font-bold'>✓</span> Permanent result (20+ years duration)</li>
-                    </ul>
-                  </div>
+<section class="bg-slate-50">
 
-                  <div class='bg-slate-50 p-4 rounded-2xl border border-slate-100'>
-                    <h4 class='text-slate-900 font-bold text-sm mb-2'>Treatment Workflow</h4>
-                    <ol class='list-decimal list-inside text-slate-600 text-xs sm:text-sm space-y-1.5 leading-relaxed'>
-                      <li><strong>3D CBCT Scan & Planning:</strong> High-precision digital mapping of your jaw structure.</li>
-                      <li><strong>Implant Placement:</strong> Gentle insertion of a medical-grade titanium post under local anesthesia.</li>
-                      <li><strong>Osseointegration:</strong> A 3-6 month healing phase where bone naturally fuses with the post.</li>
-                      <li><strong>Custom Crown Attachment:</strong> Handcrafted porcelain crown designed to match your smile.</li>
-                    </ol>
-                  </div>
-                </div>
-               ">
-            <img src="./images/1.jpg" alt="Dental Implants" class="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 opacity-50 group-hover:opacity-40">
-            <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/60 to-transparent"></div>
-            <div class="absolute bottom-0 left-0 right-0 p-6 text-white">
-              <span class="text-blue-400 text-xs font-semibold uppercase tracking-wider mb-1 block">01 / Restoration</span>
-              <h3 class="text-xl font-bold mb-2">Dental Implants</h3>
-              <p class="text-slate-300 text-xs font-light mb-4 line-clamp-2">Permanent tooth replacement solutions that restore function, confidence, and long-term oral health.</p>
-              <span class="inline-flex items-center text-xs uppercase tracking-wider text-blue-400 font-semibold group-hover:translate-x-1 transition-transform duration-300">
-                Learn More &rarr;
-              </span>
-            </div>
-          </div>
 
-          <!-- Service Card 2 -->
-          <div class="group w-[300px] sm:w-[320px] shrink-0 relative h-[420px] overflow-hidden rounded-2xl bg-white border border-slate-100 shadow-md hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 cursor-pointer"
-               data-service-title="Braces & Orthodontics"
-               data-service-category="02 / Orthodontics"
-               data-service-description="Modern orthodontic treatments to align teeth, improve bite function, and enhance smiles."
-               data-service-details="
-                <div class='space-y-6'>
-                  <p class='text-slate-600 leading-relaxed'>Orthodontic therapy corrects overcrowding, gaps, deep bites, and jaw misalignments. Achieving straight teeth is not merely cosmetic—properly aligned teeth significantly reduce wear, lower risks of gum disease, and eliminate strain on your jaw joints (TMJ).</p>
-                  
-                  <div>
-                    <h4 class='text-slate-900 font-bold text-sm uppercase tracking-wider mb-3 text-blue-600'>Available Treatment Options</h4>
-                    <div class='grid grid-cols-1 sm:grid-cols-3 gap-3'>
-                      <div class='bg-slate-50 p-3 rounded-xl border border-slate-100'>
-                        <h5 class='font-bold text-slate-900 text-xs uppercase mb-1'>Metal Braces</h5>
-                        <p class='text-slate-500 text-xs'>Traditional high-durability stainless steel brackets for reliable alignment.</p>
-                      </div>
-                      <div class='bg-slate-50 p-3 rounded-xl border border-slate-100'>
-                        <h5 class='font-bold text-slate-900 text-xs uppercase mb-1'>Ceramic Braces</h5>
-                        <p class='text-slate-500 text-xs'>Tooth-colored aesthetic brackets designed to blend discreetly with your enamel.</p>
-                      </div>
-                      <div class='bg-slate-50 p-3 rounded-xl border border-slate-100'>
-                        <h5 class='font-bold text-slate-900 text-xs uppercase mb-1'>Clear Aligners</h5>
-                        <p class='text-slate-500 text-xs'>Nearly invisible, removable custom trays for maximum comfort and convenience.</p>
-                      </div>
-                    </div>
-                  </div>
 
-                  <div class='bg-blue-50/50 p-4 rounded-2xl border border-blue-100/60'>
-                    <h4 class='text-blue-900 font-bold text-sm mb-1'>Expected Duration</h4>
-                    <p class='text-slate-600 text-xs sm:text-sm leading-relaxed'>Treatments typically range from <strong>12 to 24 months</strong> depending on age, bite complexity, and adherence to retainer schedules. Regular adjustments are performed every 4–6 weeks.</p>
-                  </div>
-                </div>
-               ">
-            <img src="./images/2.jpg" alt="Braces & Orthodontics" class="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 opacity-50 group-hover:opacity-40">
-            <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/60 to-transparent"></div>
-            <div class="absolute bottom-0 left-0 right-0 p-6 text-white">
-              <span class="text-blue-400 text-xs font-semibold uppercase tracking-wider mb-1 block">02 / Orthodontics</span>
-              <h3 class="text-xl font-bold mb-2">Braces & Orthodontics</h3>
-              <p class="text-slate-300 text-xs font-light mb-4 line-clamp-2">Modern orthodontic treatments to align teeth, improve bite function, and enhance smiles.</p>
-              <span class="inline-flex items-center text-xs uppercase tracking-wider text-blue-400 font-semibold group-hover:translate-x-1 transition-transform duration-300">
-                Learn More &rarr;
-              </span>
-            </div>
-          </div>
 
-          <!-- Service Card 3 -->
-          <div class="group w-[300px] sm:w-[320px] shrink-0 relative h-[420px] overflow-hidden rounded-2xl bg-white border border-slate-100 shadow-md hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 cursor-pointer"
-               data-service-title="Veneers"
-               data-service-category="03 / Cosmetic"
-               data-service-description="Cosmetic solutions designed to improve tooth shape, color, and overall appearance."
-               data-service-details="
-                <div class='space-y-6'>
-                  <p class='text-slate-600 leading-relaxed'>Dental veneers are custom-crafted, wafer-thin shells of dental porcelain or composite resin bonded to the front surface of your teeth. They offer a transformative solution for stubborn stains, minor gaps, chips, or asymmetrical teeth.</p>
-                  
-                  <div>
-                    <h4 class='text-slate-900 font-bold text-sm uppercase tracking-wider mb-3 text-blue-600'>What Veneers Can Correct</h4>
-                    <ul class='grid grid-cols-1 sm:grid-cols-2 gap-2 text-slate-600 text-sm'>
-                      <li class='flex items-center gap-2'><span class='text-blue-500 font-bold'>✓</span> Severe tetracycline or intrinsic stains</li>
-                      <li class='flex items-center gap-2'><span class='text-blue-500 font-bold'>✓</span> Chipped, cracked, or worn edges</li>
-                      <li class='flex items-center gap-2'><span class='text-blue-500 font-bold'>✓</span> Irregularly shaped or undersized teeth</li>
-                      <li class='flex items-center gap-2'><span class='text-blue-500 font-bold'>✓</span> Unwanted gaps between front teeth</li>
-                    </ul>
-                  </div>
-
-                  <div class='bg-slate-50 p-4 rounded-2xl border border-slate-100'>
-                    <h4 class='text-slate-900 font-bold text-sm mb-2'>Porcelain vs. Composite Veneers</h4>
-                    <p class='text-slate-600 text-xs sm:text-sm leading-relaxed mb-2'><strong>Porcelain Veneers:</strong> Exceptional natural translucency, ultra stain-resistant, and can last 15+ years with proper care.</p>
-                    <p class='text-slate-600 text-xs sm:text-sm leading-relaxed'><strong>Composite Veneers:</strong> Completed in a single visit, budget-friendly, easily repairable, requiring minimal tooth reduction.</p>
-                  </div>
-                </div>
-               ">
-            <img src="./images/3.jpg" alt="Veneers" class="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 opacity-50 group-hover:opacity-40">
-            <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/60 to-transparent"></div>
-            <div class="absolute bottom-0 left-0 right-0 p-6 text-white">
-              <span class="text-blue-400 text-xs font-semibold uppercase tracking-wider mb-1 block">03 / Cosmetic</span>
-              <h3 class="text-xl font-bold mb-2">Veneers</h3>
-              <p class="text-slate-300 text-xs font-light mb-4 line-clamp-2">Cosmetic solutions designed to improve tooth shape, color, and overall appearance.</p>
-              <span class="inline-flex items-center text-xs uppercase tracking-wider text-blue-400 font-semibold group-hover:translate-x-1 transition-transform duration-300">
-                Learn More &rarr;
-              </span>
-            </div>
-          </div>
-
-          <!-- Service Card 4 -->
-          <div class="group w-[300px] sm:w-[320px] shrink-0 relative h-[420px] overflow-hidden rounded-2xl bg-white border border-slate-100 shadow-md hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 cursor-pointer"
-               data-service-title="Root Canal (RCT)"
-               data-service-category="04 / Endodontics"
-               data-service-description="Advanced treatment to remove infection, relieve pain, and save natural teeth."
-               data-service-details="
-                <div class='space-y-6'>
-                  <p class='text-slate-600 leading-relaxed'>Root Canal Treatment (RCT) is a highly routine endodontic therapy designed to save a severely decayed, cracked, or infected tooth instead of extracting it. Modern techniques ensure the process is virtually painless and comparable to filling a routine cavity.</p>
-                  
-                  <div>
-                    <h4 class='text-slate-900 font-bold text-sm uppercase tracking-wider mb-3 text-blue-600'>Signs You May Need Root Canal Therapy</h4>
-                    <ul class='grid grid-cols-1 sm:grid-cols-2 gap-2 text-slate-600 text-sm'>
-                      <li class='flex items-center gap-2'><span class='text-blue-500 font-bold'>•</span> Severe throbbing toothache while chewing</li>
-                      <li class='flex items-center gap-2'><span class='text-blue-500 font-bold'>•</span> Prolonged sensitivity to hot or cold foods</li>
-                      <li class='flex items-center gap-2'><span class='text-blue-500 font-bold'>•</span> Swelling or tenderness in nearby gums</li>
-                      <li class='flex items-center gap-2'><span class='text-blue-500 font-bold'>•</span> Discoloration or darkening of the tooth</li>
-                    </ul>
-                  </div>
-
-                  <div class='bg-slate-50 p-4 rounded-2xl border border-slate-100'>
-                    <h4 class='text-slate-900 font-bold text-sm mb-2'>Step-by-Step Procedure</h4>
-                    <ol class='list-decimal list-inside text-slate-600 text-xs sm:text-sm space-y-1.5 leading-relaxed'>
-                      <li><strong>Local Anesthesia:</strong> Total numbing of the target area for absolute patient comfort.</li>
-                      <li><strong>Pulp Cleaning:</strong> Gentle removal of infected nerve tissue and bacteria inside the canal.</li>
-                      <li><strong>Disinfection & Sealing:</strong> Canals are sterilely flushed and filled with gutta-percha material.</li>
-                      <li><strong>Crown Restoration:</strong> A protective ceramic crown is fitted to restore 100% biting strength.</li>
-                    </ol>
-                  </div>
-                </div>
-               ">
-            <img src="./images/4.jpg" alt="Root Canal" class="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 opacity-50 group-hover:opacity-40">
-            <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/60 to-transparent"></div>
-            <div class="absolute bottom-0 left-0 right-0 p-6 text-white">
-              <span class="text-blue-400 text-xs font-semibold uppercase tracking-wider mb-1 block">04 / Endodontics</span>
-              <h3 class="text-xl font-bold mb-2">Root Canal (RCT)</h3>
-              <p class="text-slate-300 text-xs font-light mb-4 line-clamp-2">Advanced treatment to remove infection, relieve pain, and save natural teeth.</p>
-              <span class="inline-flex items-center text-xs uppercase tracking-wider text-blue-400 font-semibold group-hover:translate-x-1 transition-transform duration-300">
-                Learn More &rarr;
-              </span>
-            </div>
-          </div>
-
-          <!-- Service Card 5 -->
-          <div class="group w-[300px] sm:w-[320px] shrink-0 relative h-[420px] overflow-hidden rounded-2xl bg-white border border-slate-100 shadow-md hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 cursor-pointer"
-               data-service-title="Teeth Whitening"
-               data-service-category="05 / Aesthetics"
-               data-service-description="Professional whitening procedures for a brighter and more confident smile."
-               data-service-details="
-                <div class='space-y-6'>
-                  <p class='text-slate-600 leading-relaxed'>Our professional clinical teeth whitening treatments target deep intrinsic stains accumulated from coffee, tea, smoking, or natural aging. We utilize clinical-grade whitening agents protected by active gum barriers to ensure brilliant results without pain or sensitivity.</p>
-                  
-                  <div>
-                    <h4 class='text-slate-900 font-bold text-sm uppercase tracking-wider mb-3 text-blue-600'>Why Choose Professional Whitening?</h4>
-                    <ul class='grid grid-cols-1 sm:grid-cols-2 gap-2 text-slate-600 text-sm'>
-                      <li class='flex items-center gap-2'><span class='text-blue-500 font-bold'>✓</span> Up to 6 to 8 shades whiter in 45 minutes</li>
-                      <li class='flex items-center gap-2'><span class='text-blue-500 font-bold'>✓</span> Safe for enamel and gum tissue</li>
-                      <li class='flex items-center gap-2'><span class='text-blue-500 font-bold'>✓</span> Includes desensitizing buffer gels</li>
-                      <li class='flex items-center gap-2'><span class='text-blue-500 font-bold'>✓</span> Far superior & safer than drugstore strips</li>
-                    </ul>
-                  </div>
-
-                  <div class='bg-slate-50 p-4 rounded-2xl border border-slate-100'>
-                    <h4 class='text-slate-900 font-bold text-sm mb-1'>Post-Treatment Maintenance</h4>
-                    <p class='text-slate-600 text-xs sm:text-sm leading-relaxed'>Results can last up to 2 years. We provide custom maintenance advice and take-home touchup kits to help preserve your radiant smile over time.</p>
-                  </div>
-                </div>
-               ">
-            <img src="./images/5.jpg" alt="Teeth Whitening" class="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 opacity-50 group-hover:opacity-40">
-            <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/60 to-transparent"></div>
-            <div class="absolute bottom-0 left-0 right-0 p-6 text-white">
-              <span class="text-blue-400 text-xs font-semibold uppercase tracking-wider mb-1 block">05 / Aesthetics</span>
-              <h3 class="text-xl font-bold mb-2">Teeth Whitening</h3>
-              <p class="text-slate-300 text-xs font-light mb-4 line-clamp-2">Professional whitening procedures for a brighter and more confident smile.</p>
-              <span class="inline-flex items-center text-xs uppercase tracking-wider text-blue-400 font-semibold group-hover:translate-x-1 transition-transform duration-300">
-                Learn More &rarr;
-              </span>
-            </div>
-          </div>
-
-          <!-- Service Card 6 -->
-          <div class="group w-[300px] sm:w-[320px] shrink-0 relative h-[420px] overflow-hidden rounded-2xl bg-white border border-slate-100 shadow-md hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 cursor-pointer"
-               data-service-title="General Checkup"
-               data-service-category="06 / Preventative"
-               data-service-description="Routine examinations focused on prevention, early diagnosis, and long-term oral health."
-               data-service-details="
-                <div class='space-y-6'>
-                  <p class='text-slate-600 leading-relaxed'>Preventative dentistry is the cornerstone of lifelong dental health. Bi-annual checkups allow our specialists to diagnose micro-cavities, enamel erosion, oral lesions, and early gum conditions before they progress into costly or painful complications.</p>
-                  
-                  <div>
-                    <h4 class='text-slate-900 font-bold text-sm uppercase tracking-wider mb-3 text-blue-600'>Comprehensive Checkup Includes</h4>
-                    <ul class='grid grid-cols-1 sm:grid-cols-2 gap-2 text-slate-600 text-sm'>
-                      <li class='flex items-center gap-2'><span class='text-blue-500 font-bold'>✓</span> Low-radiation Digital Intraoral X-Rays</li>
-                      <li class='flex items-center gap-2'><span class='text-blue-500 font-bold'>✓</span> Ultrasonic Scaling & Tartar Removal</li>
-                      <li class='flex items-center gap-2'><span class='text-blue-500 font-bold'>✓</span> Periodontal Pocket Measurement</li>
-                      <li class='flex items-center gap-2'><span class='text-blue-500 font-bold'>✓</span> Oral Cancer & Soft Tissue Screening</li>
-                    </ul>
-                  </div>
-
-                  <div class='bg-blue-50/50 p-4 rounded-2xl border border-blue-100/60'>
-                    <h4 class='text-blue-900 font-bold text-sm mb-1'>Recommended Schedule</h4>
-                    <p class='text-slate-600 text-xs sm:text-sm leading-relaxed'>We recommend a thorough examination and professional ultrasonic cleaning every <strong>6 months</strong> for adults and children alike.</p>
-                  </div>
-                </div>
-               ">
-            <img src="./images/6.jpg" alt="General Checkup" class="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 opacity-50 group-hover:opacity-40">
-            <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/60 to-transparent"></div>
-            <div class="absolute bottom-0 left-0 right-0 p-6 text-white">
-              <span class="text-blue-400 text-xs font-semibold uppercase tracking-wider mb-1 block">06 / Preventative</span>
-              <h3 class="text-xl font-bold mb-2">General Checkup</h3>
-              <p class="text-slate-300 text-xs font-light mb-4 line-clamp-2">Routine examinations focused on prevention, early diagnosis, and long-term oral health.</p>
-              <span class="inline-flex items-center text-xs uppercase tracking-wider text-blue-400 font-semibold group-hover:translate-x-1 transition-transform duration-300">
-                Learn More &rarr;
-              </span>
-            </div>
-          </div>
-
-          <!-- Service Card 7 -->
-          <div class="group w-[300px] sm:w-[320px] shrink-0 relative h-[420px] overflow-hidden rounded-2xl bg-white border border-slate-100 shadow-md hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 cursor-pointer"
-               data-service-title="Gum Treatment (Periodontics)"
-               data-service-category="07 / Periodontics"
-               data-service-description="Specialized treatment for gum disease, bleeding gums, periodontal infections, and gum health."
-               data-service-details="
-                <div class='space-y-6'>
-                  <p class='text-slate-600 leading-relaxed'>Gum health forms the foundation of your entire smile. Periodontal disease starts quietly as gingivitis (bleeding gums) and can advance into periodontitis, causing bone destruction and tooth loss. Our specialized periodontal treatments stop disease progression and restore firm, healthy gum tissue.</p>
-                  
-                  <div>
-                    <h4 class='text-slate-900 font-bold text-sm uppercase tracking-wider mb-3 text-blue-600'>Signs of Periodontal Disease</h4>
-                    <ul class='grid grid-cols-1 sm:grid-cols-2 gap-2 text-slate-600 text-sm'>
-                      <li class='flex items-center gap-2'><span class='text-blue-500 font-bold'>•</span> Bleeding gums during brushing or flossing</li>
-                      <li class='flex items-center gap-2'><span class='text-blue-500 font-bold'>•</span> Persistent bad breath or unpleasant taste</li>
-                      <li class='flex items-center gap-2'><span class='text-blue-500 font-bold'>•</span> Receding gums making teeth look longer</li>
-                      <li class='flex items-center gap-2'><span class='text-blue-500 font-bold'>•</span> Loose or shifting adult teeth</li>
-                    </ul>
-                  </div>
-
-                  <div class='bg-slate-50 p-4 rounded-2xl border border-slate-100'>
-                    <h4 class='text-slate-900 font-bold text-sm mb-2'>Treatment Options</h4>
-                    <p class='text-slate-600 text-xs sm:text-sm leading-relaxed mb-2'><strong>Deep Scaling & Root Planing:</strong> Non-surgical deep cleaning under the gumline to smooth root surfaces and eradicate bacterial pockets.</p>
-                    <p class='text-slate-600 text-xs sm:text-sm leading-relaxed'><strong>Laser Periodontal Therapy:</strong> Advanced targeted laser treatment to eliminate deep bacterial colonies with minimal recovery downtime.</p>
-                  </div>
-                </div>
-               ">
-            <img src="./images/7.jpg" alt="Gum Treatment" class="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 opacity-50 group-hover:opacity-40">
-            <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/60 to-transparent"></div>
-            <div class="absolute bottom-0 left-0 right-0 p-6 text-white">
-              <span class="text-blue-400 text-xs font-semibold uppercase tracking-wider mb-1 block">07 / Periodontics</span>
-              <h3 class="text-xl font-bold mb-2">Gum Treatment</h3>
-              <p class="text-slate-300 text-xs font-light mb-4 line-clamp-2">Specialized treatment for gum disease, bleeding gums, periodontal infections, and gum health.</p>
-              <span class="inline-flex items-center text-xs uppercase tracking-wider text-blue-400 font-semibold group-hover:translate-x-1 transition-transform duration-300">
-                Learn More &rarr;
-              </span>
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- High Z-Index Service Details Modal -->
-  <div id="service-modal" class="fixed inset-0 z-[99999] items-center justify-center p-4 sm:p-8 bg-slate-900/60 backdrop-blur-md" aria-modal="true" role="dialog">
-    <div class="service-modal-backdrop absolute inset-0"></div>
-    
-    <div class="service-modal-panel relative bg-white rounded-3xl shadow-2xl max-w-2xl sm:max-w-3xl w-full mx-auto max-h-[88vh] z-10 flex flex-col overflow-hidden">
-      
-      <!-- Fixed Header Section -->
-      <div class="p-6 sm:p-8 border-b border-slate-100 flex items-start justify-between bg-white relative shrink-0">
-        <div class="pr-8">
-          <span id="service-modal-category" class="text-blue-600 text-xs sm:text-sm font-bold uppercase tracking-widest block mb-1"></span>
-          <h3 id="service-modal-title" class="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight leading-snug"></h3>
-          <p id="service-modal-description" class="text-slate-500 text-sm mt-1"></p>
-        </div>
-        
-        <button class="service-modal-close text-slate-400 hover:text-slate-700 hover:bg-slate-100 rounded-full w-10 h-10 shrink-0 flex items-center justify-center text-2xl transition-all cursor-pointer" aria-label="Close modal">&times;</button>
-      </div>
-      
-      <!-- Scrollable Rich Content Body -->
-      <div class="p-6 sm:p-8 modal-scroll overflow-y-auto grow">
-        <div id="service-modal-details"></div>
-      </div>
-      
-      <!-- Fixed Action Footer -->
-      <div class="p-4 sm:p-6 bg-slate-50 border-t border-slate-100 shrink-0 flex flex-col sm:flex-row items-center justify-between gap-3">
-        <span class="text-xs text-slate-500">Shree Ram Dental Clinic &bull; Expert Patient Care</span>
-        <button type="button" id="service-modal-close-btn" class="w-full sm:w-auto px-8 py-3 bg-slate-900 hover:bg-slate-800 text-white font-semibold text-xs uppercase tracking-widest rounded-xl text-center shadow-md transition-all hover:shadow-lg active:scale-[0.99] cursor-pointer">
-          Close Window
-        </button>
-      </div>
-
-    </div>
+<section class="services-section">
+  <div class="services-heading">
+    <p>OUR SERVICES</p>
+    <h2>Comprehensive Dental Care</h2>
+    <span>Swipe in either direction, or select a service to learn more.</span>
   </div>
 
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      const container = document.getElementById('services-container');
-      const track = container ? container.querySelector('.services-track') : null;
-      const modal = document.getElementById('service-modal');
-      const modalTitle = document.getElementById('service-modal-title');
-      const modalCategory = document.getElementById('service-modal-category');
-      const modalDesc = document.getElementById('service-modal-description');
-      const modalDetails = document.getElementById('service-modal-details');
-      const closeBtn = modal.querySelector('.service-modal-close');
-      const closeBtnBottom = document.getElementById('service-modal-close-btn');
-      const backdrop = modal.querySelector('.service-modal-backdrop');
+  <div id="servicesCarousel" class="services-carousel"></div>
+</section>
 
-      if (!container || !track) return;
+<!-- Service details popup -->
+<div id="serviceModal" class="service-modal" aria-hidden="true">
+  <div class="service-modal__backdrop" data-close-modal></div>
 
-      // Duplicate cards for seamless loop
-      const originalCards = Array.from(track.children);
-      originalCards.forEach(card => {
-        const clone = card.cloneNode(true);
-        track.appendChild(clone);
+<section class="service-modal__panel" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <button class="service-modal__close" type="button" aria-label="Close service details" data-close-modal>
+    ×
+  </button>
+
+  <div class="service-modal__content">
+    <p id="modalCategory" class="service-modal__category"></p>
+    <h2 id="modalTitle"></h2>
+    <p id="modalDescription" class="service-modal__description"></p>
+
+    <div id="modalDetails" class="service-modal__details"></div>
+
+    <button class="service-modal__button" type="button" data-close-modal>
+      Close
+    </button>
+  </div>
+</section>
+</div>
+
+<style>
+  * { box-sizing: border-box; }
+
+  .services-section {
+    overflow: hidden;
+    padding: 90px 0;
+    background: #f8fafc;
+  }
+
+  .services-heading {
+    width: min(1280px, calc(100% - 40px));
+    margin: 0 auto 42px;
+  }
+
+  .services-heading p,
+  .service-modal__category {
+    margin: 0 0 10px;
+    color: #2563eb;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: .2em;
+  }
+
+  .services-heading h2 {
+    margin: 0;
+    color: #0f172a;
+    font-size: clamp(34px, 5vw, 58px);
+    line-height: 1.05;
+  }
+
+  .services-heading span {
+    display: block;
+    max-width: 500px;
+    margin-top: 16px;
+    color: #64748b;
+    line-height: 1.6;
+  }
+
+  .services-carousel {
+    display: flex;
+    gap: 24px;
+    overflow-x: auto;
+    padding: 8px max(20px, calc((100vw - 1280px) / 2)) 24px;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    touch-action: pan-x;
+    overscroll-behavior-x: contain;
+    cursor: grab;
+  }
+
+  .services-carousel::-webkit-scrollbar { display: none; }
+  .services-carousel:active { cursor: grabbing; }
+
+  .service-card {
+    position: relative;
+    width: min(82vw, 320px);
+    height: 420px;
+    flex: 0 0 auto;
+    overflow: hidden;
+    border: 1px solid #e2e8f0;
+    border-radius: 18px;
+    background: #fff;
+    box-shadow: 0 5px 16px rgb(15 23 42 / 10%);
+    cursor: pointer;
+    transition: transform .3s ease, box-shadow .3s ease;
+  }
+
+  .service-card:hover {
+    transform: translateY(-7px);
+    box-shadow: 0 20px 35px rgb(15 23 42 / 16%);
+  }
+
+  .service-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none;
+    user-select: none;
+    transition: transform .7s ease;
+  }
+
+  .service-card:hover img { transform: scale(1.08); }
+
+  .service-card__overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    padding: 24px;
+    color: #fff;
+    background: linear-gradient(to top, rgb(2 6 23 / .95), rgb(2 6 23 / .25), transparent);
+  }
+
+  .service-card__category {
+    margin: 0 0 9px;
+    color: #bfdbfe;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: .16em;
+  }
+
+  .service-card h3 {
+    margin: 0;
+    font-size: 29px;
+    line-height: 1.1;
+  }
+
+  .service-card__description {
+    margin: 10px 0 0;
+    color: #e2e8f0;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  .service-modal {
+    position: fixed;
+    z-index: 9999;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    padding: 20px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .25s ease, visibility .25s ease;
+  }
+
+  .service-modal.is-open {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .service-modal__backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgb(2 6 23 / .72);
+    backdrop-filter: blur(5px);
+  }
+
+
+  .service-modal.is-open .service-modal__panel {
+    transform: translateY(0) scale(1);
+  }
+
+  .service-modal__image-wrap {
+    min-height: 100%;
+    background: #e2e8f0;
+  }
+
+  .service-modal__image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    min-height: 430px;
+    object-fit: cover;
+  }
+
+  .service-modal__content {
+    padding: clamp(28px, 5vw, 52px);
+  }
+
+
+  .service-modal__description {
+    margin: 18px 0 28px;
+    color: #475569;
+    font-size: 16px;
+    line-height: 1.7;
+  }
+
+  .service-modal__details {
+    color: #475569;
+    line-height: 1.7;
+  }
+
+  .service-modal__details h4 {
+    margin: 24px 0 10px;
+    color: #0f172a;
+    font-size: 14px;
+  }
+
+  .service-modal__details ul {
+    display: grid;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .service-modal__details li::before {
+    margin-right: 9px;
+    color: #2563eb;
+    content: "✓";
+    font-weight: 800;
+  }
+
+.service-modal__panel {
+  position: relative;
+  z-index: 1;
+  width: min(650px, 100%);
+  max-height: min(720px, calc(100vh - 40px));
+  overflow: auto;
+  border-radius: 22px;
+  background: #fff;
+  box-shadow: 0 24px 80px rgb(2 6 23 / .35);
+  transform: translateY(18px) scale(.98);
+  transition: transform .25s ease;
+}
+
+.service-modal__content {
+  padding: clamp(30px, 6vw, 54px);
+}
+
+.service-modal__button {
+  margin-top: 30px;
+  padding: 14px 24px;
+  border: 0;
+  border-radius: 10px;
+  background: #2563eb;
+  color: white;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+  .service-modal__close {
+    position: absolute;
+    z-index: 2;
+    top: 14px;
+    right: 14px;
+    display: grid;
+    width: 40px;
+    height: 40px;
+    place-items: center;
+    border: 0;
+    border-radius: 50%;
+    background: rgb(255 255 255 / .92);
+    color: #0f172a;
+    cursor: pointer;
+    font-size: 30px;
+    line-height: 1;
+  }
+
+  body.modal-open { overflow: hidden; }
+
+  @media (max-width: 700px) {
+    .service-modal__panel { grid-template-columns: 1fr; }
+    .service-modal__image { min-height: 240px; max-height: 280px; }
+  }
+</style>
+
+<script>
+  // Keep your existing service objects here.
+const services = [
+  {
+    title: "Dental Implants",
+    category: "01 / RESTORATION",
+    description: "Permanent tooth replacement solutions that restore function, confidence, and long-term oral health.",
+    image: "./images/3.jpg",
+    details: `
+      <p>Dental implants act as artificial tooth roots, giving replacement teeth excellent stability and a natural appearance.</p>
+      <h4>Key Clinical Benefits</h4>
+      <ul>
+        <li>Restores chewing function</li>
+        <li>Helps prevent jawbone loss</li>
+        <li>Protects adjacent healthy teeth</li>
+        <li>Designed for long-term stability</li>
+      </ul>
+    `
+  },
+  {
+    title: "Orthodontics",
+    category: "02 / ALIGNMENT",
+    description: "Braces and clear aligner treatments tailored for a healthier, balanced smile.",
+    image: "./images/2.jpg",
+    details: `
+      <p>We create orthodontic plans around your bite, goals, and lifestyle—using braces or discreet clear aligners.</p>
+      <h4>What Orthodontics Can Improve</h4>
+      <ul>
+        <li>Crowding and gaps</li>
+        <li>Bite alignment</li>
+        <li>Smile symmetry</li>
+        <li>Long-term oral hygiene</li>
+      </ul>
+    `
+  },
+  {
+    title: "Cosmetic Dentistry",
+    category: "03 / AESTHETICS",
+    description: "Refined treatments that enhance the shape, shade, and balance of your smile.",
+    image: "./images/1.jpg",
+    details: `
+      <p>Each cosmetic treatment is planned around your natural features, so your result feels balanced and authentically yours.</p>
+      <h4>Available Treatments</h4>
+      <ul>
+        <li>Porcelain veneers</li>
+        <li>Composite bonding</li>
+        <li>Smile design planning</li>
+        <li>Tooth reshaping</li>
+      </ul>
+    `
+  },
+  {
+    title: "Teeth Whitening",
+    category: "04 / BRIGHTENING",
+    description: "Professional whitening for a visibly brighter, fresher-looking smile.",
+    image: "./images/4.jpg",
+    details: `
+      <p>Professional whitening helps lift staining safely while allowing us to manage sensitivity and tailor your result.</p>
+      <h4>Why Professional Whitening</h4>
+      <ul>
+        <li>More predictable results</li>
+        <li>Tailored treatment strength</li>
+        <li>Sensitivity-conscious care</li>
+        <li>Advice for maintaining results</li>
+      </ul>
+    `
+  },
+  {
+    title: "Root Canal Care",
+    category: "05 / ENDODONTICS",
+    description: "Precise treatment focused on relieving pain and preserving your natural tooth.",
+    image: "./images/5.jpg",
+    details: `
+      <p>Root canal treatment removes infection from inside the tooth, relieves discomfort, and helps preserve your natural tooth.</p>
+      <h4>Our Focus</h4>
+      <ul>
+        <li>Comfort-focused treatment</li>
+        <li>Detailed diagnostic imaging</li>
+        <li>Preservation of the natural tooth</li>
+        <li>Clear aftercare guidance</li>
+      </ul>
+    `
+  },
+  {
+    title: "Children's Dentistry",
+    category: "06 / PEDIATRIC",
+    description: "Gentle dental care that helps children build healthy habits from their first visit.",
+    image: "./images/6.jpg",
+    details: `
+      <p>We make appointments calm, friendly, and educational so children can feel confident visiting the dentist.</p>
+      <h4>Preventive Support</h4>
+      <ul>
+        <li>Gentle examinations and cleaning</li>
+        <li>Fluoride and sealant options</li>
+        <li>Healthy brushing guidance</li>
+        <li>Parent-focused advice</li>
+      </ul>
+    `
+  },
+  {
+    title: "Preventive Care",
+    category: "07 / WELLNESS",
+    description: "Examinations, cleaning, and prevention plans that protect your smile.",
+    image: "./images/7.jpg",
+    details: `
+      <p>Regular preventive care catches small concerns early and helps keep your teeth and gums healthy for years to come.</p>
+      <h4>Your Preventive Visit Includes</h4>
+      <ul>
+        <li>Comprehensive dental examination</li>
+        <li>Professional cleaning</li>
+        <li>Gum-health assessment</li>
+        <li>Personalized prevention plan</li>
+      </ul>
+    `
+  }
+];
+
+  const carousel = document.getElementById("servicesCarousel");
+  const modal = document.getElementById("serviceModal");
+
+  const modalCategory = document.getElementById("modalCategory");
+  const modalTitle = document.getElementById("modalTitle");
+  const modalDescription = document.getElementById("modalDescription");
+  const modalDetails = document.getElementById("modalDetails");
+
+  let cycleWidth = 0;
+  let isRecentering = false;
+  let isPaused = false;
+  let lastTime = 0;
+  let resumeTimer;
+  let pointerStartX = 0;
+  let didDrag = false;
+
+  const autoScrollSpeed = 22;
+
+  function createCard(service, index) {
+    const card = document.createElement("article");
+
+    card.className = "service-card";
+
+    // Your original card data attributes remain available.
+    card.dataset.serviceIndex = index;
+    card.dataset.serviceTitle = service.title;
+    card.dataset.serviceCategory = service.category;
+    card.dataset.serviceDescription = service.description;
+    card.dataset.serviceDetails = service.details;
+
+    card.innerHTML = `
+      <img src="${service.image}" alt="${service.title}" draggable="false">
+
+      <div class="service-card__overlay">
+        <p class="service-card__category">${service.category}</p>
+        <h3>${service.title}</h3>
+        <p class="service-card__description">${service.description}</p>
+      </div>
+    `;
+
+    return card;
+  }
+
+  /*
+    Render three passes from the same array:
+
+    [ 1 2 3 4 5 6 7 ][ 1 2 3 4 5 6 7 ][ 1 2 3 4 5 6 7 ]
+
+    We begin in the centre. Moving left or right always has matching cards
+    available, so earlier cards are never lost.
+  */
+  function renderCarousel() {
+    carousel.innerHTML = "";
+
+    for (let pass = 0; pass < 3; pass++) {
+      services.forEach((service, index) => {
+        carousel.appendChild(createCard(service, index));
       });
+    }
 
-      let singleSetWidth = 0;
-      function calcTrackDimensions() {
-        const cardGap = 24;
-        singleSetWidth = originalCards.reduce((acc, card) => acc + card.offsetWidth + cardGap, 0);
-      }
-      calcTrackDimensions();
-      window.addEventListener('resize', calcTrackDimensions);
+    requestAnimationFrame(() => {
+      const cards = [...carousel.children];
+      cycleWidth = cards[services.length].offsetLeft - cards[0].offsetLeft;
 
-      // Instant loop repositioning without jitter
-      function checkInfiniteLoop() {
-        if (container.scrollLeft >= singleSetWidth) {
-          container.scrollLeft -= singleSetWidth;
-        } else if (container.scrollLeft <= 0) {
-          container.scrollLeft += singleSetWidth;
-        }
-      }
-
-      const isMobile = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-      
-      // Speed limited to 0.45px/frame for smooth animation on mobile & desktop
-      let speed = 0.45;
-      let isPaused = false;
-      let isDragging = false;
-      let touchTimeout = null;
-
-      function step() {
-        if (!isPaused && !isDragging) {
-          container.scrollLeft += speed;
-          checkInfiniteLoop();
-        }
-        requestAnimationFrame(step);
-      }
-
-      container.addEventListener('scroll', checkInfiniteLoop, { passive: true });
-
-      // Mobile Touch Handling: Native touch scrolling with auto-scroll pause/resume
-      if (isMobile) {
-        container.addEventListener('touchstart', function() {
-          isPaused = true;
-          if (touchTimeout) clearTimeout(touchTimeout);
-        }, { passive: true });
-
-        container.addEventListener('touchend', function() {
-          // Resume slow auto-marquee after 2.5 seconds of user inactivity
-          touchTimeout = setTimeout(() => {
-            isPaused = false;
-          }, 2500);
-        }, { passive: true });
-      } else {
-        // Desktop Mouse Pointer Dragging
-        let startX = 0;
-        let scrollStart = 0;
-
-        container.addEventListener('pointerdown', (e) => {
-          isDragging = false;
-          startX = e.clientX;
-          scrollStart = container.scrollLeft;
-
-          function onPointerMove(eMove) {
-            const dist = eMove.clientX - startX;
-            if (Math.abs(dist) > 5) {
-              isDragging = true;
-              container.scrollLeft = scrollStart - dist;
-            }
-          }
-
-          function onPointerUp() {
-            window.removeEventListener('pointermove', onPointerMove);
-            window.removeEventListener('pointerup', onPointerUp);
-          }
-
-          window.addEventListener('pointermove', onPointerMove);
-          window.addEventListener('pointerup', onPointerUp);
-        });
-
-        container.addEventListener('mouseenter', () => isPaused = true);
-        container.addEventListener('mouseleave', () => isPaused = false);
-      }
-
-      // Modal Handling
-      function openModal(card) {
-        modalTitle.textContent = card.getAttribute('data-service-title') || '';
-        modalCategory.textContent = card.getAttribute('data-service-category') || 'Service Overview';
-        modalDesc.textContent = card.getAttribute('data-service-description') || '';
-        modalDetails.innerHTML = card.getAttribute('data-service-details') || '';
-        modal.classList.add('visible');
-        document.body.classList.add('service-modal-open');
-      }
-
-      function closeModal() {
-        modal.classList.remove('visible');
-        document.body.classList.remove('service-modal-open');
-      }
-
-      track.addEventListener('click', (e) => {
-        if (isDragging) return;
-        const card = e.target.closest('[data-service-title]');
-        if (card) openModal(card);
-      });
-
-      closeBtn.addEventListener('click', closeModal);
-      closeBtnBottom.addEventListener('click', closeModal);
-      backdrop.addEventListener('click', closeModal);
-      window.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && modal.classList.contains('visible')) closeModal();
-      });
-
-      // Start loop
-      requestAnimationFrame(step);
+      // Start in the central copy.
+      carousel.scrollLeft = cycleWidth;
     });
-  </script>
+  }
+
+  function keepInfinitePosition() {
+    if (isRecentering || !cycleWidth) return;
+
+    const leftBoundary = cycleWidth * 0.5;
+    const rightBoundary = cycleWidth * 1.5;
+
+    isRecentering = true;
+
+    // Going backward: return to the equivalent location one cycle right.
+    if (carousel.scrollLeft < leftBoundary) {
+      carousel.scrollLeft += cycleWidth;
+    }
+
+    // Going forward: return to the equivalent location one cycle left.
+    if (carousel.scrollLeft > rightBoundary) {
+      carousel.scrollLeft -= cycleWidth;
+    }
+
+    requestAnimationFrame(() => {
+      isRecentering = false;
+    });
+  }
+
+  function openModal(service) {
+    modalCategory.textContent = service.category;
+    modalTitle.textContent = service.title;
+    modalDescription.textContent = service.description;
+    modalDetails.innerHTML = service.details;
+
+    modal.classList.add("is-open");
+    modal.setAttribute("aria-hidden", "false");
+    document.body.classList.add("modal-open");
+  }
+
+  function closeModal() {
+    modal.classList.remove("is-open");
+    modal.setAttribute("aria-hidden", "true");
+    document.body.classList.remove("modal-open");
+  }
+
+  function pauseCarousel() {
+    isPaused = true;
+    clearTimeout(resumeTimer);
+  }
+
+  function resumeCarousel(delay = 1200) {
+    clearTimeout(resumeTimer);
+
+    resumeTimer = setTimeout(() => {
+      isPaused = false;
+    }, delay);
+  }
+
+  function autoScroll(time) {
+    if (!lastTime) lastTime = time;
+
+    const elapsed = Math.min((time - lastTime) / 1000, 0.05);
+    lastTime = time;
+
+    if (!isPaused && !document.hidden) {
+      carousel.scrollLeft += autoScrollSpeed * elapsed;
+      keepInfinitePosition();
+    }
+
+    requestAnimationFrame(autoScroll);
+  }
+
+  carousel.addEventListener("click", (event) => {
+    const card = event.target.closest(".service-card");
+
+    if (!card || didDrag) return;
+
+    openModal(services[Number(card.dataset.serviceIndex)]);
+  });
+
+  carousel.addEventListener("scroll", keepInfinitePosition, { passive: true });
+
+  carousel.addEventListener("pointerdown", (event) => {
+    pointerStartX = event.clientX;
+    didDrag = false;
+    pauseCarousel();
+  });
+
+  carousel.addEventListener("pointermove", (event) => {
+    if (Math.abs(event.clientX - pointerStartX) > 8) {
+      didDrag = true;
+    }
+  });
+
+  carousel.addEventListener("pointerup", () => resumeCarousel());
+  carousel.addEventListener("pointercancel", () => resumeCarousel());
+
+  carousel.addEventListener("wheel", () => {
+    pauseCarousel();
+    resumeCarousel(1800);
+  }, { passive: true });
+
+  document.querySelectorAll("[data-close-modal]").forEach((button) => {
+    button.addEventListener("click", closeModal);
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") closeModal();
+  });
+
+  renderCarousel();
+  requestAnimationFrame(autoScroll);
+</script>
+
+</section>
+
+
 </body>
 </html>
