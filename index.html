@@ -769,14 +769,14 @@
   // TESTING MODE:
   // The localStorage check is commented out, so the intro appears on every refresh.
 
-  /*
+  
   if (localStorage.getItem("dental-care-welcome-seen") === "true") {
     welcomeSplash.remove();
   } else {
     setTimeout(closeWelcome, 2200);
     skipWelcome.addEventListener("click", closeWelcome);
   }
-  */
+  
 
   setTimeout(closeWelcome, 2200);
   skipWelcome.addEventListener("click", closeWelcome);
@@ -811,7 +811,7 @@
 
 
 
-<section class="services-section">
+<section id="services" class="services-section">
   <div class="services-heading">
     <p>OUR SERVICES</p>
     <h2>Comprehensive Dental Care</h2>
