@@ -1100,7 +1100,7 @@ const services = [
     title: "Dental Implants",
     category: "01 / RESTORATION",
     description: "Permanent tooth replacement solutions that restore function, confidence, and long-term oral health.",
-    image: "./images/3.jpg",
+    image: "./images/implant.jpg",
     details: `
       <p>Dental implants act as artificial tooth roots, giving replacement teeth excellent stability and a natural appearance.</p>
       <h4>Key Clinical Benefits</h4>
@@ -1116,7 +1116,7 @@ const services = [
     title: "Orthodontics",
     category: "02 / ALIGNMENT",
     description: "Braces and clear aligner treatments designed to create a healthier, balanced smile.",
-    image: "./images/2.jpg",
+    image: "./images/ortho.jpg",
     details: `
       <p>Our orthodontic treatments improve tooth alignment, bite function, and smile confidence through carefully planned care.</p>
       <h4>What Orthodontics Can Improve</h4>
@@ -1132,7 +1132,7 @@ const services = [
     title: "Zirconia Crowns & Bridges",
     category: "03 / RESTORATIVE",
     description: "Strong, natural-looking zirconia restorations that rebuild damaged or missing teeth.",
-    image: "./images/1.jpg",
+    image: "./images/crown.jpeg",
     details: `
       <p>Zirconia crowns and bridges combine exceptional strength with lifelike aesthetics to restore comfort, function, and confidence.</p>
       <h4>Why Choose Zirconia</h4>
@@ -1164,7 +1164,7 @@ const services = [
     title: "Digital X-Ray",
     category: "05 / DIAGNOSTICS",
     description: "Fast, detailed digital imaging that helps us diagnose dental concerns accurately.",
-    image: "./images/5.jpg",
+    image: "./images/xray.jpg",
     details: `
       <p>Digital X-rays provide clear diagnostic images with efficient processing and lower radiation exposure than traditional systems.</p>
       <h4>Benefits of Digital Imaging</h4>
@@ -1180,7 +1180,7 @@ const services = [
     title: "OPG Scan",
     category: "06 / DIAGNOSTICS",
     description: "A complete panoramic view of your teeth, jaws, and surrounding facial structures.",
-    image: "./images/6.jpg",
+    image: "./images/opg.png",
     details: `
       <p>An OPG, or panoramic dental scan, captures both jaws and all teeth in one image for comprehensive diagnosis and planning.</p>
       <h4>OPG Helps Assess</h4>
@@ -1196,7 +1196,7 @@ const services = [
     title: "CBCT Scan",
     category: "07 / 3D DIAGNOSTICS",
     description: "Advanced 3D imaging for highly precise implant, surgical, and complex dental planning.",
-    image: "./images/7.jpg",
+    image: "./images/cbct.png",
     details: `
       <p>CBCT imaging creates detailed three-dimensional views of teeth, bone, nerves, and facial structures for confident clinical planning.</p>
       <h4>CBCT Is Used For</h4>
@@ -2365,7 +2365,7 @@ const services = [
 
     <p id="videoModalTitle" class="video-modal__title"></p>
 
-    <video id="clinicVideoPlayer" class="video-modal__player" controls playsinline>
+    <video id="clinicVideoPlayer" class="video-modal__player" controls playsinline muted>
       Your browser does not support video playback.
     </video>
   </div>
@@ -2610,22 +2610,35 @@ const services = [
   const videoPlayer = document.getElementById("clinicVideoPlayer");
   const videoModalTitle = document.getElementById("videoModalTitle");
 
+  // Background flute music
+  const fluteMusic = new Audio("audio/flute.mp3"); // Put your flute music in /audio/flute.mp3
+  fluteMusic.loop = true;
+  fluteMusic.volume = 0.18; // 18% volume
+
   function openClinicVideo(videoPath, title) {
     videoModalTitle.textContent = title;
     videoPlayer.src = videoPath;
+
+    // Mute the video's original audio
+    videoPlayer.muted = true;
+
     videoModal.classList.add("is-open");
     videoModal.setAttribute("aria-hidden", "false");
     document.body.classList.add("modal-open");
 
-    videoPlayer.play().catch(() => {
-      // Some browsers require the user to press play manually.
-    });
+    Promise.all([
+      videoPlayer.play().catch(() => {}),
+      fluteMusic.play().catch(() => {})
+    ]);
   }
 
   function closeClinicVideo() {
     videoPlayer.pause();
     videoPlayer.removeAttribute("src");
     videoPlayer.load();
+
+    fluteMusic.pause();
+    fluteMusic.currentTime = 0;
 
     videoModal.classList.remove("is-open");
     videoModal.setAttribute("aria-hidden", "true");
@@ -2646,6 +2659,12 @@ const services = [
     if (event.key === "Escape" && videoModal.classList.contains("is-open")) {
       closeClinicVideo();
     }
+  });
+
+  // Stop music if video ends
+  videoPlayer.addEventListener("ended", () => {
+    fluteMusic.pause();
+    fluteMusic.currentTime = 0;
   });
 </script>
 
